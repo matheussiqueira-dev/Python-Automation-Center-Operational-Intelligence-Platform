@@ -1,0 +1,677 @@
+[
+  {
+    "id": "auto-001",
+    "slug": "limpeza-planilhas-administrativas",
+    "name": "Limpeza de planilhas administrativas",
+    "category": "Tratamento de dados",
+    "description": "Padroniza nomes, CPFs, datas, duplicidades e valores monetarios em bases administrativas.",
+    "problem": "Bases recebidas de setores diferentes chegam com campos vazios, formatos divergentes e registros duplicados, consumindo horas de conferencia manual.",
+    "status": "ready",
+    "impact": "critical",
+    "manualTimeHours": 18,
+    "automatedTimeHours": 1.8,
+    "estimatedSavingsHours": 16.2,
+    "estimatedSavingsBRL": 1944,
+    "processedRecords": 1240,
+    "fixedIssues": 312,
+    "duplicatesRemoved": 128,
+    "standardizedFields": 936,
+    "qualityBefore": 61,
+    "qualityAfter": 94,
+    "reworkReduction": 82,
+    "errorTypes": [
+      {
+        "name": "Duplicidades",
+        "value": 128
+      },
+      {
+        "name": "CPF invalido",
+        "value": 37
+      },
+      {
+        "name": "Data invalida",
+        "value": 44
+      },
+      {
+        "name": "Valor fora do padrao",
+        "value": 103
+      }
+    ],
+    "timeline": [
+      "Recebendo base",
+      "Validando estrutura",
+      "Identificando inconsistencias",
+      "Aplicando regras de limpeza",
+      "Consolidando informacoes",
+      "Gerando relatorio",
+      "Finalizando arquivos"
+    ],
+    "rules": [
+      {
+        "field": "Data de admissao",
+        "original": "32/13/2025",
+        "correction": "Registro marcado como invalido",
+        "rule": "Validacao de data no padrao dd/mm/yyyy",
+        "impact": "Removido do calculo mensal ate correcao da origem"
+      },
+      {
+        "field": "CPF",
+        "original": "123.456.789-00",
+        "correction": "CPF sinalizado para revisao",
+        "rule": "Checagem de digitos verificadores ficticios",
+        "impact": "Evita consolidacao de cadastro inconsistente"
+      },
+      {
+        "field": "Valor",
+        "original": "R$ 1.240,8",
+        "correction": "1240.80",
+        "rule": "Normalizacao monetaria para decimal",
+        "impact": "Padroniza calculos financeiros e graficos"
+      }
+    ],
+    "files": [
+      {
+        "id": "limpeza-planilhas-administrativas-raw",
+        "name": "raw-administrative-base.csv",
+        "type": "CSV",
+        "size": "32 KB",
+        "generatedAt": "2026-05-21",
+        "automationSlug": "limpeza-planilhas-administrativas",
+        "href": "/samples/raw-administrative-base.csv"
+      },
+      {
+        "id": "limpeza-planilhas-administrativas-processed",
+        "name": "processed-administrative-base.csv",
+        "type": "CSV",
+        "size": "28 KB",
+        "generatedAt": "2026-05-21",
+        "automationSlug": "limpeza-planilhas-administrativas",
+        "href": "/samples/processed-administrative-base.csv"
+      },
+      {
+        "id": "limpeza-planilhas-administrativas-report",
+        "name": "executive-report-sample.json",
+        "type": "JSON",
+        "size": "18 KB",
+        "generatedAt": "2026-05-21",
+        "automationSlug": "limpeza-planilhas-administrativas",
+        "href": "/samples/executive-report-sample.json"
+      },
+      {
+        "id": "limpeza-planilhas-administrativas-quality",
+        "name": "quality-checklist.json",
+        "type": "CHECKLIST",
+        "size": "9 KB",
+        "generatedAt": "2026-05-21",
+        "automationSlug": "limpeza-planilhas-administrativas",
+        "href": "/samples/quality-checklist.json"
+      }
+    ],
+    "kpis": [
+      {
+        "label": "Registros processados",
+        "value": "1.240",
+        "delta": "+100%",
+        "tone": "green"
+      },
+      {
+        "label": "Inconsistencias corrigidas",
+        "value": "312",
+        "delta": "+82%",
+        "tone": "blue"
+      },
+      {
+        "label": "Horas economizadas",
+        "value": "16.2h",
+        "delta": "-retrabalho",
+        "tone": "amber"
+      },
+      {
+        "label": "Score final",
+        "value": "94%",
+        "delta": "+33 pts",
+        "tone": "rose"
+      }
+    ]
+  },
+  {
+    "id": "auto-002",
+    "slug": "consolidacao-multiplos-arquivos",
+    "name": "Consolidacao de multiplos arquivos",
+    "category": "ETL",
+    "description": "Une bases setoriais, normaliza colunas divergentes e gera uma visao consolidada por area.",
+    "problem": "Relatorios mensais dependem de planilhas avulsas com nomenclaturas diferentes, categorias inconsistentes e registros repetidos.",
+    "status": "ready",
+    "impact": "high",
+    "manualTimeHours": 16,
+    "automatedTimeHours": 2.1,
+    "estimatedSavingsHours": 13.9,
+    "estimatedSavingsBRL": 1668,
+    "processedRecords": 2180,
+    "fixedIssues": 286,
+    "duplicatesRemoved": 96,
+    "standardizedFields": 654,
+    "qualityBefore": 64,
+    "qualityAfter": 92,
+    "reworkReduction": 76,
+    "errorTypes": [
+      {
+        "name": "Colunas divergentes",
+        "value": 94
+      },
+      {
+        "name": "Categorias inconsistentes",
+        "value": 86
+      },
+      {
+        "name": "Duplicidades",
+        "value": 96
+      },
+      {
+        "name": "Setor ausente",
+        "value": 10
+      }
+    ],
+    "timeline": [
+      "Recebendo base",
+      "Validando estrutura",
+      "Identificando inconsistencias",
+      "Aplicando regras de limpeza",
+      "Consolidando informacoes",
+      "Gerando relatorio",
+      "Finalizando arquivos"
+    ],
+    "rules": [
+      {
+        "field": "Data de admissao",
+        "original": "32/13/2025",
+        "correction": "Registro marcado como invalido",
+        "rule": "Validacao de data no padrao dd/mm/yyyy",
+        "impact": "Removido do calculo mensal ate correcao da origem"
+      },
+      {
+        "field": "CPF",
+        "original": "123.456.789-00",
+        "correction": "CPF sinalizado para revisao",
+        "rule": "Checagem de digitos verificadores ficticios",
+        "impact": "Evita consolidacao de cadastro inconsistente"
+      },
+      {
+        "field": "Valor",
+        "original": "R$ 1.240,8",
+        "correction": "1240.80",
+        "rule": "Normalizacao monetaria para decimal",
+        "impact": "Padroniza calculos financeiros e graficos"
+      }
+    ],
+    "files": [
+      {
+        "id": "consolidacao-multiplos-arquivos-raw",
+        "name": "raw-administrative-base.csv",
+        "type": "CSV",
+        "size": "32 KB",
+        "generatedAt": "2026-05-21",
+        "automationSlug": "consolidacao-multiplos-arquivos",
+        "href": "/samples/raw-administrative-base.csv"
+      },
+      {
+        "id": "consolidacao-multiplos-arquivos-processed",
+        "name": "processed-administrative-base.csv",
+        "type": "CSV",
+        "size": "28 KB",
+        "generatedAt": "2026-05-21",
+        "automationSlug": "consolidacao-multiplos-arquivos",
+        "href": "/samples/processed-administrative-base.csv"
+      },
+      {
+        "id": "consolidacao-multiplos-arquivos-report",
+        "name": "executive-report-sample.json",
+        "type": "JSON",
+        "size": "18 KB",
+        "generatedAt": "2026-05-21",
+        "automationSlug": "consolidacao-multiplos-arquivos",
+        "href": "/samples/executive-report-sample.json"
+      },
+      {
+        "id": "consolidacao-multiplos-arquivos-quality",
+        "name": "quality-checklist.json",
+        "type": "CHECKLIST",
+        "size": "9 KB",
+        "generatedAt": "2026-05-21",
+        "automationSlug": "consolidacao-multiplos-arquivos",
+        "href": "/samples/quality-checklist.json"
+      }
+    ],
+    "kpis": [
+      {
+        "label": "Registros processados",
+        "value": "2.180",
+        "delta": "+100%",
+        "tone": "green"
+      },
+      {
+        "label": "Inconsistencias corrigidas",
+        "value": "286",
+        "delta": "+76%",
+        "tone": "blue"
+      },
+      {
+        "label": "Horas economizadas",
+        "value": "13.9h",
+        "delta": "-retrabalho",
+        "tone": "amber"
+      },
+      {
+        "label": "Score final",
+        "value": "92%",
+        "delta": "+28 pts",
+        "tone": "rose"
+      }
+    ]
+  },
+  {
+    "id": "auto-003",
+    "slug": "geracao-relatorio-executivo",
+    "name": "Geracao de relatorio executivo",
+    "category": "Business Intelligence",
+    "description": "Transforma indicadores tratados em resumo gerencial com KPIs, graficos e recomendacoes.",
+    "problem": "A preparacao de relatorios executivos exige consolidar metricas, revisar excecoes e montar apresentacoes manualmente.",
+    "status": "success",
+    "impact": "high",
+    "manualTimeHours": 12,
+    "automatedTimeHours": 1.4,
+    "estimatedSavingsHours": 10.6,
+    "estimatedSavingsBRL": 1272,
+    "processedRecords": 960,
+    "fixedIssues": 148,
+    "duplicatesRemoved": 18,
+    "standardizedFields": 420,
+    "qualityBefore": 70,
+    "qualityAfter": 96,
+    "reworkReduction": 71,
+    "errorTypes": [
+      {
+        "name": "Indicador ausente",
+        "value": 42
+      },
+      {
+        "name": "Periodo inconsistente",
+        "value": 38
+      },
+      {
+        "name": "Valor fora do padrao",
+        "value": 50
+      },
+      {
+        "name": "Duplicidades",
+        "value": 18
+      }
+    ],
+    "timeline": [
+      "Recebendo base",
+      "Validando estrutura",
+      "Identificando inconsistencias",
+      "Aplicando regras de limpeza",
+      "Consolidando informacoes",
+      "Gerando relatorio",
+      "Finalizando arquivos"
+    ],
+    "rules": [
+      {
+        "field": "Data de admissao",
+        "original": "32/13/2025",
+        "correction": "Registro marcado como invalido",
+        "rule": "Validacao de data no padrao dd/mm/yyyy",
+        "impact": "Removido do calculo mensal ate correcao da origem"
+      },
+      {
+        "field": "CPF",
+        "original": "123.456.789-00",
+        "correction": "CPF sinalizado para revisao",
+        "rule": "Checagem de digitos verificadores ficticios",
+        "impact": "Evita consolidacao de cadastro inconsistente"
+      },
+      {
+        "field": "Valor",
+        "original": "R$ 1.240,8",
+        "correction": "1240.80",
+        "rule": "Normalizacao monetaria para decimal",
+        "impact": "Padroniza calculos financeiros e graficos"
+      }
+    ],
+    "files": [
+      {
+        "id": "geracao-relatorio-executivo-raw",
+        "name": "raw-administrative-base.csv",
+        "type": "CSV",
+        "size": "32 KB",
+        "generatedAt": "2026-05-21",
+        "automationSlug": "geracao-relatorio-executivo",
+        "href": "/samples/raw-administrative-base.csv"
+      },
+      {
+        "id": "geracao-relatorio-executivo-processed",
+        "name": "processed-administrative-base.csv",
+        "type": "CSV",
+        "size": "28 KB",
+        "generatedAt": "2026-05-21",
+        "automationSlug": "geracao-relatorio-executivo",
+        "href": "/samples/processed-administrative-base.csv"
+      },
+      {
+        "id": "geracao-relatorio-executivo-report",
+        "name": "executive-report-sample.json",
+        "type": "JSON",
+        "size": "18 KB",
+        "generatedAt": "2026-05-21",
+        "automationSlug": "geracao-relatorio-executivo",
+        "href": "/samples/executive-report-sample.json"
+      },
+      {
+        "id": "geracao-relatorio-executivo-quality",
+        "name": "quality-checklist.json",
+        "type": "CHECKLIST",
+        "size": "9 KB",
+        "generatedAt": "2026-05-21",
+        "automationSlug": "geracao-relatorio-executivo",
+        "href": "/samples/quality-checklist.json"
+      }
+    ],
+    "kpis": [
+      {
+        "label": "Registros processados",
+        "value": "960",
+        "delta": "+100%",
+        "tone": "green"
+      },
+      {
+        "label": "Inconsistencias corrigidas",
+        "value": "148",
+        "delta": "+71%",
+        "tone": "blue"
+      },
+      {
+        "label": "Horas economizadas",
+        "value": "10.6h",
+        "delta": "-retrabalho",
+        "tone": "amber"
+      },
+      {
+        "label": "Score final",
+        "value": "96%",
+        "delta": "+26 pts",
+        "tone": "rose"
+      }
+    ]
+  },
+  {
+    "id": "auto-004",
+    "slug": "auditoria-qualidade-dados",
+    "name": "Auditoria de qualidade de dados",
+    "category": "Governanca",
+    "description": "Mapeia nulos, duplicidades, formatos invalidos, outliers e severidade por coluna.",
+    "problem": "Times operacionais tomam decisoes com bases sem diagnostico de qualidade, aumentando risco e retrabalho.",
+    "status": "attention",
+    "impact": "critical",
+    "manualTimeHours": 14,
+    "automatedTimeHours": 2.3,
+    "estimatedSavingsHours": 11.7,
+    "estimatedSavingsBRL": 1404,
+    "processedRecords": 1750,
+    "fixedIssues": 401,
+    "duplicatesRemoved": 72,
+    "standardizedFields": 588,
+    "qualityBefore": 58,
+    "qualityAfter": 91,
+    "reworkReduction": 79,
+    "errorTypes": [
+      {
+        "name": "Campos obrigatorios ausentes",
+        "value": 112
+      },
+      {
+        "name": "Outliers",
+        "value": 76
+      },
+      {
+        "name": "Formato invalido",
+        "value": 141
+      },
+      {
+        "name": "Duplicidades",
+        "value": 72
+      }
+    ],
+    "timeline": [
+      "Recebendo base",
+      "Validando estrutura",
+      "Identificando inconsistencias",
+      "Aplicando regras de limpeza",
+      "Consolidando informacoes",
+      "Gerando relatorio",
+      "Finalizando arquivos"
+    ],
+    "rules": [
+      {
+        "field": "Data de admissao",
+        "original": "32/13/2025",
+        "correction": "Registro marcado como invalido",
+        "rule": "Validacao de data no padrao dd/mm/yyyy",
+        "impact": "Removido do calculo mensal ate correcao da origem"
+      },
+      {
+        "field": "CPF",
+        "original": "123.456.789-00",
+        "correction": "CPF sinalizado para revisao",
+        "rule": "Checagem de digitos verificadores ficticios",
+        "impact": "Evita consolidacao de cadastro inconsistente"
+      },
+      {
+        "field": "Valor",
+        "original": "R$ 1.240,8",
+        "correction": "1240.80",
+        "rule": "Normalizacao monetaria para decimal",
+        "impact": "Padroniza calculos financeiros e graficos"
+      }
+    ],
+    "files": [
+      {
+        "id": "auditoria-qualidade-dados-raw",
+        "name": "raw-administrative-base.csv",
+        "type": "CSV",
+        "size": "32 KB",
+        "generatedAt": "2026-05-21",
+        "automationSlug": "auditoria-qualidade-dados",
+        "href": "/samples/raw-administrative-base.csv"
+      },
+      {
+        "id": "auditoria-qualidade-dados-processed",
+        "name": "processed-administrative-base.csv",
+        "type": "CSV",
+        "size": "28 KB",
+        "generatedAt": "2026-05-21",
+        "automationSlug": "auditoria-qualidade-dados",
+        "href": "/samples/processed-administrative-base.csv"
+      },
+      {
+        "id": "auditoria-qualidade-dados-report",
+        "name": "executive-report-sample.json",
+        "type": "JSON",
+        "size": "18 KB",
+        "generatedAt": "2026-05-21",
+        "automationSlug": "auditoria-qualidade-dados",
+        "href": "/samples/executive-report-sample.json"
+      },
+      {
+        "id": "auditoria-qualidade-dados-quality",
+        "name": "quality-checklist.json",
+        "type": "CHECKLIST",
+        "size": "9 KB",
+        "generatedAt": "2026-05-21",
+        "automationSlug": "auditoria-qualidade-dados",
+        "href": "/samples/quality-checklist.json"
+      }
+    ],
+    "kpis": [
+      {
+        "label": "Registros processados",
+        "value": "1.750",
+        "delta": "+100%",
+        "tone": "green"
+      },
+      {
+        "label": "Inconsistencias corrigidas",
+        "value": "401",
+        "delta": "+79%",
+        "tone": "blue"
+      },
+      {
+        "label": "Horas economizadas",
+        "value": "11.7h",
+        "delta": "-retrabalho",
+        "tone": "amber"
+      },
+      {
+        "label": "Score final",
+        "value": "91%",
+        "delta": "+33 pts",
+        "tone": "rose"
+      }
+    ]
+  },
+  {
+    "id": "auto-005",
+    "slug": "rotina-financeira-operacional",
+    "name": "Rotina financeira e operacional",
+    "category": "Operacoes",
+    "description": "Classifica despesas, contratos, chamados e centros de custo para alertas de eficiencia.",
+    "problem": "Acompanhamentos financeiros e operacionais dependem de filtros manuais para identificar anomalias, atrasos e variacoes mensais.",
+    "status": "ready",
+    "impact": "medium",
+    "manualTimeHours": 10,
+    "automatedTimeHours": 1.6,
+    "estimatedSavingsHours": 8.4,
+    "estimatedSavingsBRL": 1008,
+    "processedRecords": 1420,
+    "fixedIssues": 219,
+    "duplicatesRemoved": 42,
+    "standardizedFields": 364,
+    "qualityBefore": 67,
+    "qualityAfter": 90,
+    "reworkReduction": 68,
+    "errorTypes": [
+      {
+        "name": "Centro de custo invalido",
+        "value": 63
+      },
+      {
+        "name": "Contrato sem status",
+        "value": 45
+      },
+      {
+        "name": "Anomalia de valor",
+        "value": 69
+      },
+      {
+        "name": "Duplicidades",
+        "value": 42
+      }
+    ],
+    "timeline": [
+      "Recebendo base",
+      "Validando estrutura",
+      "Identificando inconsistencias",
+      "Aplicando regras de limpeza",
+      "Consolidando informacoes",
+      "Gerando relatorio",
+      "Finalizando arquivos"
+    ],
+    "rules": [
+      {
+        "field": "Data de admissao",
+        "original": "32/13/2025",
+        "correction": "Registro marcado como invalido",
+        "rule": "Validacao de data no padrao dd/mm/yyyy",
+        "impact": "Removido do calculo mensal ate correcao da origem"
+      },
+      {
+        "field": "CPF",
+        "original": "123.456.789-00",
+        "correction": "CPF sinalizado para revisao",
+        "rule": "Checagem de digitos verificadores ficticios",
+        "impact": "Evita consolidacao de cadastro inconsistente"
+      },
+      {
+        "field": "Valor",
+        "original": "R$ 1.240,8",
+        "correction": "1240.80",
+        "rule": "Normalizacao monetaria para decimal",
+        "impact": "Padroniza calculos financeiros e graficos"
+      }
+    ],
+    "files": [
+      {
+        "id": "rotina-financeira-operacional-raw",
+        "name": "raw-administrative-base.csv",
+        "type": "CSV",
+        "size": "32 KB",
+        "generatedAt": "2026-05-21",
+        "automationSlug": "rotina-financeira-operacional",
+        "href": "/samples/raw-administrative-base.csv"
+      },
+      {
+        "id": "rotina-financeira-operacional-processed",
+        "name": "processed-administrative-base.csv",
+        "type": "CSV",
+        "size": "28 KB",
+        "generatedAt": "2026-05-21",
+        "automationSlug": "rotina-financeira-operacional",
+        "href": "/samples/processed-administrative-base.csv"
+      },
+      {
+        "id": "rotina-financeira-operacional-report",
+        "name": "executive-report-sample.json",
+        "type": "JSON",
+        "size": "18 KB",
+        "generatedAt": "2026-05-21",
+        "automationSlug": "rotina-financeira-operacional",
+        "href": "/samples/executive-report-sample.json"
+      },
+      {
+        "id": "rotina-financeira-operacional-quality",
+        "name": "quality-checklist.json",
+        "type": "CHECKLIST",
+        "size": "9 KB",
+        "generatedAt": "2026-05-21",
+        "automationSlug": "rotina-financeira-operacional",
+        "href": "/samples/quality-checklist.json"
+      }
+    ],
+    "kpis": [
+      {
+        "label": "Registros processados",
+        "value": "1.420",
+        "delta": "+100%",
+        "tone": "green"
+      },
+      {
+        "label": "Inconsistencias corrigidas",
+        "value": "219",
+        "delta": "+68%",
+        "tone": "blue"
+      },
+      {
+        "label": "Horas economizadas",
+        "value": "8.4h",
+        "delta": "-retrabalho",
+        "tone": "amber"
+      },
+      {
+        "label": "Score final",
+        "value": "90%",
+        "delta": "+23 pts",
+        "tone": "rose"
+      }
+    ]
+  }
+]

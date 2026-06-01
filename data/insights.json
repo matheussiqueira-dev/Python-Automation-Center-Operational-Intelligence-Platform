@@ -1,0 +1,10 @@
+[
+  {
+    "id": "recurring-duplicates",
+    "title": "Duplicidades recorrentes",
+    "description": "Duplicidades aparecem em todos os fluxos simulados e devem ser tratadas antes da consolidacao mensal.",
+    "severity": "medium",
+    "category": "governanca",
+    "recommendation": "Criar uma chave de negocio por origem e setor antes da carga final."
+  }
+]

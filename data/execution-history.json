@@ -1,0 +1,42 @@
+[
+  {
+    "month": "Jan",
+    "runs": 5,
+    "records": 1280,
+    "hoursSaved": 18,
+    "savingsBRL": 2160,
+    "qualityScore": 82
+  },
+  {
+    "month": "Fev",
+    "runs": 7,
+    "records": 2140,
+    "hoursSaved": 24,
+    "savingsBRL": 2880,
+    "qualityScore": 86
+  },
+  {
+    "month": "Mar",
+    "runs": 8,
+    "records": 2940,
+    "hoursSaved": 31,
+    "savingsBRL": 3720,
+    "qualityScore": 89
+  },
+  {
+    "month": "Abr",
+    "runs": 10,
+    "records": 3820,
+    "hoursSaved": 42,
+    "savingsBRL": 5040,
+    "qualityScore": 92
+  },
+  {
+    "month": "Mai",
+    "runs": 12,
+    "records": 4610,
+    "hoursSaved": 51,
+    "savingsBRL": 6120,
+    "qualityScore": 94
+  }
+]

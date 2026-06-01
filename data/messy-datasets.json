@@ -1,0 +1,292 @@
+{
+  "limpeza-planilhas-administrativas": [
+    {
+      "id": "ADM-001",
+      "nome": "ana  silva",
+      "cpf": "123.456.789-00",
+      "setor": "fin",
+      "data": "32/13/2025",
+      "valor": "R$ 1.240,8",
+      "status": "ativo",
+      "inconsistencies": [
+        "nome",
+        "cpf",
+        "data",
+        "valor"
+      ]
+    },
+    {
+      "id": "ADM-002",
+      "nome": "BRUNO COSTA",
+      "cpf": "00000000000",
+      "setor": "",
+      "data": "2025-04-12",
+      "valor": "845,00",
+      "status": "pendente",
+      "inconsistencies": [
+        "cpf",
+        "setor",
+        "data"
+      ]
+    },
+    {
+      "id": "ADM-002",
+      "nome": "Bruno Costa",
+      "cpf": "00000000000",
+      "setor": "Financeiro",
+      "data": "12/04/2025",
+      "valor": "845.00",
+      "status": "pendente",
+      "inconsistencies": [
+        "duplicidade",
+        "cpf"
+      ]
+    },
+    {
+      "id": "ADM-004",
+      "nome": "carla lima",
+      "cpf": "987.654.321-99",
+      "setor": "Operacoes",
+      "data": "",
+      "valor": "R$ -",
+      "status": "sem status",
+      "inconsistencies": [
+        "data",
+        "valor",
+        "status"
+      ]
+    }
+  ],
+  "consolidacao-multiplos-arquivos": [
+    {
+      "id": "ADM-001",
+      "nome": "ana  silva",
+      "cpf": "123.456.789-00",
+      "setor": "fin",
+      "data": "32/13/2025",
+      "valor": "R$ 1.240,8",
+      "status": "ativo",
+      "inconsistencies": [
+        "nome",
+        "cpf",
+        "data",
+        "valor"
+      ]
+    },
+    {
+      "id": "ADM-002",
+      "nome": "BRUNO COSTA",
+      "cpf": "00000000000",
+      "setor": "",
+      "data": "2025-04-12",
+      "valor": "845,00",
+      "status": "pendente",
+      "inconsistencies": [
+        "cpf",
+        "setor",
+        "data"
+      ]
+    },
+    {
+      "id": "ADM-002",
+      "nome": "Bruno Costa",
+      "cpf": "00000000000",
+      "setor": "Financeiro",
+      "data": "12/04/2025",
+      "valor": "845.00",
+      "status": "pendente",
+      "inconsistencies": [
+        "duplicidade",
+        "cpf"
+      ]
+    },
+    {
+      "id": "ADM-004",
+      "nome": "carla lima",
+      "cpf": "987.654.321-99",
+      "setor": "Operacoes",
+      "data": "",
+      "valor": "R$ -",
+      "status": "sem status",
+      "inconsistencies": [
+        "data",
+        "valor",
+        "status"
+      ]
+    }
+  ],
+  "geracao-relatorio-executivo": [
+    {
+      "id": "ADM-001",
+      "nome": "ana  silva",
+      "cpf": "123.456.789-00",
+      "setor": "fin",
+      "data": "32/13/2025",
+      "valor": "R$ 1.240,8",
+      "status": "ativo",
+      "inconsistencies": [
+        "nome",
+        "cpf",
+        "data",
+        "valor"
+      ]
+    },
+    {
+      "id": "ADM-002",
+      "nome": "BRUNO COSTA",
+      "cpf": "00000000000",
+      "setor": "",
+      "data": "2025-04-12",
+      "valor": "845,00",
+      "status": "pendente",
+      "inconsistencies": [
+        "cpf",
+        "setor",
+        "data"
+      ]
+    },
+    {
+      "id": "ADM-002",
+      "nome": "Bruno Costa",
+      "cpf": "00000000000",
+      "setor": "Financeiro",
+      "data": "12/04/2025",
+      "valor": "845.00",
+      "status": "pendente",
+      "inconsistencies": [
+        "duplicidade",
+        "cpf"
+      ]
+    },
+    {
+      "id": "ADM-004",
+      "nome": "carla lima",
+      "cpf": "987.654.321-99",
+      "setor": "Operacoes",
+      "data": "",
+      "valor": "R$ -",
+      "status": "sem status",
+      "inconsistencies": [
+        "data",
+        "valor",
+        "status"
+      ]
+    }
+  ],
+  "auditoria-qualidade-dados": [
+    {
+      "id": "ADM-001",
+      "nome": "ana  silva",
+      "cpf": "123.456.789-00",
+      "setor": "fin",
+      "data": "32/13/2025",
+      "valor": "R$ 1.240,8",
+      "status": "ativo",
+      "inconsistencies": [
+        "nome",
+        "cpf",
+        "data",
+        "valor"
+      ]
+    },
+    {
+      "id": "ADM-002",
+      "nome": "BRUNO COSTA",
+      "cpf": "00000000000",
+      "setor": "",
+      "data": "2025-04-12",
+      "valor": "845,00",
+      "status": "pendente",
+      "inconsistencies": [
+        "cpf",
+        "setor",
+        "data"
+      ]
+    },
+    {
+      "id": "ADM-002",
+      "nome": "Bruno Costa",
+      "cpf": "00000000000",
+      "setor": "Financeiro",
+      "data": "12/04/2025",
+      "valor": "845.00",
+      "status": "pendente",
+      "inconsistencies": [
+        "duplicidade",
+        "cpf"
+      ]
+    },
+    {
+      "id": "ADM-004",
+      "nome": "carla lima",
+      "cpf": "987.654.321-99",
+      "setor": "Operacoes",
+      "data": "",
+      "valor": "R$ -",
+      "status": "sem status",
+      "inconsistencies": [
+        "data",
+        "valor",
+        "status"
+      ]
+    }
+  ],
+  "rotina-financeira-operacional": [
+    {
+      "id": "ADM-001",
+      "nome": "ana  silva",
+      "cpf": "123.456.789-00",
+      "setor": "fin",
+      "data": "32/13/2025",
+      "valor": "R$ 1.240,8",
+      "status": "ativo",
+      "inconsistencies": [
+        "nome",
+        "cpf",
+        "data",
+        "valor"
+      ]
+    },
+    {
+      "id": "ADM-002",
+      "nome": "BRUNO COSTA",
+      "cpf": "00000000000",
+      "setor": "",
+      "data": "2025-04-12",
+      "valor": "845,00",
+      "status": "pendente",
+      "inconsistencies": [
+        "cpf",
+        "setor",
+        "data"
+      ]
+    },
+    {
+      "id": "ADM-002",
+      "nome": "Bruno Costa",
+      "cpf": "00000000000",
+      "setor": "Financeiro",
+      "data": "12/04/2025",
+      "valor": "845.00",
+      "status": "pendente",
+      "inconsistencies": [
+        "duplicidade",
+        "cpf"
+      ]
+    },
+    {
+      "id": "ADM-004",
+      "nome": "carla lima",
+      "cpf": "987.654.321-99",
+      "setor": "Operacoes",
+      "data": "",
+      "valor": "R$ -",
+      "status": "sem status",
+      "inconsistencies": [
+        "data",
+        "valor",
+        "status"
+      ]
+    }
+  ]
+}

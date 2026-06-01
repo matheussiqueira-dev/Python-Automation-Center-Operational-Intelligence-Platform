@@ -1,0 +1,9 @@
+{
+  "items": [
+    "Campos obrigatorios validados",
+    "Duplicidades removidas",
+    "Datas normalizadas",
+    "Valores monetarios padronizados",
+    "Logs de execucao preservados"
+  ]
+}

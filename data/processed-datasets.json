@@ -1,0 +1,227 @@
+{
+  "limpeza-planilhas-administrativas": [
+    {
+      "id": "ADM-001",
+      "nome": "Ana Silva",
+      "cpf": "CPF invalido - revisar",
+      "setor": "Financeiro",
+      "data": "Data invalida",
+      "valor": "1240.80",
+      "status": "Ativo",
+      "corrections": [
+        "nome padronizado",
+        "cpf sinalizado",
+        "data sinalizada",
+        "valor normalizado"
+      ]
+    },
+    {
+      "id": "ADM-002",
+      "nome": "Bruno Costa",
+      "cpf": "CPF invalido - revisar",
+      "setor": "Financeiro",
+      "data": "12/04/2025",
+      "valor": "845.00",
+      "status": "Pendente",
+      "corrections": [
+        "duplicidade removida",
+        "setor preenchido",
+        "data normalizada"
+      ]
+    },
+    {
+      "id": "ADM-004",
+      "nome": "Carla Lima",
+      "cpf": "987.654.321-99",
+      "setor": "Operacoes",
+      "data": "Pendente de origem",
+      "valor": "0.00",
+      "status": "Em revisao",
+      "corrections": [
+        "nome padronizado",
+        "valor zerado para auditoria",
+        "status corrigido"
+      ]
+    }
+  ],
+  "consolidacao-multiplos-arquivos": [
+    {
+      "id": "ADM-001",
+      "nome": "Ana Silva",
+      "cpf": "CPF invalido - revisar",
+      "setor": "Financeiro",
+      "data": "Data invalida",
+      "valor": "1240.80",
+      "status": "Ativo",
+      "corrections": [
+        "nome padronizado",
+        "cpf sinalizado",
+        "data sinalizada",
+        "valor normalizado"
+      ]
+    },
+    {
+      "id": "ADM-002",
+      "nome": "Bruno Costa",
+      "cpf": "CPF invalido - revisar",
+      "setor": "Financeiro",
+      "data": "12/04/2025",
+      "valor": "845.00",
+      "status": "Pendente",
+      "corrections": [
+        "duplicidade removida",
+        "setor preenchido",
+        "data normalizada"
+      ]
+    },
+    {
+      "id": "ADM-004",
+      "nome": "Carla Lima",
+      "cpf": "987.654.321-99",
+      "setor": "Operacoes",
+      "data": "Pendente de origem",
+      "valor": "0.00",
+      "status": "Em revisao",
+      "corrections": [
+        "nome padronizado",
+        "valor zerado para auditoria",
+        "status corrigido"
+      ]
+    }
+  ],
+  "geracao-relatorio-executivo": [
+    {
+      "id": "ADM-001",
+      "nome": "Ana Silva",
+      "cpf": "CPF invalido - revisar",
+      "setor": "Financeiro",
+      "data": "Data invalida",
+      "valor": "1240.80",
+      "status": "Ativo",
+      "corrections": [
+        "nome padronizado",
+        "cpf sinalizado",
+        "data sinalizada",
+        "valor normalizado"
+      ]
+    },
+    {
+      "id": "ADM-002",
+      "nome": "Bruno Costa",
+      "cpf": "CPF invalido - revisar",
+      "setor": "Financeiro",
+      "data": "12/04/2025",
+      "valor": "845.00",
+      "status": "Pendente",
+      "corrections": [
+        "duplicidade removida",
+        "setor preenchido",
+        "data normalizada"
+      ]
+    },
+    {
+      "id": "ADM-004",
+      "nome": "Carla Lima",
+      "cpf": "987.654.321-99",
+      "setor": "Operacoes",
+      "data": "Pendente de origem",
+      "valor": "0.00",
+      "status": "Em revisao",
+      "corrections": [
+        "nome padronizado",
+        "valor zerado para auditoria",
+        "status corrigido"
+      ]
+    }
+  ],
+  "auditoria-qualidade-dados": [
+    {
+      "id": "ADM-001",
+      "nome": "Ana Silva",
+      "cpf": "CPF invalido - revisar",
+      "setor": "Financeiro",
+      "data": "Data invalida",
+      "valor": "1240.80",
+      "status": "Ativo",
+      "corrections": [
+        "nome padronizado",
+        "cpf sinalizado",
+        "data sinalizada",
+        "valor normalizado"
+      ]
+    },
+    {
+      "id": "ADM-002",
+      "nome": "Bruno Costa",
+      "cpf": "CPF invalido - revisar",
+      "setor": "Financeiro",
+      "data": "12/04/2025",
+      "valor": "845.00",
+      "status": "Pendente",
+      "corrections": [
+        "duplicidade removida",
+        "setor preenchido",
+        "data normalizada"
+      ]
+    },
+    {
+      "id": "ADM-004",
+      "nome": "Carla Lima",
+      "cpf": "987.654.321-99",
+      "setor": "Operacoes",
+      "data": "Pendente de origem",
+      "valor": "0.00",
+      "status": "Em revisao",
+      "corrections": [
+        "nome padronizado",
+        "valor zerado para auditoria",
+        "status corrigido"
+      ]
+    }
+  ],
+  "rotina-financeira-operacional": [
+    {
+      "id": "ADM-001",
+      "nome": "Ana Silva",
+      "cpf": "CPF invalido - revisar",
+      "setor": "Financeiro",
+      "data": "Data invalida",
+      "valor": "1240.80",
+      "status": "Ativo",
+      "corrections": [
+        "nome padronizado",
+        "cpf sinalizado",
+        "data sinalizada",
+        "valor normalizado"
+      ]
+    },
+    {
+      "id": "ADM-002",
+      "nome": "Bruno Costa",
+      "cpf": "CPF invalido - revisar",
+      "setor": "Financeiro",
+      "data": "12/04/2025",
+      "valor": "845.00",
+      "status": "Pendente",
+      "corrections": [
+        "duplicidade removida",
+        "setor preenchido",
+        "data normalizada"
+      ]
+    },
+    {
+      "id": "ADM-004",
+      "nome": "Carla Lima",
+      "cpf": "987.654.321-99",
+      "setor": "Operacoes",
+      "data": "Pendente de origem",
+      "valor": "0.00",
+      "status": "Em revisao",
+      "corrections": [
+        "nome padronizado",
+        "valor zerado para auditoria",
+        "status corrigido"
+      ]
+    }
+  ]
+}

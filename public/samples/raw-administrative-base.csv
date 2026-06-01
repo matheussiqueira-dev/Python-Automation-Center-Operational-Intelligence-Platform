@@ -1,0 +1,5 @@
+id,nome,cpf,setor,data,valor,status
+ADM-001,ana  silva,123.456.789-00,fin,32/13/2025,"R$ 1.240,8",ativo
+ADM-002,BRUNO COSTA,00000000000,,2025-04-12,"845,00",pendente
+ADM-002,Bruno Costa,00000000000,Financeiro,12/04/2025,845.00,pendente
+ADM-004,carla lima,987.654.321-99,Operacoes,,R$ -,sem status

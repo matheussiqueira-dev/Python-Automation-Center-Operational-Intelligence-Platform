@@ -1,0 +1,4 @@
+id,nome,cpf,setor,data,valor,status
+ADM-001,Ana Silva,CPF invalido - revisar,Financeiro,Data invalida,1240.80,Ativo
+ADM-002,Bruno Costa,CPF invalido - revisar,Financeiro,12/04/2025,845.00,Pendente
+ADM-004,Carla Lima,987.654.321-99,Operacoes,Pendente de origem,0.00,Em revisao
