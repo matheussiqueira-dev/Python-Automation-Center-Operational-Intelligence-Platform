@@ -6,7 +6,11 @@ describe("POST /api/automations/run", () => {
     const response = await POST(
       new Request("http://localhost/api/automations/run", {
         method: "POST",
-        body: JSON.stringify({ slug: "limpeza-planilhas-administrativas" }),
+        body: JSON.stringify({
+          automationId: "auto-001",
+          enabledRules: ["remover-duplicados", "normalizar-datas"],
+          mode: "technical",
+        }),
       }),
     );
     const payload = await response.json();
@@ -14,6 +18,7 @@ describe("POST /api/automations/run", () => {
     expect(response.status).toBe(200);
     expect(payload.status).toBe("success");
     expect(payload.logs.length).toBeGreaterThan(0);
+    expect(payload.auditTrail.length).toBeGreaterThan(0);
     expect(payload.files.length).toBeGreaterThan(0);
   });
 

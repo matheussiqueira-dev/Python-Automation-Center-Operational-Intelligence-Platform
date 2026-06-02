@@ -3,14 +3,18 @@
     {
       "id": "ADM-001",
       "nome": "Ana Silva",
-      "cpf": "CPF invalido - revisar",
+      "cpf_ficticio": "CPF invalido - revisar",
       "setor": "Financeiro",
+      "cargo": "Analista",
       "data": "Data invalida",
       "valor": "1240.80",
+      "categoria": "Servico",
+      "centro_custo": "CC-01",
       "status": "Ativo",
+      "severidade": "critico",
       "corrections": [
         "nome padronizado",
-        "cpf sinalizado",
+        "cpf_ficticio sinalizado",
         "data sinalizada",
         "valor normalizado"
       ]
@@ -18,11 +22,15 @@
     {
       "id": "ADM-002",
       "nome": "Bruno Costa",
-      "cpf": "CPF invalido - revisar",
+      "cpf_ficticio": "CPF invalido - revisar",
       "setor": "Financeiro",
+      "cargo": "Coordenador",
       "data": "12/04/2025",
       "valor": "845.00",
+      "categoria": "Opex",
+      "centro_custo": "CC-02",
       "status": "Pendente",
+      "severidade": "alto",
       "corrections": [
         "duplicidade removida",
         "setor preenchido",
@@ -32,11 +40,15 @@
     {
       "id": "ADM-004",
       "nome": "Carla Lima",
-      "cpf": "987.654.321-99",
+      "cpf_ficticio": "987.654.321-99",
       "setor": "Operacoes",
+      "cargo": "Gestora",
       "data": "Pendente de origem",
       "valor": "0.00",
+      "categoria": "Contrato",
+      "centro_custo": "CC-09",
       "status": "Em revisao",
+      "severidade": "medio",
       "corrections": [
         "nome padronizado",
         "valor zerado para auditoria",
@@ -48,14 +60,18 @@
     {
       "id": "ADM-001",
       "nome": "Ana Silva",
-      "cpf": "CPF invalido - revisar",
+      "cpf_ficticio": "CPF invalido - revisar",
       "setor": "Financeiro",
+      "cargo": "Analista",
       "data": "Data invalida",
       "valor": "1240.80",
+      "categoria": "Servico",
+      "centro_custo": "CC-01",
       "status": "Ativo",
+      "severidade": "critico",
       "corrections": [
         "nome padronizado",
-        "cpf sinalizado",
+        "cpf_ficticio sinalizado",
         "data sinalizada",
         "valor normalizado"
       ]
@@ -63,11 +79,15 @@
     {
       "id": "ADM-002",
       "nome": "Bruno Costa",
-      "cpf": "CPF invalido - revisar",
+      "cpf_ficticio": "CPF invalido - revisar",
       "setor": "Financeiro",
+      "cargo": "Coordenador",
       "data": "12/04/2025",
       "valor": "845.00",
+      "categoria": "Opex",
+      "centro_custo": "CC-02",
       "status": "Pendente",
+      "severidade": "alto",
       "corrections": [
         "duplicidade removida",
         "setor preenchido",
@@ -77,11 +97,15 @@
     {
       "id": "ADM-004",
       "nome": "Carla Lima",
-      "cpf": "987.654.321-99",
+      "cpf_ficticio": "987.654.321-99",
       "setor": "Operacoes",
+      "cargo": "Gestora",
       "data": "Pendente de origem",
       "valor": "0.00",
+      "categoria": "Contrato",
+      "centro_custo": "CC-09",
       "status": "Em revisao",
+      "severidade": "medio",
       "corrections": [
         "nome padronizado",
         "valor zerado para auditoria",
@@ -93,14 +117,18 @@
     {
       "id": "ADM-001",
       "nome": "Ana Silva",
-      "cpf": "CPF invalido - revisar",
+      "cpf_ficticio": "CPF invalido - revisar",
       "setor": "Financeiro",
+      "cargo": "Analista",
       "data": "Data invalida",
       "valor": "1240.80",
+      "categoria": "Servico",
+      "centro_custo": "CC-01",
       "status": "Ativo",
+      "severidade": "critico",
       "corrections": [
         "nome padronizado",
-        "cpf sinalizado",
+        "cpf_ficticio sinalizado",
         "data sinalizada",
         "valor normalizado"
       ]
@@ -108,11 +136,15 @@
     {
       "id": "ADM-002",
       "nome": "Bruno Costa",
-      "cpf": "CPF invalido - revisar",
+      "cpf_ficticio": "CPF invalido - revisar",
       "setor": "Financeiro",
+      "cargo": "Coordenador",
       "data": "12/04/2025",
       "valor": "845.00",
+      "categoria": "Opex",
+      "centro_custo": "CC-02",
       "status": "Pendente",
+      "severidade": "alto",
       "corrections": [
         "duplicidade removida",
         "setor preenchido",
@@ -122,11 +154,15 @@
     {
       "id": "ADM-004",
       "nome": "Carla Lima",
-      "cpf": "987.654.321-99",
+      "cpf_ficticio": "987.654.321-99",
       "setor": "Operacoes",
+      "cargo": "Gestora",
       "data": "Pendente de origem",
       "valor": "0.00",
+      "categoria": "Contrato",
+      "centro_custo": "CC-09",
       "status": "Em revisao",
+      "severidade": "medio",
       "corrections": [
         "nome padronizado",
         "valor zerado para auditoria",
@@ -138,14 +174,18 @@
     {
       "id": "ADM-001",
       "nome": "Ana Silva",
-      "cpf": "CPF invalido - revisar",
+      "cpf_ficticio": "CPF invalido - revisar",
       "setor": "Financeiro",
+      "cargo": "Analista",
       "data": "Data invalida",
       "valor": "1240.80",
+      "categoria": "Servico",
+      "centro_custo": "CC-01",
       "status": "Ativo",
+      "severidade": "critico",
       "corrections": [
         "nome padronizado",
-        "cpf sinalizado",
+        "cpf_ficticio sinalizado",
         "data sinalizada",
         "valor normalizado"
       ]
@@ -153,11 +193,15 @@
     {
       "id": "ADM-002",
       "nome": "Bruno Costa",
-      "cpf": "CPF invalido - revisar",
+      "cpf_ficticio": "CPF invalido - revisar",
       "setor": "Financeiro",
+      "cargo": "Coordenador",
       "data": "12/04/2025",
       "valor": "845.00",
+      "categoria": "Opex",
+      "centro_custo": "CC-02",
       "status": "Pendente",
+      "severidade": "alto",
       "corrections": [
         "duplicidade removida",
         "setor preenchido",
@@ -167,11 +211,15 @@
     {
       "id": "ADM-004",
       "nome": "Carla Lima",
-      "cpf": "987.654.321-99",
+      "cpf_ficticio": "987.654.321-99",
       "setor": "Operacoes",
+      "cargo": "Gestora",
       "data": "Pendente de origem",
       "valor": "0.00",
+      "categoria": "Contrato",
+      "centro_custo": "CC-09",
       "status": "Em revisao",
+      "severidade": "medio",
       "corrections": [
         "nome padronizado",
         "valor zerado para auditoria",
@@ -183,14 +231,18 @@
     {
       "id": "ADM-001",
       "nome": "Ana Silva",
-      "cpf": "CPF invalido - revisar",
+      "cpf_ficticio": "CPF invalido - revisar",
       "setor": "Financeiro",
+      "cargo": "Analista",
       "data": "Data invalida",
       "valor": "1240.80",
+      "categoria": "Servico",
+      "centro_custo": "CC-01",
       "status": "Ativo",
+      "severidade": "critico",
       "corrections": [
         "nome padronizado",
-        "cpf sinalizado",
+        "cpf_ficticio sinalizado",
         "data sinalizada",
         "valor normalizado"
       ]
@@ -198,11 +250,15 @@
     {
       "id": "ADM-002",
       "nome": "Bruno Costa",
-      "cpf": "CPF invalido - revisar",
+      "cpf_ficticio": "CPF invalido - revisar",
       "setor": "Financeiro",
+      "cargo": "Coordenador",
       "data": "12/04/2025",
       "valor": "845.00",
+      "categoria": "Opex",
+      "centro_custo": "CC-02",
       "status": "Pendente",
+      "severidade": "alto",
       "corrections": [
         "duplicidade removida",
         "setor preenchido",
@@ -212,11 +268,186 @@
     {
       "id": "ADM-004",
       "nome": "Carla Lima",
-      "cpf": "987.654.321-99",
+      "cpf_ficticio": "987.654.321-99",
       "setor": "Operacoes",
+      "cargo": "Gestora",
       "data": "Pendente de origem",
       "valor": "0.00",
+      "categoria": "Contrato",
+      "centro_custo": "CC-09",
       "status": "Em revisao",
+      "severidade": "medio",
+      "corrections": [
+        "nome padronizado",
+        "valor zerado para auditoria",
+        "status corrigido"
+      ]
+    }
+  ],
+  "validacao-cadastros": [
+    {
+      "id": "ADM-001",
+      "nome": "Ana Silva",
+      "cpf_ficticio": "CPF invalido - revisar",
+      "setor": "Financeiro",
+      "cargo": "Analista",
+      "data": "Data invalida",
+      "valor": "1240.80",
+      "categoria": "Servico",
+      "centro_custo": "CC-01",
+      "status": "Ativo",
+      "severidade": "critico",
+      "corrections": [
+        "nome padronizado",
+        "cpf_ficticio sinalizado",
+        "data sinalizada",
+        "valor normalizado"
+      ]
+    },
+    {
+      "id": "ADM-002",
+      "nome": "Bruno Costa",
+      "cpf_ficticio": "CPF invalido - revisar",
+      "setor": "Financeiro",
+      "cargo": "Coordenador",
+      "data": "12/04/2025",
+      "valor": "845.00",
+      "categoria": "Opex",
+      "centro_custo": "CC-02",
+      "status": "Pendente",
+      "severidade": "alto",
+      "corrections": [
+        "duplicidade removida",
+        "setor preenchido",
+        "data normalizada"
+      ]
+    },
+    {
+      "id": "ADM-004",
+      "nome": "Carla Lima",
+      "cpf_ficticio": "987.654.321-99",
+      "setor": "Operacoes",
+      "cargo": "Gestora",
+      "data": "Pendente de origem",
+      "valor": "0.00",
+      "categoria": "Contrato",
+      "centro_custo": "CC-09",
+      "status": "Em revisao",
+      "severidade": "medio",
+      "corrections": [
+        "nome padronizado",
+        "valor zerado para auditoria",
+        "status corrigido"
+      ]
+    }
+  ],
+  "monitoramento-sla": [
+    {
+      "id": "ADM-001",
+      "nome": "Ana Silva",
+      "cpf_ficticio": "CPF invalido - revisar",
+      "setor": "Financeiro",
+      "cargo": "Analista",
+      "data": "Data invalida",
+      "valor": "1240.80",
+      "categoria": "Servico",
+      "centro_custo": "CC-01",
+      "status": "Ativo",
+      "severidade": "critico",
+      "corrections": [
+        "nome padronizado",
+        "cpf_ficticio sinalizado",
+        "data sinalizada",
+        "valor normalizado"
+      ]
+    },
+    {
+      "id": "ADM-002",
+      "nome": "Bruno Costa",
+      "cpf_ficticio": "CPF invalido - revisar",
+      "setor": "Financeiro",
+      "cargo": "Coordenador",
+      "data": "12/04/2025",
+      "valor": "845.00",
+      "categoria": "Opex",
+      "centro_custo": "CC-02",
+      "status": "Pendente",
+      "severidade": "alto",
+      "corrections": [
+        "duplicidade removida",
+        "setor preenchido",
+        "data normalizada"
+      ]
+    },
+    {
+      "id": "ADM-004",
+      "nome": "Carla Lima",
+      "cpf_ficticio": "987.654.321-99",
+      "setor": "Operacoes",
+      "cargo": "Gestora",
+      "data": "Pendente de origem",
+      "valor": "0.00",
+      "categoria": "Contrato",
+      "centro_custo": "CC-09",
+      "status": "Em revisao",
+      "severidade": "medio",
+      "corrections": [
+        "nome padronizado",
+        "valor zerado para auditoria",
+        "status corrigido"
+      ]
+    }
+  ],
+  "padronizacao-relatorios-mensais": [
+    {
+      "id": "ADM-001",
+      "nome": "Ana Silva",
+      "cpf_ficticio": "CPF invalido - revisar",
+      "setor": "Financeiro",
+      "cargo": "Analista",
+      "data": "Data invalida",
+      "valor": "1240.80",
+      "categoria": "Servico",
+      "centro_custo": "CC-01",
+      "status": "Ativo",
+      "severidade": "critico",
+      "corrections": [
+        "nome padronizado",
+        "cpf_ficticio sinalizado",
+        "data sinalizada",
+        "valor normalizado"
+      ]
+    },
+    {
+      "id": "ADM-002",
+      "nome": "Bruno Costa",
+      "cpf_ficticio": "CPF invalido - revisar",
+      "setor": "Financeiro",
+      "cargo": "Coordenador",
+      "data": "12/04/2025",
+      "valor": "845.00",
+      "categoria": "Opex",
+      "centro_custo": "CC-02",
+      "status": "Pendente",
+      "severidade": "alto",
+      "corrections": [
+        "duplicidade removida",
+        "setor preenchido",
+        "data normalizada"
+      ]
+    },
+    {
+      "id": "ADM-004",
+      "nome": "Carla Lima",
+      "cpf_ficticio": "987.654.321-99",
+      "setor": "Operacoes",
+      "cargo": "Gestora",
+      "data": "Pendente de origem",
+      "valor": "0.00",
+      "categoria": "Contrato",
+      "centro_custo": "CC-09",
+      "status": "Em revisao",
+      "severidade": "medio",
       "corrections": [
         "nome padronizado",
         "valor zerado para auditoria",

@@ -11,6 +11,8 @@ const gains = [
   { title: "Padronizacao de dados", icon: Database, description: "Campos criticos seguem regras consistentes antes da consolidacao." },
   { title: "Relatorios rastreaveis", icon: FileCheck2, description: "Cada execucao libera arquivos simulados, logs e resumo executivo." },
   { title: "Insights operacionais", icon: Sparkles, description: "Regras analiticas indicam riscos, ganhos e proximas acoes." },
+  { title: "Rastreabilidade", icon: ShieldCheck, description: "Audit trail registra regras, timestamps, severidade e arquivos gerados." },
+  { title: "ROI operacional", icon: Gauge, description: "Economia mensal e anual simuladas tornam o impacto facil de explicar." },
 ];
 
 const workflowSteps = ["Entrada da base", "Validacao", "Automacao", "Relatorio final"];

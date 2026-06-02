@@ -10,7 +10,7 @@ export async function POST(request: Request) {
       return Response.json({ status: "error", message: parseJsonError(parsed.error) }, { status: 400 });
     }
 
-    const result = buildAutomationRunResult(parsed.data.slug);
+    const result = buildAutomationRunResult(parsed.data.automationId ?? parsed.data.slug ?? "", parsed.data.enabledRules);
 
     if (!result) {
       return Response.json({ status: "error", message: "Automacao nao encontrada." }, { status: 404 });

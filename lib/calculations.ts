@@ -26,6 +26,31 @@ export function calculateRoi(automation: Pick<Automation, "estimatedSavingsBRL" 
   return Math.round((automation.estimatedSavingsBRL / simulatedCost) * 100);
 }
 
+export function calculateOperationalRoi({
+  manualTimeHours,
+  automatedTimeHours,
+  monthlyRuns = 4,
+  hourlyRate = 120,
+}: {
+  manualTimeHours: number;
+  automatedTimeHours: number;
+  monthlyRuns?: number;
+  hourlyRate?: number;
+}) {
+  const savedHours = calculateTimeSaved(manualTimeHours, automatedTimeHours);
+  const monthlySavings = savedHours * hourlyRate * monthlyRuns;
+  const annualSavings = monthlySavings * 12;
+  const efficiencyRate = manualTimeHours > 0 ? Math.round((savedHours / manualTimeHours) * 100) : 0;
+
+  return {
+    savedHours,
+    monthlySavings,
+    annualSavings,
+    efficiencyRate,
+    productivityGain: `${efficiencyRate}%`,
+  };
+}
+
 export function aggregateDashboardMetrics(automations: Automation[]): DashboardMetrics {
   const totals = automations.reduce(
     (acc, automation) => {
@@ -39,6 +64,8 @@ export function aggregateDashboardMetrics(automations: Automation[]): DashboardM
       acc.qualityBefore += automation.qualityBefore;
       acc.qualityAfter += automation.qualityAfter;
       acc.reworkReduction += automation.reworkReduction;
+      acc.successRate += automation.successRate;
+      acc.averageResponseTimeMs += automation.averageResponseTimeMs;
       return acc;
     },
     {
@@ -52,6 +79,8 @@ export function aggregateDashboardMetrics(automations: Automation[]): DashboardM
       qualityBefore: 0,
       qualityAfter: 0,
       reworkReduction: 0,
+      successRate: 0,
+      averageResponseTimeMs: 0,
     },
   );
 
@@ -69,6 +98,8 @@ export function aggregateDashboardMetrics(automations: Automation[]): DashboardM
     averageQualityAfter: Math.round(totals.qualityAfter / count),
     averageQualityScore: Math.round(totals.qualityAfter / count),
     reworkReduction: Math.round(totals.reworkReduction / count),
+    successRate: Math.round(totals.successRate / count),
+    averageResponseTimeMs: Math.round(totals.averageResponseTimeMs / count),
   };
 }
 

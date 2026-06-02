@@ -12,14 +12,17 @@ Demonstrar uma central web interativa que transforma bases administrativas desor
 ## Funcionalidades
 
 - Home orientada a produto com CTAs de demonstracao.
-- Central de automacoes com busca e filtros.
-- Detalhe de automacao com problema de negocio, KPIs, simulacao de execucao, progresso, timeline e logs.
-- Comparacao antes/depois com celulas destacadas, resumo e regras aplicadas.
-- Dashboard executivo com KPIs, graficos Recharts, ranking, alertas e insights.
+- Automation Marketplace com busca e filtros por categoria, status, impacto e complexidade.
+- Detalhe de automacao com problema de negocio, KPIs, modo executivo/tecnico, rule engine, fila simulada, pipeline, progresso, timeline e logs.
+- Comparacao antes/depois com Data Diff, celulas destacadas, resumo e regras aplicadas.
+- Data Quality Score por dimensao, audit trail, risco/compliance e downloads.
+- Dashboard executivo com KPIs, graficos Recharts, ranking, alertas, System Health e insights.
+- Historico de execucoes com status, score, arquivos e responsaveis ficticios.
+- Paginas Architecture e Case Study para explicar valor tecnico e produto.
 - Relatorios simulados com preview e downloads.
-- Route Handlers para automacoes, execucao, relatorios e downloads.
+- Route Handlers para automacoes, execucao, executions, relatorios, downloads e health.
 - Scripts Python locais para gerar datasets e arquivos de exemplo.
-- Testes minimos para UI, calculos, insights, validadores e endpoint.
+- Testes para UI, calculos, insights, validadores, rule engine, data quality, endpoint de execucao e health.
 
 ## Tecnologias
 
@@ -53,6 +56,9 @@ tests/               Testes automatizados essenciais
 3. Geracao de relatorio executivo
 4. Auditoria de qualidade de dados
 5. Rotina financeira e operacional
+6. Validacao de cadastros
+7. Monitoramento de SLA
+8. Padronizacao de relatorios mensais
 
 ## Rodando localmente
 
@@ -67,6 +73,7 @@ Acesse `http://localhost:3000`.
 
 ```bash
 python scripts/generate_datasets.py
+python scripts/generate_reports.py
 ```
 
 O script gera arquivos em `data/` e `public/samples/`. Python nao e dependencia de runtime em producao.
@@ -95,6 +102,7 @@ npm audit
 - Downloads simulados por arquivos estaticos.
 - Execucao de automacao usa timers no client e Route Handlers leves.
 - Processamento Python pesado deve ser externo ao runtime da Vercel.
+- Observabilidade e health sao simulados, preparados para futura integracao com Vercel Analytics.
 
 ## Roadmap
 
@@ -103,6 +111,7 @@ npm audit
 - Integracao com filas/workers para processamento real.
 - Autenticacao para ambientes corporativos.
 - Exportacao HTML/PDF mais completa.
+- Analytics reais, tracing e storage de audit trail.
 
 ## Creditos
 

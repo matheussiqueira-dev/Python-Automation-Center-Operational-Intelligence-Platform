@@ -1,5 +1,5 @@
-id,nome,cpf,setor,data,valor,status
-ADM-001,ana  silva,123.456.789-00,fin,32/13/2025,"R$ 1.240,8",ativo
-ADM-002,BRUNO COSTA,00000000000,,2025-04-12,"845,00",pendente
-ADM-002,Bruno Costa,00000000000,Financeiro,12/04/2025,845.00,pendente
-ADM-004,carla lima,987.654.321-99,Operacoes,,R$ -,sem status
+id,nome,cpf_ficticio,setor,cargo,data,valor,categoria,centro_custo,status,severidade
+ADM-001,ana  silva,123.456.789-00,fin,analista,32/13/2025,"R$ 1.240,8",servico,CC-01,ativo,critico
+ADM-002,BRUNO COSTA,00000000000,,coord,2025-04-12,"845,00",opex,,pendente,alto
+ADM-002,Bruno Costa,00000000000,Financeiro,coord,12/04/2025,845.00,OPEX,CC-02,pendente,alto
+ADM-004,carla lima,987.654.321-99,Operacoes,gestora,,R$ -,contrato,CC-09,sem status,medio

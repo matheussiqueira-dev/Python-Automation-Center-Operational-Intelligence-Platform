@@ -1,0 +1,27 @@
+{
+  "status": "healthy",
+  "lastExecutionAt": "2026-06-01T14:42:06.000Z",
+  "averageResponseTimeMs": 386,
+  "successRate": 97,
+  "activeAutomations": 8,
+  "uptime": "99.95%",
+  "errorsByCategory": [
+    {
+      "name": "Duplicidades",
+      "value": 128
+    },
+    {
+      "name": "Campo obrigatorio vazio",
+      "value": 112
+    },
+    {
+      "name": "Formato invalido",
+      "value": 141
+    },
+    {
+      "name": "Outliers",
+      "value": 76
+    }
+  ],
+  "interactionEvents": 284
+}

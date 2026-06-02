@@ -3,6 +3,13 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Download, Lightbulb, ShieldCheck } from "lucide-react";
 import { BeforeAfterTable } from "@/components/automations/before-after-table";
+import { DataDiffViewer } from "@/components/data-quality/data-diff-viewer";
+import { DataQualityScore } from "@/components/data-quality/data-quality-score";
+import { RuleEnginePanel } from "@/components/data-quality/rule-engine-panel";
+import { ValidationSummary } from "@/components/data-quality/validation-summary";
+import { AuditTrail } from "@/components/execution/audit-trail";
+import { ExecutionPipeline } from "@/components/execution/execution-pipeline";
+import { QueueSimulator } from "@/components/execution/queue-simulator";
 import { ExecutionPanel } from "@/components/automations/execution-panel";
 import { ExecutionTimeline } from "@/components/automations/execution-timeline";
 import { LogsPanel } from "@/components/automations/logs-panel";
@@ -10,8 +17,9 @@ import { Badge } from "@/components/shared/badge";
 import { Card } from "@/components/shared/card";
 import { ErrorState } from "@/components/shared/error-state";
 import { MetricDelta } from "@/components/shared/metric-delta";
+import { Tabs } from "@/components/shared/tabs";
 import { formatCurrency, formatHours } from "@/lib/formatters";
-import type { Automation, AutomationRunResult, DatasetRecord, ExecutionLog } from "@/lib/types";
+import type { Automation, AutomationRunResult, DatasetRecord, ExecutionLog, ViewMode } from "@/lib/types";
 
 interface AutomationDetailProps {
   automation: Automation;
@@ -25,6 +33,8 @@ export function AutomationDetail({ automation, before, after }: AutomationDetail
   const [activeStep, setActiveStep] = useState(0);
   const [logs, setLogs] = useState<ExecutionLog[]>([]);
   const [result, setResult] = useState<AutomationRunResult | null>(null);
+  const [mode, setMode] = useState<ViewMode>("executive");
+  const [enabledRules, setEnabledRules] = useState<string[]>(() => automation.rulesEngine.filter((rule) => rule.active).map((rule) => rule.id));
   const timerRef = useRef<number | null>(null);
 
   const qualityGain = automation.qualityAfter - automation.qualityBefore;
@@ -65,7 +75,7 @@ export function AutomationDetail({ automation, before, after }: AutomationDetail
       const response = await fetch("/api/automations/run", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ slug: automation.slug }),
+        body: JSON.stringify({ automationId: automation.id, enabledRules, mode }),
       });
 
       if (!response.ok) {
@@ -132,7 +142,7 @@ export function AutomationDetail({ automation, before, after }: AutomationDetail
             <div className="mt-5 grid gap-3 sm:grid-cols-3">
               <Fact label="Tempo manual" value={formatHours(automation.manualTimeHours)} />
               <Fact label="Tempo automatizado" value={formatHours(automation.automatedTimeHours)} />
-              <Fact label="Economia simulada" value={formatCurrency(automation.estimatedSavingsBRL)} />
+              <Fact label="Economia mensal" value={formatCurrency(automation.monthlySavingsBRL)} />
             </div>
           </div>
           <div className="rounded-lg border border-white/10 bg-black/18 p-4">
@@ -152,6 +162,21 @@ export function AutomationDetail({ automation, before, after }: AutomationDetail
         </div>
       </Card>
 
+      <div className="flex justify-end">
+        <Tabs
+          value={mode}
+          onChange={setMode}
+          items={[
+            { value: "executive", label: "Modo executivo" },
+            { value: "technical", label: "Modo tecnico" },
+          ]}
+        />
+      </div>
+
+      <ValidationSummary automation={automation} />
+      <RuleEnginePanel rules={automation.rulesEngine} onChange={setEnabledRules} />
+      <QueueSimulator automation={automation} activeStep={automation.timeline[activeStep] ?? "Na fila"} />
+      <ExecutionPipeline steps={automation.timeline} activeIndex={activeStep} />
       <ExecutionPanel status={status} progress={progress} result={result} onRun={handleRun} />
 
       {status === "error" ? <ErrorState title="Erro na simulacao" description="A API retornou uma falha simulada ou indisponibilidade temporaria." /> : null}
@@ -162,6 +187,8 @@ export function AutomationDetail({ automation, before, after }: AutomationDetail
       </div>
 
       <BeforeAfterTable before={before} after={after} rules={automation.rules} />
+      <DataDiffViewer before={before} after={after} rules={automation.rules} />
+      <DataQualityScore automation={automation} />
 
       <div className="grid gap-4 lg:grid-cols-[1fr_360px]">
         <Card className="p-5">
@@ -207,6 +234,27 @@ export function AutomationDetail({ automation, before, after }: AutomationDetail
           </div>
         </Card>
       </div>
+
+      {mode === "technical" ? (
+        <div className="grid gap-4 lg:grid-cols-[1fr_420px]">
+          <AuditTrail events={result?.auditTrail ?? automation.auditTrail} />
+          <Card className="p-5">
+            <h2 className="text-lg font-semibold text-white">Payload tecnico</h2>
+            <pre className="scrollbar-soft mt-4 max-h-96 overflow-auto rounded-md border border-white/10 bg-black/30 p-4 text-xs leading-6 text-zinc-300">
+              {JSON.stringify(
+                {
+                  endpoint: "/api/automations/run",
+                  method: "POST",
+                  request: { automationId: automation.id, enabledRules, mode },
+                  response: result ?? "execute a automacao para visualizar o payload",
+                },
+                null,
+                2,
+              )}
+            </pre>
+          </Card>
+        </div>
+      ) : null}
     </div>
   );
 }

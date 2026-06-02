@@ -3,7 +3,7 @@ import { reportPayloadSchema, runAutomationPayloadSchema } from "@/lib/validator
 
 describe("api validators", () => {
   it("accepts a valid automation run payload", () => {
-    expect(runAutomationPayloadSchema.safeParse({ slug: "limpeza-planilhas-administrativas" }).success).toBe(true);
+    expect(runAutomationPayloadSchema.safeParse({ automationId: "auto-001", enabledRules: ["remover-duplicados"], mode: "executive" }).success).toBe(true);
   });
 
   it("rejects unsafe slug values", () => {

@@ -3,7 +3,7 @@ import { getAutomations } from "@/lib/mock-data";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://python-automation-center.vercel.app";
-  const staticRoutes = ["", "/automations", "/dashboard", "/reports", "/about"];
+  const staticRoutes = ["", "/automations", "/dashboard", "/executions", "/reports", "/architecture", "/case-study", "/about"];
   const automationRoutes = getAutomations().map((automation) => `/automations/${automation.slug}`);
 
   return [...staticRoutes, ...automationRoutes].map((route) => ({

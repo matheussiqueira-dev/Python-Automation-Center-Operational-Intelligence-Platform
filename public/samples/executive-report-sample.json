@@ -1,6 +1,16 @@
 {
-  "title": "Executive Report Sample",
-  "summary": "Amostra de relatorio executivo gerado pela plataforma com KPIs, logs e recomendacoes.",
-  "generatedAt": "2026-05-21",
-  "credits": "Desenvolvido por Matheus Siqueira - https://www.matheussiqueira.dev"
+  "id": "report-limpeza-planilhas-administrativas",
+  "title": "Relatorio executivo - Limpeza de planilhas administrativas",
+  "generatedAt": "2026-06-01",
+  "automationSlug": "limpeza-planilhas-administrativas",
+  "automationName": "Limpeza de planilhas administrativas",
+  "status": "Disponivel",
+  "format": "JSON",
+  "executiveSummary": "1240 registros processados, 312 inconsistencias corrigidas e economia mensal simulada de R$ 7776.",
+  "preview": [
+    "Score de qualidade: 61% -> 94%",
+    "Tempo economizado por ciclo: 16.2h",
+    "Reducao de retrabalho: 82%"
+  ],
+  "href": "/samples/executive-report-sample.json"
 }

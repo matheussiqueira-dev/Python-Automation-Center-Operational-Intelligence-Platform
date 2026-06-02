@@ -1,0 +1,130 @@
+[
+  {
+    "id": "report-limpeza-planilhas-administrativas",
+    "title": "Relatorio executivo - Limpeza de planilhas administrativas",
+    "generatedAt": "2026-06-01",
+    "automationSlug": "limpeza-planilhas-administrativas",
+    "automationName": "Limpeza de planilhas administrativas",
+    "status": "Disponivel",
+    "format": "HTML",
+    "executiveSummary": "1240 registros processados, 312 inconsistencias corrigidas e R$ 7776 de economia mensal simulada.",
+    "preview": [
+      "Score de qualidade: 61% -> 94%",
+      "Horas economizadas: 16.2h",
+      "Economia anual simulada: R$ 93312"
+    ],
+    "href": "/samples/executive-report-sample.html"
+  },
+  {
+    "id": "report-consolidacao-multiplos-arquivos",
+    "title": "Relatorio executivo - Consolidacao de multiplos arquivos",
+    "generatedAt": "2026-06-01",
+    "automationSlug": "consolidacao-multiplos-arquivos",
+    "automationName": "Consolidacao de multiplos arquivos",
+    "status": "Disponivel",
+    "format": "HTML",
+    "executiveSummary": "2180 registros processados, 286 inconsistencias corrigidas e R$ 6672 de economia mensal simulada.",
+    "preview": [
+      "Score de qualidade: 64% -> 92%",
+      "Horas economizadas: 13.9h",
+      "Economia anual simulada: R$ 80064"
+    ],
+    "href": "/samples/executive-report-sample.html"
+  },
+  {
+    "id": "report-geracao-relatorio-executivo",
+    "title": "Relatorio executivo - Geracao de relatorio executivo",
+    "generatedAt": "2026-06-01",
+    "automationSlug": "geracao-relatorio-executivo",
+    "automationName": "Geracao de relatorio executivo",
+    "status": "Disponivel",
+    "format": "HTML",
+    "executiveSummary": "960 registros processados, 148 inconsistencias corrigidas e R$ 5088 de economia mensal simulada.",
+    "preview": [
+      "Score de qualidade: 70% -> 96%",
+      "Horas economizadas: 10.6h",
+      "Economia anual simulada: R$ 61056"
+    ],
+    "href": "/samples/executive-report-sample.html"
+  },
+  {
+    "id": "report-auditoria-qualidade-dados",
+    "title": "Relatorio executivo - Auditoria de qualidade de dados",
+    "generatedAt": "2026-06-01",
+    "automationSlug": "auditoria-qualidade-dados",
+    "automationName": "Auditoria de qualidade de dados",
+    "status": "Disponivel",
+    "format": "HTML",
+    "executiveSummary": "1750 registros processados, 401 inconsistencias corrigidas e R$ 5616 de economia mensal simulada.",
+    "preview": [
+      "Score de qualidade: 58% -> 91%",
+      "Horas economizadas: 11.7h",
+      "Economia anual simulada: R$ 67392"
+    ],
+    "href": "/samples/executive-report-sample.html"
+  },
+  {
+    "id": "report-rotina-financeira-operacional",
+    "title": "Relatorio executivo - Rotina financeira e operacional",
+    "generatedAt": "2026-06-01",
+    "automationSlug": "rotina-financeira-operacional",
+    "automationName": "Rotina financeira e operacional",
+    "status": "Disponivel",
+    "format": "HTML",
+    "executiveSummary": "1420 registros processados, 219 inconsistencias corrigidas e R$ 4032 de economia mensal simulada.",
+    "preview": [
+      "Score de qualidade: 67% -> 90%",
+      "Horas economizadas: 8.4h",
+      "Economia anual simulada: R$ 48384"
+    ],
+    "href": "/samples/executive-report-sample.html"
+  },
+  {
+    "id": "report-validacao-cadastros",
+    "title": "Relatorio executivo - Validacao de cadastros",
+    "generatedAt": "2026-06-01",
+    "automationSlug": "validacao-cadastros",
+    "automationName": "Validacao de cadastros",
+    "status": "Disponivel",
+    "format": "HTML",
+    "executiveSummary": "1880 registros processados, 267 inconsistencias corrigidas e R$ 3888 de economia mensal simulada.",
+    "preview": [
+      "Score de qualidade: 63% -> 93%",
+      "Horas economizadas: 8.1h",
+      "Economia anual simulada: R$ 46656"
+    ],
+    "href": "/samples/executive-report-sample.html"
+  },
+  {
+    "id": "report-monitoramento-sla",
+    "title": "Relatorio executivo - Monitoramento de SLA",
+    "generatedAt": "2026-06-01",
+    "automationSlug": "monitoramento-sla",
+    "automationName": "Monitoramento de SLA",
+    "status": "Disponivel",
+    "format": "HTML",
+    "executiveSummary": "1320 registros processados, 198 inconsistencias corrigidas e R$ 4704 de economia mensal simulada.",
+    "preview": [
+      "Score de qualidade: 69% -> 95%",
+      "Horas economizadas: 9.8h",
+      "Economia anual simulada: R$ 56448"
+    ],
+    "href": "/samples/executive-report-sample.html"
+  },
+  {
+    "id": "report-padronizacao-relatorios-mensais",
+    "title": "Relatorio executivo - Padronizacao de relatorios mensais",
+    "generatedAt": "2026-06-01",
+    "automationSlug": "padronizacao-relatorios-mensais",
+    "automationName": "Padronizacao de relatorios mensais",
+    "status": "Disponivel",
+    "format": "HTML",
+    "executiveSummary": "1540 registros processados, 234 inconsistencias corrigidas e R$ 5520 de economia mensal simulada.",
+    "preview": [
+      "Score de qualidade: 66% -> 94%",
+      "Horas economizadas: 11.5h",
+      "Economia anual simulada: R$ 66240"
+    ],
+    "href": "/samples/executive-report-sample.html"
+  }
+]

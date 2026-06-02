@@ -3,15 +3,22 @@
     "id": "auto-001",
     "slug": "limpeza-planilhas-administrativas",
     "name": "Limpeza de planilhas administrativas",
-    "category": "Tratamento de dados",
-    "description": "Padroniza nomes, CPFs, datas, duplicidades e valores monetarios em bases administrativas.",
-    "problem": "Bases recebidas de setores diferentes chegam com campos vazios, formatos divergentes e registros duplicados, consumindo horas de conferencia manual.",
+    "category": "Dados",
+    "complexity": "high",
+    "description": "Automacao simulada para limpeza de planilhas administrativas, com regras de validacao, logs, score de qualidade e relatorio exportavel.",
+    "problem": "Rotina atual sofre com duplicidade, cpf e valores fora do padrao, exigindo conferência manual e aumentando risco operacional.",
+    "objective": "Reduzir retrabalho, padronizar dados, preservar rastreabilidade e entregar indicadores prontos para decisao.",
     "status": "ready",
     "impact": "critical",
+    "riskReduced": "Risco operacional e retrabalho reduzidos com validacao preventiva.",
     "manualTimeHours": 18,
     "automatedTimeHours": 1.8,
     "estimatedSavingsHours": 16.2,
     "estimatedSavingsBRL": 1944,
+    "monthlySavingsBRL": 7776,
+    "annualSavingsBRL": 93312,
+    "successRate": 96,
+    "averageResponseTimeMs": 344,
     "processedRecords": 1240,
     "fixedIssues": 312,
     "duplicatesRemoved": 128,
@@ -25,48 +32,272 @@
         "value": 128
       },
       {
-        "name": "CPF invalido",
-        "value": 37
+        "name": "Campo obrigatorio vazio",
+        "value": 112
       },
       {
-        "name": "Data invalida",
-        "value": 44
+        "name": "Formato invalido",
+        "value": 141
       },
       {
-        "name": "Valor fora do padrao",
-        "value": 103
+        "name": "Outliers",
+        "value": 76
       }
     ],
     "timeline": [
+      "Na fila",
       "Recebendo base",
       "Validando estrutura",
-      "Identificando inconsistencias",
-      "Aplicando regras de limpeza",
-      "Consolidando informacoes",
+      "Detectando inconsistencias",
+      "Aplicando regras",
+      "Consolidando dados",
       "Gerando relatorio",
-      "Finalizando arquivos"
+      "Finalizando",
+      "Concluido"
     ],
     "rules": [
+      {
+        "field": "Valor",
+        "original": "R$ 1.200,50",
+        "correction": "1200.50",
+        "rule": "normalizacao monetaria",
+        "impact": "campo liberado para calculo agregado"
+      },
       {
         "field": "Data de admissao",
         "original": "32/13/2025",
         "correction": "Registro marcado como invalido",
-        "rule": "Validacao de data no padrao dd/mm/yyyy",
-        "impact": "Removido do calculo mensal ate correcao da origem"
+        "rule": "validacao de data no padrao dd/mm/yyyy",
+        "impact": "removido do calculo mensal ate correcao da origem"
       },
       {
-        "field": "CPF",
-        "original": "123.456.789-00",
-        "correction": "CPF sinalizado para revisao",
-        "rule": "Checagem de digitos verificadores ficticios",
-        "impact": "Evita consolidacao de cadastro inconsistente"
+        "field": "Status",
+        "original": "sem status",
+        "correction": "Em revisao",
+        "rule": "validar status permitido",
+        "impact": "evita consolidacao com classificacao operacional invalida"
+      }
+    ],
+    "rulesEngine": [
+      {
+        "id": "remover-duplicados",
+        "name": "Remover duplicados",
+        "description": "Remove registros repetidos pela chave de negocio.",
+        "estimatedImpact": "Base consolidada sem sobrecontagem",
+        "affectedRecords": 156,
+        "reducedRisk": "risco de duplicidade",
+        "active": true
       },
       {
-        "field": "Valor",
-        "original": "R$ 1.240,8",
-        "correction": "1240.80",
-        "rule": "Normalizacao monetaria para decimal",
-        "impact": "Padroniza calculos financeiros e graficos"
+        "id": "validar-cpf-ficticio",
+        "name": "Validar CPF ficticio",
+        "description": "Marca documentos ficticios invalidos para revisao.",
+        "estimatedImpact": "Cadastros invalidos deixam de entrar no relatorio",
+        "affectedRecords": 104,
+        "reducedRisk": "risco cadastral",
+        "active": true
+      },
+      {
+        "id": "normalizar-datas",
+        "name": "Normalizar datas",
+        "description": "Converte datas validas para dd/mm/yyyy e sinaliza impossiveis.",
+        "estimatedImpact": "Periodos ficam comparaveis",
+        "affectedRecords": 78,
+        "reducedRisk": "risco temporal",
+        "active": true
+      },
+      {
+        "id": "padronizar-nomes",
+        "name": "Padronizar nomes",
+        "description": "Aplica capitalizacao e remove espacos duplicados.",
+        "estimatedImpact": "Relatorios ficam legiveis e agrupaveis",
+        "affectedRecords": 62,
+        "reducedRisk": "risco de agrupamento",
+        "active": true
+      },
+      {
+        "id": "corrigir-categorias",
+        "name": "Corrigir categorias",
+        "description": "Mapeia categorias divergentes para uma taxonomia padrao.",
+        "estimatedImpact": "Indicadores por categoria ficam consistentes",
+        "affectedRecords": 52,
+        "reducedRisk": "risco de classificacao",
+        "active": true
+      },
+      {
+        "id": "detectar-negativos",
+        "name": "Detectar valores negativos",
+        "description": "Sinaliza valores negativos fora de contexto.",
+        "estimatedImpact": "Anomalias financeiras ficam visiveis",
+        "affectedRecords": 44,
+        "reducedRisk": "risco financeiro",
+        "active": true
+      },
+      {
+        "id": "campos-obrigatorios",
+        "name": "Marcar obrigatorios vazios",
+        "description": "Identifica campos essenciais sem preenchimento.",
+        "estimatedImpact": "Registros incompletos deixam de contaminar KPIs",
+        "affectedRecords": 39,
+        "reducedRisk": "risco de completude",
+        "active": true
+      },
+      {
+        "id": "identificar-outliers",
+        "name": "Identificar outliers",
+        "description": "Marca valores fora da distribuicao esperada.",
+        "estimatedImpact": "Excecoes operacionais ficam auditaveis",
+        "affectedRecords": 34,
+        "reducedRisk": "risco de decisao",
+        "active": false
+      },
+      {
+        "id": "normalizar-monetarios",
+        "name": "Normalizar valores monetarios",
+        "description": "Converte moeda em decimal padronizado.",
+        "estimatedImpact": "Calculos financeiros ficam seguros",
+        "affectedRecords": 31,
+        "reducedRisk": "risco contabil",
+        "active": false
+      },
+      {
+        "id": "validar-status",
+        "name": "Validar status permitido",
+        "description": "Garante status dentro da lista oficial.",
+        "estimatedImpact": "Fluxos operacionais ficam comparaveis",
+        "affectedRecords": 28,
+        "reducedRisk": "risco operacional",
+        "active": false
+      }
+    ],
+    "qualityDimensions": [
+      {
+        "dimension": "completude",
+        "before": 61,
+        "after": 94,
+        "issues": 156,
+        "severity": "critico",
+        "recommendation": "Manter regra automatizada de completude antes do fechamento mensal."
+      },
+      {
+        "dimension": "unicidade",
+        "before": 60,
+        "after": 94,
+        "issues": 104,
+        "severity": "critico",
+        "recommendation": "Manter regra automatizada de unicidade antes do fechamento mensal."
+      },
+      {
+        "dimension": "validade",
+        "before": 59,
+        "after": 93,
+        "issues": 78,
+        "severity": "critico",
+        "recommendation": "Manter regra automatizada de validade antes do fechamento mensal."
+      },
+      {
+        "dimension": "consistencia",
+        "before": 58,
+        "after": 93,
+        "issues": 62,
+        "severity": "alto",
+        "recommendation": "Manter regra automatizada de consistencia antes do fechamento mensal."
+      },
+      {
+        "dimension": "padronizacao",
+        "before": 57,
+        "after": 92,
+        "issues": 52,
+        "severity": "alto",
+        "recommendation": "Manter regra automatizada de padronizacao antes do fechamento mensal."
+      },
+      {
+        "dimension": "integridade",
+        "before": 56,
+        "after": 92,
+        "issues": 44,
+        "severity": "medio",
+        "recommendation": "Manter regra automatizada de integridade antes do fechamento mensal."
+      }
+    ],
+    "riskProfile": [
+      {
+        "name": "Risco de duplicidade",
+        "before": "alto",
+        "after": "baixo",
+        "description": "Evita contagem dupla em relatórios e indicadores."
+      },
+      {
+        "name": "Campo obrigatorio vazio",
+        "before": "critico",
+        "after": "medio",
+        "description": "Reduz registros incompletos em bases analiticas."
+      },
+      {
+        "name": "Relatorio inconsistente",
+        "before": "alto",
+        "after": "baixo",
+        "description": "Padroniza periodos, categorias e formatos."
+      },
+      {
+        "name": "Atraso operacional",
+        "before": "medio",
+        "after": "baixo",
+        "description": "Diminui dependencia de revisao manual."
+      },
+      {
+        "name": "Decisao com dado invalido",
+        "before": "critico",
+        "after": "baixo",
+        "description": "Sinaliza excecoes antes do consumo gerencial."
+      },
+      {
+        "name": "Retrabalho",
+        "before": "alto",
+        "after": "baixo",
+        "description": "Automatiza validacoes repetitivas."
+      }
+    ],
+    "auditTrail": [
+      {
+        "id": "limpeza-planilhas-administrativas-audit-0",
+        "timestamp": "2026-06-01 14:32",
+        "event": "Regra aplicada",
+        "rule": "normalizar_datas",
+        "affectedRecords": 104,
+        "severity": "success",
+        "result": "Datas normalizadas e invalidas sinalizadas.",
+        "generatedFile": ""
+      },
+      {
+        "id": "limpeza-planilhas-administrativas-audit-1",
+        "timestamp": "2026-06-01 14:33",
+        "event": "Registros marcados",
+        "rule": "campos_obrigatorios",
+        "affectedRecords": 62,
+        "severity": "warning",
+        "result": "Registros incompletos enviados para revisao.",
+        "generatedFile": ""
+      },
+      {
+        "id": "limpeza-planilhas-administrativas-audit-2",
+        "timestamp": "2026-06-01 14:34",
+        "event": "Duplicidades removidas",
+        "rule": "remover_duplicados",
+        "affectedRecords": 52,
+        "severity": "success",
+        "result": "Base consolidada sem duplicidades.",
+        "generatedFile": ""
+      },
+      {
+        "id": "limpeza-planilhas-administrativas-audit-3",
+        "timestamp": "2026-06-01 14:35",
+        "event": "Relatorio gerado",
+        "rule": "gerar_relatorio",
+        "affectedRecords": 312,
+        "severity": "success",
+        "result": "Relatorio executivo gerado.",
+        "generatedFile": "executive-report-sample.json"
       }
     ],
     "files": [
@@ -75,7 +306,7 @@
         "name": "raw-administrative-base.csv",
         "type": "CSV",
         "size": "32 KB",
-        "generatedAt": "2026-05-21",
+        "generatedAt": "2026-06-01",
         "automationSlug": "limpeza-planilhas-administrativas",
         "href": "/samples/raw-administrative-base.csv"
       },
@@ -84,25 +315,43 @@
         "name": "processed-administrative-base.csv",
         "type": "CSV",
         "size": "28 KB",
-        "generatedAt": "2026-05-21",
+        "generatedAt": "2026-06-01",
         "automationSlug": "limpeza-planilhas-administrativas",
         "href": "/samples/processed-administrative-base.csv"
       },
       {
-        "id": "limpeza-planilhas-administrativas-report",
+        "id": "limpeza-planilhas-administrativas-execution",
+        "name": "automation-execution-log.json",
+        "type": "LOG",
+        "size": "14 KB",
+        "generatedAt": "2026-06-01",
+        "automationSlug": "limpeza-planilhas-administrativas",
+        "href": "/samples/automation-execution-log.json"
+      },
+      {
+        "id": "limpeza-planilhas-administrativas-report-json",
         "name": "executive-report-sample.json",
         "type": "JSON",
         "size": "18 KB",
-        "generatedAt": "2026-05-21",
+        "generatedAt": "2026-06-01",
         "automationSlug": "limpeza-planilhas-administrativas",
         "href": "/samples/executive-report-sample.json"
+      },
+      {
+        "id": "limpeza-planilhas-administrativas-report-html",
+        "name": "executive-report-sample.html",
+        "type": "HTML",
+        "size": "22 KB",
+        "generatedAt": "2026-06-01",
+        "automationSlug": "limpeza-planilhas-administrativas",
+        "href": "/samples/executive-report-sample.html"
       },
       {
         "id": "limpeza-planilhas-administrativas-quality",
         "name": "quality-checklist.json",
         "type": "CHECKLIST",
         "size": "9 KB",
-        "generatedAt": "2026-05-21",
+        "generatedAt": "2026-06-01",
         "automationSlug": "limpeza-planilhas-administrativas",
         "href": "/samples/quality-checklist.json"
       }
@@ -138,15 +387,22 @@
     "id": "auto-002",
     "slug": "consolidacao-multiplos-arquivos",
     "name": "Consolidacao de multiplos arquivos",
-    "category": "ETL",
-    "description": "Une bases setoriais, normaliza colunas divergentes e gera uma visao consolidada por area.",
-    "problem": "Relatorios mensais dependem de planilhas avulsas com nomenclaturas diferentes, categorias inconsistentes e registros repetidos.",
+    "category": "Operacoes",
+    "complexity": "high",
+    "description": "Automacao simulada para consolidacao de multiplos arquivos, com regras de validacao, logs, score de qualidade e relatorio exportavel.",
+    "problem": "Rotina atual sofre com colunas divergentes e categorias inconsistentes, exigindo conferência manual e aumentando risco operacional.",
+    "objective": "Reduzir retrabalho, padronizar dados, preservar rastreabilidade e entregar indicadores prontos para decisao.",
     "status": "ready",
     "impact": "high",
+    "riskReduced": "Risco operacional e retrabalho reduzidos com validacao preventiva.",
     "manualTimeHours": 16,
     "automatedTimeHours": 2.1,
     "estimatedSavingsHours": 13.9,
     "estimatedSavingsBRL": 1668,
+    "monthlySavingsBRL": 6672,
+    "annualSavingsBRL": 80064,
+    "successRate": 97,
+    "averageResponseTimeMs": 368,
     "processedRecords": 2180,
     "fixedIssues": 286,
     "duplicatesRemoved": 96,
@@ -156,52 +412,276 @@
     "reworkReduction": 76,
     "errorTypes": [
       {
-        "name": "Colunas divergentes",
-        "value": 94
-      },
-      {
-        "name": "Categorias inconsistentes",
-        "value": 86
-      },
-      {
         "name": "Duplicidades",
-        "value": 96
+        "value": 128
       },
       {
-        "name": "Setor ausente",
-        "value": 10
+        "name": "Campo obrigatorio vazio",
+        "value": 112
+      },
+      {
+        "name": "Formato invalido",
+        "value": 141
+      },
+      {
+        "name": "Outliers",
+        "value": 76
       }
     ],
     "timeline": [
+      "Na fila",
       "Recebendo base",
       "Validando estrutura",
-      "Identificando inconsistencias",
-      "Aplicando regras de limpeza",
-      "Consolidando informacoes",
+      "Detectando inconsistencias",
+      "Aplicando regras",
+      "Consolidando dados",
       "Gerando relatorio",
-      "Finalizando arquivos"
+      "Finalizando",
+      "Concluido"
     ],
     "rules": [
+      {
+        "field": "Valor",
+        "original": "R$ 1.200,50",
+        "correction": "1200.50",
+        "rule": "normalizacao monetaria",
+        "impact": "campo liberado para calculo agregado"
+      },
       {
         "field": "Data de admissao",
         "original": "32/13/2025",
         "correction": "Registro marcado como invalido",
-        "rule": "Validacao de data no padrao dd/mm/yyyy",
-        "impact": "Removido do calculo mensal ate correcao da origem"
+        "rule": "validacao de data no padrao dd/mm/yyyy",
+        "impact": "removido do calculo mensal ate correcao da origem"
       },
       {
-        "field": "CPF",
-        "original": "123.456.789-00",
-        "correction": "CPF sinalizado para revisao",
-        "rule": "Checagem de digitos verificadores ficticios",
-        "impact": "Evita consolidacao de cadastro inconsistente"
+        "field": "Status",
+        "original": "sem status",
+        "correction": "Em revisao",
+        "rule": "validar status permitido",
+        "impact": "evita consolidacao com classificacao operacional invalida"
+      }
+    ],
+    "rulesEngine": [
+      {
+        "id": "remover-duplicados",
+        "name": "Remover duplicados",
+        "description": "Remove registros repetidos pela chave de negocio.",
+        "estimatedImpact": "Base consolidada sem sobrecontagem",
+        "affectedRecords": 143,
+        "reducedRisk": "risco de duplicidade",
+        "active": true
       },
       {
-        "field": "Valor",
-        "original": "R$ 1.240,8",
-        "correction": "1240.80",
-        "rule": "Normalizacao monetaria para decimal",
-        "impact": "Padroniza calculos financeiros e graficos"
+        "id": "validar-cpf-ficticio",
+        "name": "Validar CPF ficticio",
+        "description": "Marca documentos ficticios invalidos para revisao.",
+        "estimatedImpact": "Cadastros invalidos deixam de entrar no relatorio",
+        "affectedRecords": 95,
+        "reducedRisk": "risco cadastral",
+        "active": true
+      },
+      {
+        "id": "normalizar-datas",
+        "name": "Normalizar datas",
+        "description": "Converte datas validas para dd/mm/yyyy e sinaliza impossiveis.",
+        "estimatedImpact": "Periodos ficam comparaveis",
+        "affectedRecords": 71,
+        "reducedRisk": "risco temporal",
+        "active": true
+      },
+      {
+        "id": "padronizar-nomes",
+        "name": "Padronizar nomes",
+        "description": "Aplica capitalizacao e remove espacos duplicados.",
+        "estimatedImpact": "Relatorios ficam legiveis e agrupaveis",
+        "affectedRecords": 57,
+        "reducedRisk": "risco de agrupamento",
+        "active": true
+      },
+      {
+        "id": "corrigir-categorias",
+        "name": "Corrigir categorias",
+        "description": "Mapeia categorias divergentes para uma taxonomia padrao.",
+        "estimatedImpact": "Indicadores por categoria ficam consistentes",
+        "affectedRecords": 47,
+        "reducedRisk": "risco de classificacao",
+        "active": true
+      },
+      {
+        "id": "detectar-negativos",
+        "name": "Detectar valores negativos",
+        "description": "Sinaliza valores negativos fora de contexto.",
+        "estimatedImpact": "Anomalias financeiras ficam visiveis",
+        "affectedRecords": 40,
+        "reducedRisk": "risco financeiro",
+        "active": true
+      },
+      {
+        "id": "campos-obrigatorios",
+        "name": "Marcar obrigatorios vazios",
+        "description": "Identifica campos essenciais sem preenchimento.",
+        "estimatedImpact": "Registros incompletos deixam de contaminar KPIs",
+        "affectedRecords": 35,
+        "reducedRisk": "risco de completude",
+        "active": true
+      },
+      {
+        "id": "identificar-outliers",
+        "name": "Identificar outliers",
+        "description": "Marca valores fora da distribuicao esperada.",
+        "estimatedImpact": "Excecoes operacionais ficam auditaveis",
+        "affectedRecords": 31,
+        "reducedRisk": "risco de decisao",
+        "active": true
+      },
+      {
+        "id": "normalizar-monetarios",
+        "name": "Normalizar valores monetarios",
+        "description": "Converte moeda em decimal padronizado.",
+        "estimatedImpact": "Calculos financeiros ficam seguros",
+        "affectedRecords": 28,
+        "reducedRisk": "risco contabil",
+        "active": true
+      },
+      {
+        "id": "validar-status",
+        "name": "Validar status permitido",
+        "description": "Garante status dentro da lista oficial.",
+        "estimatedImpact": "Fluxos operacionais ficam comparaveis",
+        "affectedRecords": 26,
+        "reducedRisk": "risco operacional",
+        "active": true
+      }
+    ],
+    "qualityDimensions": [
+      {
+        "dimension": "completude",
+        "before": 64,
+        "after": 92,
+        "issues": 143,
+        "severity": "critico",
+        "recommendation": "Manter regra automatizada de completude antes do fechamento mensal."
+      },
+      {
+        "dimension": "unicidade",
+        "before": 63,
+        "after": 92,
+        "issues": 95,
+        "severity": "critico",
+        "recommendation": "Manter regra automatizada de unicidade antes do fechamento mensal."
+      },
+      {
+        "dimension": "validade",
+        "before": 62,
+        "after": 91,
+        "issues": 71,
+        "severity": "critico",
+        "recommendation": "Manter regra automatizada de validade antes do fechamento mensal."
+      },
+      {
+        "dimension": "consistencia",
+        "before": 61,
+        "after": 91,
+        "issues": 57,
+        "severity": "alto",
+        "recommendation": "Manter regra automatizada de consistencia antes do fechamento mensal."
+      },
+      {
+        "dimension": "padronizacao",
+        "before": 60,
+        "after": 90,
+        "issues": 47,
+        "severity": "alto",
+        "recommendation": "Manter regra automatizada de padronizacao antes do fechamento mensal."
+      },
+      {
+        "dimension": "integridade",
+        "before": 59,
+        "after": 90,
+        "issues": 40,
+        "severity": "medio",
+        "recommendation": "Manter regra automatizada de integridade antes do fechamento mensal."
+      }
+    ],
+    "riskProfile": [
+      {
+        "name": "Risco de duplicidade",
+        "before": "alto",
+        "after": "baixo",
+        "description": "Evita contagem dupla em relatórios e indicadores."
+      },
+      {
+        "name": "Campo obrigatorio vazio",
+        "before": "critico",
+        "after": "medio",
+        "description": "Reduz registros incompletos em bases analiticas."
+      },
+      {
+        "name": "Relatorio inconsistente",
+        "before": "alto",
+        "after": "baixo",
+        "description": "Padroniza periodos, categorias e formatos."
+      },
+      {
+        "name": "Atraso operacional",
+        "before": "medio",
+        "after": "baixo",
+        "description": "Diminui dependencia de revisao manual."
+      },
+      {
+        "name": "Decisao com dado invalido",
+        "before": "critico",
+        "after": "baixo",
+        "description": "Sinaliza excecoes antes do consumo gerencial."
+      },
+      {
+        "name": "Retrabalho",
+        "before": "alto",
+        "after": "baixo",
+        "description": "Automatiza validacoes repetitivas."
+      }
+    ],
+    "auditTrail": [
+      {
+        "id": "consolidacao-multiplos-arquivos-audit-0",
+        "timestamp": "2026-06-01 14:32",
+        "event": "Regra aplicada",
+        "rule": "normalizar_datas",
+        "affectedRecords": 95,
+        "severity": "success",
+        "result": "Datas normalizadas e invalidas sinalizadas.",
+        "generatedFile": ""
+      },
+      {
+        "id": "consolidacao-multiplos-arquivos-audit-1",
+        "timestamp": "2026-06-01 14:33",
+        "event": "Registros marcados",
+        "rule": "campos_obrigatorios",
+        "affectedRecords": 57,
+        "severity": "warning",
+        "result": "Registros incompletos enviados para revisao.",
+        "generatedFile": ""
+      },
+      {
+        "id": "consolidacao-multiplos-arquivos-audit-2",
+        "timestamp": "2026-06-01 14:34",
+        "event": "Duplicidades removidas",
+        "rule": "remover_duplicados",
+        "affectedRecords": 47,
+        "severity": "success",
+        "result": "Base consolidada sem duplicidades.",
+        "generatedFile": ""
+      },
+      {
+        "id": "consolidacao-multiplos-arquivos-audit-3",
+        "timestamp": "2026-06-01 14:35",
+        "event": "Relatorio gerado",
+        "rule": "gerar_relatorio",
+        "affectedRecords": 286,
+        "severity": "success",
+        "result": "Relatorio executivo gerado.",
+        "generatedFile": "executive-report-sample.json"
       }
     ],
     "files": [
@@ -210,7 +690,7 @@
         "name": "raw-administrative-base.csv",
         "type": "CSV",
         "size": "32 KB",
-        "generatedAt": "2026-05-21",
+        "generatedAt": "2026-06-01",
         "automationSlug": "consolidacao-multiplos-arquivos",
         "href": "/samples/raw-administrative-base.csv"
       },
@@ -219,25 +699,43 @@
         "name": "processed-administrative-base.csv",
         "type": "CSV",
         "size": "28 KB",
-        "generatedAt": "2026-05-21",
+        "generatedAt": "2026-06-01",
         "automationSlug": "consolidacao-multiplos-arquivos",
         "href": "/samples/processed-administrative-base.csv"
       },
       {
-        "id": "consolidacao-multiplos-arquivos-report",
+        "id": "consolidacao-multiplos-arquivos-execution",
+        "name": "automation-execution-log.json",
+        "type": "LOG",
+        "size": "14 KB",
+        "generatedAt": "2026-06-01",
+        "automationSlug": "consolidacao-multiplos-arquivos",
+        "href": "/samples/automation-execution-log.json"
+      },
+      {
+        "id": "consolidacao-multiplos-arquivos-report-json",
         "name": "executive-report-sample.json",
         "type": "JSON",
         "size": "18 KB",
-        "generatedAt": "2026-05-21",
+        "generatedAt": "2026-06-01",
         "automationSlug": "consolidacao-multiplos-arquivos",
         "href": "/samples/executive-report-sample.json"
+      },
+      {
+        "id": "consolidacao-multiplos-arquivos-report-html",
+        "name": "executive-report-sample.html",
+        "type": "HTML",
+        "size": "22 KB",
+        "generatedAt": "2026-06-01",
+        "automationSlug": "consolidacao-multiplos-arquivos",
+        "href": "/samples/executive-report-sample.html"
       },
       {
         "id": "consolidacao-multiplos-arquivos-quality",
         "name": "quality-checklist.json",
         "type": "CHECKLIST",
         "size": "9 KB",
-        "generatedAt": "2026-05-21",
+        "generatedAt": "2026-06-01",
         "automationSlug": "consolidacao-multiplos-arquivos",
         "href": "/samples/quality-checklist.json"
       }
@@ -273,15 +771,22 @@
     "id": "auto-003",
     "slug": "geracao-relatorio-executivo",
     "name": "Geracao de relatorio executivo",
-    "category": "Business Intelligence",
-    "description": "Transforma indicadores tratados em resumo gerencial com KPIs, graficos e recomendacoes.",
-    "problem": "A preparacao de relatorios executivos exige consolidar metricas, revisar excecoes e montar apresentacoes manualmente.",
+    "category": "Relatorios",
+    "complexity": "medium",
+    "description": "Automacao simulada para geracao de relatorio executivo, com regras de validacao, logs, score de qualidade e relatorio exportavel.",
+    "problem": "Rotina atual sofre com indicadores ausentes e periodos inconsistentes, exigindo conferência manual e aumentando risco operacional.",
+    "objective": "Reduzir retrabalho, padronizar dados, preservar rastreabilidade e entregar indicadores prontos para decisao.",
     "status": "success",
     "impact": "high",
+    "riskReduced": "Risco operacional e retrabalho reduzidos com validacao preventiva.",
     "manualTimeHours": 12,
     "automatedTimeHours": 1.4,
     "estimatedSavingsHours": 10.6,
     "estimatedSavingsBRL": 1272,
+    "monthlySavingsBRL": 5088,
+    "annualSavingsBRL": 61056,
+    "successRate": 98,
+    "averageResponseTimeMs": 392,
     "processedRecords": 960,
     "fixedIssues": 148,
     "duplicatesRemoved": 18,
@@ -291,52 +796,276 @@
     "reworkReduction": 71,
     "errorTypes": [
       {
-        "name": "Indicador ausente",
-        "value": 42
-      },
-      {
-        "name": "Periodo inconsistente",
-        "value": 38
-      },
-      {
-        "name": "Valor fora do padrao",
-        "value": 50
-      },
-      {
         "name": "Duplicidades",
-        "value": 18
+        "value": 128
+      },
+      {
+        "name": "Campo obrigatorio vazio",
+        "value": 112
+      },
+      {
+        "name": "Formato invalido",
+        "value": 141
+      },
+      {
+        "name": "Outliers",
+        "value": 76
       }
     ],
     "timeline": [
+      "Na fila",
       "Recebendo base",
       "Validando estrutura",
-      "Identificando inconsistencias",
-      "Aplicando regras de limpeza",
-      "Consolidando informacoes",
+      "Detectando inconsistencias",
+      "Aplicando regras",
+      "Consolidando dados",
       "Gerando relatorio",
-      "Finalizando arquivos"
+      "Finalizando",
+      "Concluido"
     ],
     "rules": [
+      {
+        "field": "Valor",
+        "original": "R$ 1.200,50",
+        "correction": "1200.50",
+        "rule": "normalizacao monetaria",
+        "impact": "campo liberado para calculo agregado"
+      },
       {
         "field": "Data de admissao",
         "original": "32/13/2025",
         "correction": "Registro marcado como invalido",
-        "rule": "Validacao de data no padrao dd/mm/yyyy",
-        "impact": "Removido do calculo mensal ate correcao da origem"
+        "rule": "validacao de data no padrao dd/mm/yyyy",
+        "impact": "removido do calculo mensal ate correcao da origem"
       },
       {
-        "field": "CPF",
-        "original": "123.456.789-00",
-        "correction": "CPF sinalizado para revisao",
-        "rule": "Checagem de digitos verificadores ficticios",
-        "impact": "Evita consolidacao de cadastro inconsistente"
+        "field": "Status",
+        "original": "sem status",
+        "correction": "Em revisao",
+        "rule": "validar status permitido",
+        "impact": "evita consolidacao com classificacao operacional invalida"
+      }
+    ],
+    "rulesEngine": [
+      {
+        "id": "remover-duplicados",
+        "name": "Remover duplicados",
+        "description": "Remove registros repetidos pela chave de negocio.",
+        "estimatedImpact": "Base consolidada sem sobrecontagem",
+        "affectedRecords": 74,
+        "reducedRisk": "risco de duplicidade",
+        "active": true
       },
       {
-        "field": "Valor",
-        "original": "R$ 1.240,8",
-        "correction": "1240.80",
-        "rule": "Normalizacao monetaria para decimal",
-        "impact": "Padroniza calculos financeiros e graficos"
+        "id": "validar-cpf-ficticio",
+        "name": "Validar CPF ficticio",
+        "description": "Marca documentos ficticios invalidos para revisao.",
+        "estimatedImpact": "Cadastros invalidos deixam de entrar no relatorio",
+        "affectedRecords": 49,
+        "reducedRisk": "risco cadastral",
+        "active": true
+      },
+      {
+        "id": "normalizar-datas",
+        "name": "Normalizar datas",
+        "description": "Converte datas validas para dd/mm/yyyy e sinaliza impossiveis.",
+        "estimatedImpact": "Periodos ficam comparaveis",
+        "affectedRecords": 37,
+        "reducedRisk": "risco temporal",
+        "active": true
+      },
+      {
+        "id": "padronizar-nomes",
+        "name": "Padronizar nomes",
+        "description": "Aplica capitalizacao e remove espacos duplicados.",
+        "estimatedImpact": "Relatorios ficam legiveis e agrupaveis",
+        "affectedRecords": 29,
+        "reducedRisk": "risco de agrupamento",
+        "active": true
+      },
+      {
+        "id": "corrigir-categorias",
+        "name": "Corrigir categorias",
+        "description": "Mapeia categorias divergentes para uma taxonomia padrao.",
+        "estimatedImpact": "Indicadores por categoria ficam consistentes",
+        "affectedRecords": 24,
+        "reducedRisk": "risco de classificacao",
+        "active": true
+      },
+      {
+        "id": "detectar-negativos",
+        "name": "Detectar valores negativos",
+        "description": "Sinaliza valores negativos fora de contexto.",
+        "estimatedImpact": "Anomalias financeiras ficam visiveis",
+        "affectedRecords": 21,
+        "reducedRisk": "risco financeiro",
+        "active": true
+      },
+      {
+        "id": "campos-obrigatorios",
+        "name": "Marcar obrigatorios vazios",
+        "description": "Identifica campos essenciais sem preenchimento.",
+        "estimatedImpact": "Registros incompletos deixam de contaminar KPIs",
+        "affectedRecords": 18,
+        "reducedRisk": "risco de completude",
+        "active": true
+      },
+      {
+        "id": "identificar-outliers",
+        "name": "Identificar outliers",
+        "description": "Marca valores fora da distribuicao esperada.",
+        "estimatedImpact": "Excecoes operacionais ficam auditaveis",
+        "affectedRecords": 16,
+        "reducedRisk": "risco de decisao",
+        "active": false
+      },
+      {
+        "id": "normalizar-monetarios",
+        "name": "Normalizar valores monetarios",
+        "description": "Converte moeda em decimal padronizado.",
+        "estimatedImpact": "Calculos financeiros ficam seguros",
+        "affectedRecords": 14,
+        "reducedRisk": "risco contabil",
+        "active": false
+      },
+      {
+        "id": "validar-status",
+        "name": "Validar status permitido",
+        "description": "Garante status dentro da lista oficial.",
+        "estimatedImpact": "Fluxos operacionais ficam comparaveis",
+        "affectedRecords": 13,
+        "reducedRisk": "risco operacional",
+        "active": false
+      }
+    ],
+    "qualityDimensions": [
+      {
+        "dimension": "completude",
+        "before": 70,
+        "after": 96,
+        "issues": 74,
+        "severity": "critico",
+        "recommendation": "Manter regra automatizada de completude antes do fechamento mensal."
+      },
+      {
+        "dimension": "unicidade",
+        "before": 69,
+        "after": 96,
+        "issues": 49,
+        "severity": "critico",
+        "recommendation": "Manter regra automatizada de unicidade antes do fechamento mensal."
+      },
+      {
+        "dimension": "validade",
+        "before": 68,
+        "after": 95,
+        "issues": 37,
+        "severity": "critico",
+        "recommendation": "Manter regra automatizada de validade antes do fechamento mensal."
+      },
+      {
+        "dimension": "consistencia",
+        "before": 67,
+        "after": 95,
+        "issues": 29,
+        "severity": "alto",
+        "recommendation": "Manter regra automatizada de consistencia antes do fechamento mensal."
+      },
+      {
+        "dimension": "padronizacao",
+        "before": 66,
+        "after": 94,
+        "issues": 24,
+        "severity": "alto",
+        "recommendation": "Manter regra automatizada de padronizacao antes do fechamento mensal."
+      },
+      {
+        "dimension": "integridade",
+        "before": 65,
+        "after": 94,
+        "issues": 21,
+        "severity": "medio",
+        "recommendation": "Manter regra automatizada de integridade antes do fechamento mensal."
+      }
+    ],
+    "riskProfile": [
+      {
+        "name": "Risco de duplicidade",
+        "before": "alto",
+        "after": "baixo",
+        "description": "Evita contagem dupla em relatórios e indicadores."
+      },
+      {
+        "name": "Campo obrigatorio vazio",
+        "before": "critico",
+        "after": "medio",
+        "description": "Reduz registros incompletos em bases analiticas."
+      },
+      {
+        "name": "Relatorio inconsistente",
+        "before": "alto",
+        "after": "baixo",
+        "description": "Padroniza periodos, categorias e formatos."
+      },
+      {
+        "name": "Atraso operacional",
+        "before": "medio",
+        "after": "baixo",
+        "description": "Diminui dependencia de revisao manual."
+      },
+      {
+        "name": "Decisao com dado invalido",
+        "before": "critico",
+        "after": "baixo",
+        "description": "Sinaliza excecoes antes do consumo gerencial."
+      },
+      {
+        "name": "Retrabalho",
+        "before": "alto",
+        "after": "baixo",
+        "description": "Automatiza validacoes repetitivas."
+      }
+    ],
+    "auditTrail": [
+      {
+        "id": "geracao-relatorio-executivo-audit-0",
+        "timestamp": "2026-06-01 14:32",
+        "event": "Regra aplicada",
+        "rule": "normalizar_datas",
+        "affectedRecords": 49,
+        "severity": "success",
+        "result": "Datas normalizadas e invalidas sinalizadas.",
+        "generatedFile": ""
+      },
+      {
+        "id": "geracao-relatorio-executivo-audit-1",
+        "timestamp": "2026-06-01 14:33",
+        "event": "Registros marcados",
+        "rule": "campos_obrigatorios",
+        "affectedRecords": 29,
+        "severity": "warning",
+        "result": "Registros incompletos enviados para revisao.",
+        "generatedFile": ""
+      },
+      {
+        "id": "geracao-relatorio-executivo-audit-2",
+        "timestamp": "2026-06-01 14:34",
+        "event": "Duplicidades removidas",
+        "rule": "remover_duplicados",
+        "affectedRecords": 24,
+        "severity": "success",
+        "result": "Base consolidada sem duplicidades.",
+        "generatedFile": ""
+      },
+      {
+        "id": "geracao-relatorio-executivo-audit-3",
+        "timestamp": "2026-06-01 14:35",
+        "event": "Relatorio gerado",
+        "rule": "gerar_relatorio",
+        "affectedRecords": 148,
+        "severity": "success",
+        "result": "Relatorio executivo gerado.",
+        "generatedFile": "executive-report-sample.json"
       }
     ],
     "files": [
@@ -345,7 +1074,7 @@
         "name": "raw-administrative-base.csv",
         "type": "CSV",
         "size": "32 KB",
-        "generatedAt": "2026-05-21",
+        "generatedAt": "2026-06-01",
         "automationSlug": "geracao-relatorio-executivo",
         "href": "/samples/raw-administrative-base.csv"
       },
@@ -354,25 +1083,43 @@
         "name": "processed-administrative-base.csv",
         "type": "CSV",
         "size": "28 KB",
-        "generatedAt": "2026-05-21",
+        "generatedAt": "2026-06-01",
         "automationSlug": "geracao-relatorio-executivo",
         "href": "/samples/processed-administrative-base.csv"
       },
       {
-        "id": "geracao-relatorio-executivo-report",
+        "id": "geracao-relatorio-executivo-execution",
+        "name": "automation-execution-log.json",
+        "type": "LOG",
+        "size": "14 KB",
+        "generatedAt": "2026-06-01",
+        "automationSlug": "geracao-relatorio-executivo",
+        "href": "/samples/automation-execution-log.json"
+      },
+      {
+        "id": "geracao-relatorio-executivo-report-json",
         "name": "executive-report-sample.json",
         "type": "JSON",
         "size": "18 KB",
-        "generatedAt": "2026-05-21",
+        "generatedAt": "2026-06-01",
         "automationSlug": "geracao-relatorio-executivo",
         "href": "/samples/executive-report-sample.json"
+      },
+      {
+        "id": "geracao-relatorio-executivo-report-html",
+        "name": "executive-report-sample.html",
+        "type": "HTML",
+        "size": "22 KB",
+        "generatedAt": "2026-06-01",
+        "automationSlug": "geracao-relatorio-executivo",
+        "href": "/samples/executive-report-sample.html"
       },
       {
         "id": "geracao-relatorio-executivo-quality",
         "name": "quality-checklist.json",
         "type": "CHECKLIST",
         "size": "9 KB",
-        "generatedAt": "2026-05-21",
+        "generatedAt": "2026-06-01",
         "automationSlug": "geracao-relatorio-executivo",
         "href": "/samples/quality-checklist.json"
       }
@@ -408,15 +1155,22 @@
     "id": "auto-004",
     "slug": "auditoria-qualidade-dados",
     "name": "Auditoria de qualidade de dados",
-    "category": "Governanca",
-    "description": "Mapeia nulos, duplicidades, formatos invalidos, outliers e severidade por coluna.",
-    "problem": "Times operacionais tomam decisoes com bases sem diagnostico de qualidade, aumentando risco e retrabalho.",
+    "category": "Auditoria",
+    "complexity": "high",
+    "description": "Automacao simulada para auditoria de qualidade de dados, com regras de validacao, logs, score de qualidade e relatorio exportavel.",
+    "problem": "Rotina atual sofre com nulos, outliers e campos obrigatorios ausentes, exigindo conferência manual e aumentando risco operacional.",
+    "objective": "Reduzir retrabalho, padronizar dados, preservar rastreabilidade e entregar indicadores prontos para decisao.",
     "status": "attention",
     "impact": "critical",
+    "riskReduced": "Risco operacional e retrabalho reduzidos com validacao preventiva.",
     "manualTimeHours": 14,
     "automatedTimeHours": 2.3,
     "estimatedSavingsHours": 11.7,
     "estimatedSavingsBRL": 1404,
+    "monthlySavingsBRL": 5616,
+    "annualSavingsBRL": 67392,
+    "successRate": 95,
+    "averageResponseTimeMs": 416,
     "processedRecords": 1750,
     "fixedIssues": 401,
     "duplicatesRemoved": 72,
@@ -426,52 +1180,276 @@
     "reworkReduction": 79,
     "errorTypes": [
       {
-        "name": "Campos obrigatorios ausentes",
-        "value": 112
+        "name": "Duplicidades",
+        "value": 128
       },
       {
-        "name": "Outliers",
-        "value": 76
+        "name": "Campo obrigatorio vazio",
+        "value": 112
       },
       {
         "name": "Formato invalido",
         "value": 141
       },
       {
-        "name": "Duplicidades",
-        "value": 72
+        "name": "Outliers",
+        "value": 76
       }
     ],
     "timeline": [
+      "Na fila",
       "Recebendo base",
       "Validando estrutura",
-      "Identificando inconsistencias",
-      "Aplicando regras de limpeza",
-      "Consolidando informacoes",
+      "Detectando inconsistencias",
+      "Aplicando regras",
+      "Consolidando dados",
       "Gerando relatorio",
-      "Finalizando arquivos"
+      "Finalizando",
+      "Concluido"
     ],
     "rules": [
+      {
+        "field": "Valor",
+        "original": "R$ 1.200,50",
+        "correction": "1200.50",
+        "rule": "normalizacao monetaria",
+        "impact": "campo liberado para calculo agregado"
+      },
       {
         "field": "Data de admissao",
         "original": "32/13/2025",
         "correction": "Registro marcado como invalido",
-        "rule": "Validacao de data no padrao dd/mm/yyyy",
-        "impact": "Removido do calculo mensal ate correcao da origem"
+        "rule": "validacao de data no padrao dd/mm/yyyy",
+        "impact": "removido do calculo mensal ate correcao da origem"
       },
       {
-        "field": "CPF",
-        "original": "123.456.789-00",
-        "correction": "CPF sinalizado para revisao",
-        "rule": "Checagem de digitos verificadores ficticios",
-        "impact": "Evita consolidacao de cadastro inconsistente"
+        "field": "Status",
+        "original": "sem status",
+        "correction": "Em revisao",
+        "rule": "validar status permitido",
+        "impact": "evita consolidacao com classificacao operacional invalida"
+      }
+    ],
+    "rulesEngine": [
+      {
+        "id": "remover-duplicados",
+        "name": "Remover duplicados",
+        "description": "Remove registros repetidos pela chave de negocio.",
+        "estimatedImpact": "Base consolidada sem sobrecontagem",
+        "affectedRecords": 200,
+        "reducedRisk": "risco de duplicidade",
+        "active": true
       },
       {
-        "field": "Valor",
-        "original": "R$ 1.240,8",
-        "correction": "1240.80",
-        "rule": "Normalizacao monetaria para decimal",
-        "impact": "Padroniza calculos financeiros e graficos"
+        "id": "validar-cpf-ficticio",
+        "name": "Validar CPF ficticio",
+        "description": "Marca documentos ficticios invalidos para revisao.",
+        "estimatedImpact": "Cadastros invalidos deixam de entrar no relatorio",
+        "affectedRecords": 133,
+        "reducedRisk": "risco cadastral",
+        "active": true
+      },
+      {
+        "id": "normalizar-datas",
+        "name": "Normalizar datas",
+        "description": "Converte datas validas para dd/mm/yyyy e sinaliza impossiveis.",
+        "estimatedImpact": "Periodos ficam comparaveis",
+        "affectedRecords": 100,
+        "reducedRisk": "risco temporal",
+        "active": true
+      },
+      {
+        "id": "padronizar-nomes",
+        "name": "Padronizar nomes",
+        "description": "Aplica capitalizacao e remove espacos duplicados.",
+        "estimatedImpact": "Relatorios ficam legiveis e agrupaveis",
+        "affectedRecords": 80,
+        "reducedRisk": "risco de agrupamento",
+        "active": true
+      },
+      {
+        "id": "corrigir-categorias",
+        "name": "Corrigir categorias",
+        "description": "Mapeia categorias divergentes para uma taxonomia padrao.",
+        "estimatedImpact": "Indicadores por categoria ficam consistentes",
+        "affectedRecords": 66,
+        "reducedRisk": "risco de classificacao",
+        "active": true
+      },
+      {
+        "id": "detectar-negativos",
+        "name": "Detectar valores negativos",
+        "description": "Sinaliza valores negativos fora de contexto.",
+        "estimatedImpact": "Anomalias financeiras ficam visiveis",
+        "affectedRecords": 57,
+        "reducedRisk": "risco financeiro",
+        "active": true
+      },
+      {
+        "id": "campos-obrigatorios",
+        "name": "Marcar obrigatorios vazios",
+        "description": "Identifica campos essenciais sem preenchimento.",
+        "estimatedImpact": "Registros incompletos deixam de contaminar KPIs",
+        "affectedRecords": 50,
+        "reducedRisk": "risco de completude",
+        "active": true
+      },
+      {
+        "id": "identificar-outliers",
+        "name": "Identificar outliers",
+        "description": "Marca valores fora da distribuicao esperada.",
+        "estimatedImpact": "Excecoes operacionais ficam auditaveis",
+        "affectedRecords": 44,
+        "reducedRisk": "risco de decisao",
+        "active": true
+      },
+      {
+        "id": "normalizar-monetarios",
+        "name": "Normalizar valores monetarios",
+        "description": "Converte moeda em decimal padronizado.",
+        "estimatedImpact": "Calculos financeiros ficam seguros",
+        "affectedRecords": 40,
+        "reducedRisk": "risco contabil",
+        "active": true
+      },
+      {
+        "id": "validar-status",
+        "name": "Validar status permitido",
+        "description": "Garante status dentro da lista oficial.",
+        "estimatedImpact": "Fluxos operacionais ficam comparaveis",
+        "affectedRecords": 36,
+        "reducedRisk": "risco operacional",
+        "active": true
+      }
+    ],
+    "qualityDimensions": [
+      {
+        "dimension": "completude",
+        "before": 58,
+        "after": 91,
+        "issues": 200,
+        "severity": "critico",
+        "recommendation": "Manter regra automatizada de completude antes do fechamento mensal."
+      },
+      {
+        "dimension": "unicidade",
+        "before": 57,
+        "after": 91,
+        "issues": 133,
+        "severity": "critico",
+        "recommendation": "Manter regra automatizada de unicidade antes do fechamento mensal."
+      },
+      {
+        "dimension": "validade",
+        "before": 56,
+        "after": 90,
+        "issues": 100,
+        "severity": "critico",
+        "recommendation": "Manter regra automatizada de validade antes do fechamento mensal."
+      },
+      {
+        "dimension": "consistencia",
+        "before": 55,
+        "after": 90,
+        "issues": 80,
+        "severity": "alto",
+        "recommendation": "Manter regra automatizada de consistencia antes do fechamento mensal."
+      },
+      {
+        "dimension": "padronizacao",
+        "before": 54,
+        "after": 89,
+        "issues": 66,
+        "severity": "alto",
+        "recommendation": "Manter regra automatizada de padronizacao antes do fechamento mensal."
+      },
+      {
+        "dimension": "integridade",
+        "before": 53,
+        "after": 89,
+        "issues": 57,
+        "severity": "medio",
+        "recommendation": "Manter regra automatizada de integridade antes do fechamento mensal."
+      }
+    ],
+    "riskProfile": [
+      {
+        "name": "Risco de duplicidade",
+        "before": "alto",
+        "after": "baixo",
+        "description": "Evita contagem dupla em relatórios e indicadores."
+      },
+      {
+        "name": "Campo obrigatorio vazio",
+        "before": "critico",
+        "after": "medio",
+        "description": "Reduz registros incompletos em bases analiticas."
+      },
+      {
+        "name": "Relatorio inconsistente",
+        "before": "alto",
+        "after": "baixo",
+        "description": "Padroniza periodos, categorias e formatos."
+      },
+      {
+        "name": "Atraso operacional",
+        "before": "medio",
+        "after": "baixo",
+        "description": "Diminui dependencia de revisao manual."
+      },
+      {
+        "name": "Decisao com dado invalido",
+        "before": "critico",
+        "after": "baixo",
+        "description": "Sinaliza excecoes antes do consumo gerencial."
+      },
+      {
+        "name": "Retrabalho",
+        "before": "alto",
+        "after": "baixo",
+        "description": "Automatiza validacoes repetitivas."
+      }
+    ],
+    "auditTrail": [
+      {
+        "id": "auditoria-qualidade-dados-audit-0",
+        "timestamp": "2026-06-01 14:32",
+        "event": "Regra aplicada",
+        "rule": "normalizar_datas",
+        "affectedRecords": 133,
+        "severity": "success",
+        "result": "Datas normalizadas e invalidas sinalizadas.",
+        "generatedFile": ""
+      },
+      {
+        "id": "auditoria-qualidade-dados-audit-1",
+        "timestamp": "2026-06-01 14:33",
+        "event": "Registros marcados",
+        "rule": "campos_obrigatorios",
+        "affectedRecords": 80,
+        "severity": "warning",
+        "result": "Registros incompletos enviados para revisao.",
+        "generatedFile": ""
+      },
+      {
+        "id": "auditoria-qualidade-dados-audit-2",
+        "timestamp": "2026-06-01 14:34",
+        "event": "Duplicidades removidas",
+        "rule": "remover_duplicados",
+        "affectedRecords": 66,
+        "severity": "success",
+        "result": "Base consolidada sem duplicidades.",
+        "generatedFile": ""
+      },
+      {
+        "id": "auditoria-qualidade-dados-audit-3",
+        "timestamp": "2026-06-01 14:35",
+        "event": "Relatorio gerado",
+        "rule": "gerar_relatorio",
+        "affectedRecords": 401,
+        "severity": "success",
+        "result": "Relatorio executivo gerado.",
+        "generatedFile": "executive-report-sample.json"
       }
     ],
     "files": [
@@ -480,7 +1458,7 @@
         "name": "raw-administrative-base.csv",
         "type": "CSV",
         "size": "32 KB",
-        "generatedAt": "2026-05-21",
+        "generatedAt": "2026-06-01",
         "automationSlug": "auditoria-qualidade-dados",
         "href": "/samples/raw-administrative-base.csv"
       },
@@ -489,25 +1467,43 @@
         "name": "processed-administrative-base.csv",
         "type": "CSV",
         "size": "28 KB",
-        "generatedAt": "2026-05-21",
+        "generatedAt": "2026-06-01",
         "automationSlug": "auditoria-qualidade-dados",
         "href": "/samples/processed-administrative-base.csv"
       },
       {
-        "id": "auditoria-qualidade-dados-report",
+        "id": "auditoria-qualidade-dados-execution",
+        "name": "automation-execution-log.json",
+        "type": "LOG",
+        "size": "14 KB",
+        "generatedAt": "2026-06-01",
+        "automationSlug": "auditoria-qualidade-dados",
+        "href": "/samples/automation-execution-log.json"
+      },
+      {
+        "id": "auditoria-qualidade-dados-report-json",
         "name": "executive-report-sample.json",
         "type": "JSON",
         "size": "18 KB",
-        "generatedAt": "2026-05-21",
+        "generatedAt": "2026-06-01",
         "automationSlug": "auditoria-qualidade-dados",
         "href": "/samples/executive-report-sample.json"
+      },
+      {
+        "id": "auditoria-qualidade-dados-report-html",
+        "name": "executive-report-sample.html",
+        "type": "HTML",
+        "size": "22 KB",
+        "generatedAt": "2026-06-01",
+        "automationSlug": "auditoria-qualidade-dados",
+        "href": "/samples/executive-report-sample.html"
       },
       {
         "id": "auditoria-qualidade-dados-quality",
         "name": "quality-checklist.json",
         "type": "CHECKLIST",
         "size": "9 KB",
-        "generatedAt": "2026-05-21",
+        "generatedAt": "2026-06-01",
         "automationSlug": "auditoria-qualidade-dados",
         "href": "/samples/quality-checklist.json"
       }
@@ -543,15 +1539,22 @@
     "id": "auto-005",
     "slug": "rotina-financeira-operacional",
     "name": "Rotina financeira e operacional",
-    "category": "Operacoes",
-    "description": "Classifica despesas, contratos, chamados e centros de custo para alertas de eficiencia.",
-    "problem": "Acompanhamentos financeiros e operacionais dependem de filtros manuais para identificar anomalias, atrasos e variacoes mensais.",
+    "category": "Financeiro",
+    "complexity": "medium",
+    "description": "Automacao simulada para rotina financeira e operacional, com regras de validacao, logs, score de qualidade e relatorio exportavel.",
+    "problem": "Rotina atual sofre com centros de custo invalidos e anomalias de valor, exigindo conferência manual e aumentando risco operacional.",
+    "objective": "Reduzir retrabalho, padronizar dados, preservar rastreabilidade e entregar indicadores prontos para decisao.",
     "status": "ready",
     "impact": "medium",
+    "riskReduced": "Risco operacional e retrabalho reduzidos com validacao preventiva.",
     "manualTimeHours": 10,
     "automatedTimeHours": 1.6,
     "estimatedSavingsHours": 8.4,
     "estimatedSavingsBRL": 1008,
+    "monthlySavingsBRL": 4032,
+    "annualSavingsBRL": 48384,
+    "successRate": 96,
+    "averageResponseTimeMs": 440,
     "processedRecords": 1420,
     "fixedIssues": 219,
     "duplicatesRemoved": 42,
@@ -561,52 +1564,276 @@
     "reworkReduction": 68,
     "errorTypes": [
       {
-        "name": "Centro de custo invalido",
-        "value": 63
-      },
-      {
-        "name": "Contrato sem status",
-        "value": 45
-      },
-      {
-        "name": "Anomalia de valor",
-        "value": 69
-      },
-      {
         "name": "Duplicidades",
-        "value": 42
+        "value": 128
+      },
+      {
+        "name": "Campo obrigatorio vazio",
+        "value": 112
+      },
+      {
+        "name": "Formato invalido",
+        "value": 141
+      },
+      {
+        "name": "Outliers",
+        "value": 76
       }
     ],
     "timeline": [
+      "Na fila",
       "Recebendo base",
       "Validando estrutura",
-      "Identificando inconsistencias",
-      "Aplicando regras de limpeza",
-      "Consolidando informacoes",
+      "Detectando inconsistencias",
+      "Aplicando regras",
+      "Consolidando dados",
       "Gerando relatorio",
-      "Finalizando arquivos"
+      "Finalizando",
+      "Concluido"
     ],
     "rules": [
+      {
+        "field": "Valor",
+        "original": "R$ 1.200,50",
+        "correction": "1200.50",
+        "rule": "normalizacao monetaria",
+        "impact": "campo liberado para calculo agregado"
+      },
       {
         "field": "Data de admissao",
         "original": "32/13/2025",
         "correction": "Registro marcado como invalido",
-        "rule": "Validacao de data no padrao dd/mm/yyyy",
-        "impact": "Removido do calculo mensal ate correcao da origem"
+        "rule": "validacao de data no padrao dd/mm/yyyy",
+        "impact": "removido do calculo mensal ate correcao da origem"
       },
       {
-        "field": "CPF",
-        "original": "123.456.789-00",
-        "correction": "CPF sinalizado para revisao",
-        "rule": "Checagem de digitos verificadores ficticios",
-        "impact": "Evita consolidacao de cadastro inconsistente"
+        "field": "Status",
+        "original": "sem status",
+        "correction": "Em revisao",
+        "rule": "validar status permitido",
+        "impact": "evita consolidacao com classificacao operacional invalida"
+      }
+    ],
+    "rulesEngine": [
+      {
+        "id": "remover-duplicados",
+        "name": "Remover duplicados",
+        "description": "Remove registros repetidos pela chave de negocio.",
+        "estimatedImpact": "Base consolidada sem sobrecontagem",
+        "affectedRecords": 109,
+        "reducedRisk": "risco de duplicidade",
+        "active": true
       },
       {
-        "field": "Valor",
-        "original": "R$ 1.240,8",
-        "correction": "1240.80",
-        "rule": "Normalizacao monetaria para decimal",
-        "impact": "Padroniza calculos financeiros e graficos"
+        "id": "validar-cpf-ficticio",
+        "name": "Validar CPF ficticio",
+        "description": "Marca documentos ficticios invalidos para revisao.",
+        "estimatedImpact": "Cadastros invalidos deixam de entrar no relatorio",
+        "affectedRecords": 73,
+        "reducedRisk": "risco cadastral",
+        "active": true
+      },
+      {
+        "id": "normalizar-datas",
+        "name": "Normalizar datas",
+        "description": "Converte datas validas para dd/mm/yyyy e sinaliza impossiveis.",
+        "estimatedImpact": "Periodos ficam comparaveis",
+        "affectedRecords": 54,
+        "reducedRisk": "risco temporal",
+        "active": true
+      },
+      {
+        "id": "padronizar-nomes",
+        "name": "Padronizar nomes",
+        "description": "Aplica capitalizacao e remove espacos duplicados.",
+        "estimatedImpact": "Relatorios ficam legiveis e agrupaveis",
+        "affectedRecords": 43,
+        "reducedRisk": "risco de agrupamento",
+        "active": true
+      },
+      {
+        "id": "corrigir-categorias",
+        "name": "Corrigir categorias",
+        "description": "Mapeia categorias divergentes para uma taxonomia padrao.",
+        "estimatedImpact": "Indicadores por categoria ficam consistentes",
+        "affectedRecords": 36,
+        "reducedRisk": "risco de classificacao",
+        "active": true
+      },
+      {
+        "id": "detectar-negativos",
+        "name": "Detectar valores negativos",
+        "description": "Sinaliza valores negativos fora de contexto.",
+        "estimatedImpact": "Anomalias financeiras ficam visiveis",
+        "affectedRecords": 31,
+        "reducedRisk": "risco financeiro",
+        "active": true
+      },
+      {
+        "id": "campos-obrigatorios",
+        "name": "Marcar obrigatorios vazios",
+        "description": "Identifica campos essenciais sem preenchimento.",
+        "estimatedImpact": "Registros incompletos deixam de contaminar KPIs",
+        "affectedRecords": 27,
+        "reducedRisk": "risco de completude",
+        "active": true
+      },
+      {
+        "id": "identificar-outliers",
+        "name": "Identificar outliers",
+        "description": "Marca valores fora da distribuicao esperada.",
+        "estimatedImpact": "Excecoes operacionais ficam auditaveis",
+        "affectedRecords": 24,
+        "reducedRisk": "risco de decisao",
+        "active": false
+      },
+      {
+        "id": "normalizar-monetarios",
+        "name": "Normalizar valores monetarios",
+        "description": "Converte moeda em decimal padronizado.",
+        "estimatedImpact": "Calculos financeiros ficam seguros",
+        "affectedRecords": 21,
+        "reducedRisk": "risco contabil",
+        "active": false
+      },
+      {
+        "id": "validar-status",
+        "name": "Validar status permitido",
+        "description": "Garante status dentro da lista oficial.",
+        "estimatedImpact": "Fluxos operacionais ficam comparaveis",
+        "affectedRecords": 19,
+        "reducedRisk": "risco operacional",
+        "active": false
+      }
+    ],
+    "qualityDimensions": [
+      {
+        "dimension": "completude",
+        "before": 67,
+        "after": 90,
+        "issues": 109,
+        "severity": "critico",
+        "recommendation": "Manter regra automatizada de completude antes do fechamento mensal."
+      },
+      {
+        "dimension": "unicidade",
+        "before": 66,
+        "after": 90,
+        "issues": 73,
+        "severity": "critico",
+        "recommendation": "Manter regra automatizada de unicidade antes do fechamento mensal."
+      },
+      {
+        "dimension": "validade",
+        "before": 65,
+        "after": 89,
+        "issues": 54,
+        "severity": "critico",
+        "recommendation": "Manter regra automatizada de validade antes do fechamento mensal."
+      },
+      {
+        "dimension": "consistencia",
+        "before": 64,
+        "after": 89,
+        "issues": 43,
+        "severity": "alto",
+        "recommendation": "Manter regra automatizada de consistencia antes do fechamento mensal."
+      },
+      {
+        "dimension": "padronizacao",
+        "before": 63,
+        "after": 88,
+        "issues": 36,
+        "severity": "alto",
+        "recommendation": "Manter regra automatizada de padronizacao antes do fechamento mensal."
+      },
+      {
+        "dimension": "integridade",
+        "before": 62,
+        "after": 88,
+        "issues": 31,
+        "severity": "medio",
+        "recommendation": "Manter regra automatizada de integridade antes do fechamento mensal."
+      }
+    ],
+    "riskProfile": [
+      {
+        "name": "Risco de duplicidade",
+        "before": "alto",
+        "after": "baixo",
+        "description": "Evita contagem dupla em relatórios e indicadores."
+      },
+      {
+        "name": "Campo obrigatorio vazio",
+        "before": "critico",
+        "after": "medio",
+        "description": "Reduz registros incompletos em bases analiticas."
+      },
+      {
+        "name": "Relatorio inconsistente",
+        "before": "alto",
+        "after": "baixo",
+        "description": "Padroniza periodos, categorias e formatos."
+      },
+      {
+        "name": "Atraso operacional",
+        "before": "medio",
+        "after": "baixo",
+        "description": "Diminui dependencia de revisao manual."
+      },
+      {
+        "name": "Decisao com dado invalido",
+        "before": "critico",
+        "after": "baixo",
+        "description": "Sinaliza excecoes antes do consumo gerencial."
+      },
+      {
+        "name": "Retrabalho",
+        "before": "alto",
+        "after": "baixo",
+        "description": "Automatiza validacoes repetitivas."
+      }
+    ],
+    "auditTrail": [
+      {
+        "id": "rotina-financeira-operacional-audit-0",
+        "timestamp": "2026-06-01 14:32",
+        "event": "Regra aplicada",
+        "rule": "normalizar_datas",
+        "affectedRecords": 73,
+        "severity": "success",
+        "result": "Datas normalizadas e invalidas sinalizadas.",
+        "generatedFile": ""
+      },
+      {
+        "id": "rotina-financeira-operacional-audit-1",
+        "timestamp": "2026-06-01 14:33",
+        "event": "Registros marcados",
+        "rule": "campos_obrigatorios",
+        "affectedRecords": 43,
+        "severity": "warning",
+        "result": "Registros incompletos enviados para revisao.",
+        "generatedFile": ""
+      },
+      {
+        "id": "rotina-financeira-operacional-audit-2",
+        "timestamp": "2026-06-01 14:34",
+        "event": "Duplicidades removidas",
+        "rule": "remover_duplicados",
+        "affectedRecords": 36,
+        "severity": "success",
+        "result": "Base consolidada sem duplicidades.",
+        "generatedFile": ""
+      },
+      {
+        "id": "rotina-financeira-operacional-audit-3",
+        "timestamp": "2026-06-01 14:35",
+        "event": "Relatorio gerado",
+        "rule": "gerar_relatorio",
+        "affectedRecords": 219,
+        "severity": "success",
+        "result": "Relatorio executivo gerado.",
+        "generatedFile": "executive-report-sample.json"
       }
     ],
     "files": [
@@ -615,7 +1842,7 @@
         "name": "raw-administrative-base.csv",
         "type": "CSV",
         "size": "32 KB",
-        "generatedAt": "2026-05-21",
+        "generatedAt": "2026-06-01",
         "automationSlug": "rotina-financeira-operacional",
         "href": "/samples/raw-administrative-base.csv"
       },
@@ -624,25 +1851,43 @@
         "name": "processed-administrative-base.csv",
         "type": "CSV",
         "size": "28 KB",
-        "generatedAt": "2026-05-21",
+        "generatedAt": "2026-06-01",
         "automationSlug": "rotina-financeira-operacional",
         "href": "/samples/processed-administrative-base.csv"
       },
       {
-        "id": "rotina-financeira-operacional-report",
+        "id": "rotina-financeira-operacional-execution",
+        "name": "automation-execution-log.json",
+        "type": "LOG",
+        "size": "14 KB",
+        "generatedAt": "2026-06-01",
+        "automationSlug": "rotina-financeira-operacional",
+        "href": "/samples/automation-execution-log.json"
+      },
+      {
+        "id": "rotina-financeira-operacional-report-json",
         "name": "executive-report-sample.json",
         "type": "JSON",
         "size": "18 KB",
-        "generatedAt": "2026-05-21",
+        "generatedAt": "2026-06-01",
         "automationSlug": "rotina-financeira-operacional",
         "href": "/samples/executive-report-sample.json"
+      },
+      {
+        "id": "rotina-financeira-operacional-report-html",
+        "name": "executive-report-sample.html",
+        "type": "HTML",
+        "size": "22 KB",
+        "generatedAt": "2026-06-01",
+        "automationSlug": "rotina-financeira-operacional",
+        "href": "/samples/executive-report-sample.html"
       },
       {
         "id": "rotina-financeira-operacional-quality",
         "name": "quality-checklist.json",
         "type": "CHECKLIST",
         "size": "9 KB",
-        "generatedAt": "2026-05-21",
+        "generatedAt": "2026-06-01",
         "automationSlug": "rotina-financeira-operacional",
         "href": "/samples/quality-checklist.json"
       }
@@ -670,6 +1915,1158 @@
         "label": "Score final",
         "value": "90%",
         "delta": "+23 pts",
+        "tone": "rose"
+      }
+    ]
+  },
+  {
+    "id": "auto-006",
+    "slug": "validacao-cadastros",
+    "name": "Validacao de cadastros",
+    "category": "Administrativo",
+    "complexity": "medium",
+    "description": "Automacao simulada para validacao de cadastros, com regras de validacao, logs, score de qualidade e relatorio exportavel.",
+    "problem": "Rotina atual sofre com campos obrigatorios vazios e documentos ficticios invalidos, exigindo conferência manual e aumentando risco operacional.",
+    "objective": "Reduzir retrabalho, padronizar dados, preservar rastreabilidade e entregar indicadores prontos para decisao.",
+    "status": "ready",
+    "impact": "high",
+    "riskReduced": "Risco operacional e retrabalho reduzidos com validacao preventiva.",
+    "manualTimeHours": 9,
+    "automatedTimeHours": 0.9,
+    "estimatedSavingsHours": 8.1,
+    "estimatedSavingsBRL": 972,
+    "monthlySavingsBRL": 3888,
+    "annualSavingsBRL": 46656,
+    "successRate": 97,
+    "averageResponseTimeMs": 464,
+    "processedRecords": 1880,
+    "fixedIssues": 267,
+    "duplicatesRemoved": 84,
+    "standardizedFields": 612,
+    "qualityBefore": 63,
+    "qualityAfter": 93,
+    "reworkReduction": 74,
+    "errorTypes": [
+      {
+        "name": "Duplicidades",
+        "value": 128
+      },
+      {
+        "name": "Campo obrigatorio vazio",
+        "value": 112
+      },
+      {
+        "name": "Formato invalido",
+        "value": 141
+      },
+      {
+        "name": "Outliers",
+        "value": 76
+      }
+    ],
+    "timeline": [
+      "Na fila",
+      "Recebendo base",
+      "Validando estrutura",
+      "Detectando inconsistencias",
+      "Aplicando regras",
+      "Consolidando dados",
+      "Gerando relatorio",
+      "Finalizando",
+      "Concluido"
+    ],
+    "rules": [
+      {
+        "field": "Valor",
+        "original": "R$ 1.200,50",
+        "correction": "1200.50",
+        "rule": "normalizacao monetaria",
+        "impact": "campo liberado para calculo agregado"
+      },
+      {
+        "field": "Data de admissao",
+        "original": "32/13/2025",
+        "correction": "Registro marcado como invalido",
+        "rule": "validacao de data no padrao dd/mm/yyyy",
+        "impact": "removido do calculo mensal ate correcao da origem"
+      },
+      {
+        "field": "Status",
+        "original": "sem status",
+        "correction": "Em revisao",
+        "rule": "validar status permitido",
+        "impact": "evita consolidacao com classificacao operacional invalida"
+      }
+    ],
+    "rulesEngine": [
+      {
+        "id": "remover-duplicados",
+        "name": "Remover duplicados",
+        "description": "Remove registros repetidos pela chave de negocio.",
+        "estimatedImpact": "Base consolidada sem sobrecontagem",
+        "affectedRecords": 133,
+        "reducedRisk": "risco de duplicidade",
+        "active": true
+      },
+      {
+        "id": "validar-cpf-ficticio",
+        "name": "Validar CPF ficticio",
+        "description": "Marca documentos ficticios invalidos para revisao.",
+        "estimatedImpact": "Cadastros invalidos deixam de entrar no relatorio",
+        "affectedRecords": 89,
+        "reducedRisk": "risco cadastral",
+        "active": true
+      },
+      {
+        "id": "normalizar-datas",
+        "name": "Normalizar datas",
+        "description": "Converte datas validas para dd/mm/yyyy e sinaliza impossiveis.",
+        "estimatedImpact": "Periodos ficam comparaveis",
+        "affectedRecords": 66,
+        "reducedRisk": "risco temporal",
+        "active": true
+      },
+      {
+        "id": "padronizar-nomes",
+        "name": "Padronizar nomes",
+        "description": "Aplica capitalizacao e remove espacos duplicados.",
+        "estimatedImpact": "Relatorios ficam legiveis e agrupaveis",
+        "affectedRecords": 53,
+        "reducedRisk": "risco de agrupamento",
+        "active": true
+      },
+      {
+        "id": "corrigir-categorias",
+        "name": "Corrigir categorias",
+        "description": "Mapeia categorias divergentes para uma taxonomia padrao.",
+        "estimatedImpact": "Indicadores por categoria ficam consistentes",
+        "affectedRecords": 44,
+        "reducedRisk": "risco de classificacao",
+        "active": true
+      },
+      {
+        "id": "detectar-negativos",
+        "name": "Detectar valores negativos",
+        "description": "Sinaliza valores negativos fora de contexto.",
+        "estimatedImpact": "Anomalias financeiras ficam visiveis",
+        "affectedRecords": 38,
+        "reducedRisk": "risco financeiro",
+        "active": true
+      },
+      {
+        "id": "campos-obrigatorios",
+        "name": "Marcar obrigatorios vazios",
+        "description": "Identifica campos essenciais sem preenchimento.",
+        "estimatedImpact": "Registros incompletos deixam de contaminar KPIs",
+        "affectedRecords": 33,
+        "reducedRisk": "risco de completude",
+        "active": true
+      },
+      {
+        "id": "identificar-outliers",
+        "name": "Identificar outliers",
+        "description": "Marca valores fora da distribuicao esperada.",
+        "estimatedImpact": "Excecoes operacionais ficam auditaveis",
+        "affectedRecords": 29,
+        "reducedRisk": "risco de decisao",
+        "active": true
+      },
+      {
+        "id": "normalizar-monetarios",
+        "name": "Normalizar valores monetarios",
+        "description": "Converte moeda em decimal padronizado.",
+        "estimatedImpact": "Calculos financeiros ficam seguros",
+        "affectedRecords": 26,
+        "reducedRisk": "risco contabil",
+        "active": true
+      },
+      {
+        "id": "validar-status",
+        "name": "Validar status permitido",
+        "description": "Garante status dentro da lista oficial.",
+        "estimatedImpact": "Fluxos operacionais ficam comparaveis",
+        "affectedRecords": 24,
+        "reducedRisk": "risco operacional",
+        "active": true
+      }
+    ],
+    "qualityDimensions": [
+      {
+        "dimension": "completude",
+        "before": 63,
+        "after": 93,
+        "issues": 133,
+        "severity": "critico",
+        "recommendation": "Manter regra automatizada de completude antes do fechamento mensal."
+      },
+      {
+        "dimension": "unicidade",
+        "before": 62,
+        "after": 93,
+        "issues": 89,
+        "severity": "critico",
+        "recommendation": "Manter regra automatizada de unicidade antes do fechamento mensal."
+      },
+      {
+        "dimension": "validade",
+        "before": 61,
+        "after": 92,
+        "issues": 66,
+        "severity": "critico",
+        "recommendation": "Manter regra automatizada de validade antes do fechamento mensal."
+      },
+      {
+        "dimension": "consistencia",
+        "before": 60,
+        "after": 92,
+        "issues": 53,
+        "severity": "alto",
+        "recommendation": "Manter regra automatizada de consistencia antes do fechamento mensal."
+      },
+      {
+        "dimension": "padronizacao",
+        "before": 59,
+        "after": 91,
+        "issues": 44,
+        "severity": "alto",
+        "recommendation": "Manter regra automatizada de padronizacao antes do fechamento mensal."
+      },
+      {
+        "dimension": "integridade",
+        "before": 58,
+        "after": 91,
+        "issues": 38,
+        "severity": "medio",
+        "recommendation": "Manter regra automatizada de integridade antes do fechamento mensal."
+      }
+    ],
+    "riskProfile": [
+      {
+        "name": "Risco de duplicidade",
+        "before": "alto",
+        "after": "baixo",
+        "description": "Evita contagem dupla em relatórios e indicadores."
+      },
+      {
+        "name": "Campo obrigatorio vazio",
+        "before": "critico",
+        "after": "medio",
+        "description": "Reduz registros incompletos em bases analiticas."
+      },
+      {
+        "name": "Relatorio inconsistente",
+        "before": "alto",
+        "after": "baixo",
+        "description": "Padroniza periodos, categorias e formatos."
+      },
+      {
+        "name": "Atraso operacional",
+        "before": "medio",
+        "after": "baixo",
+        "description": "Diminui dependencia de revisao manual."
+      },
+      {
+        "name": "Decisao com dado invalido",
+        "before": "critico",
+        "after": "baixo",
+        "description": "Sinaliza excecoes antes do consumo gerencial."
+      },
+      {
+        "name": "Retrabalho",
+        "before": "alto",
+        "after": "baixo",
+        "description": "Automatiza validacoes repetitivas."
+      }
+    ],
+    "auditTrail": [
+      {
+        "id": "validacao-cadastros-audit-0",
+        "timestamp": "2026-06-01 14:32",
+        "event": "Regra aplicada",
+        "rule": "normalizar_datas",
+        "affectedRecords": 89,
+        "severity": "success",
+        "result": "Datas normalizadas e invalidas sinalizadas.",
+        "generatedFile": ""
+      },
+      {
+        "id": "validacao-cadastros-audit-1",
+        "timestamp": "2026-06-01 14:33",
+        "event": "Registros marcados",
+        "rule": "campos_obrigatorios",
+        "affectedRecords": 53,
+        "severity": "warning",
+        "result": "Registros incompletos enviados para revisao.",
+        "generatedFile": ""
+      },
+      {
+        "id": "validacao-cadastros-audit-2",
+        "timestamp": "2026-06-01 14:34",
+        "event": "Duplicidades removidas",
+        "rule": "remover_duplicados",
+        "affectedRecords": 44,
+        "severity": "success",
+        "result": "Base consolidada sem duplicidades.",
+        "generatedFile": ""
+      },
+      {
+        "id": "validacao-cadastros-audit-3",
+        "timestamp": "2026-06-01 14:35",
+        "event": "Relatorio gerado",
+        "rule": "gerar_relatorio",
+        "affectedRecords": 267,
+        "severity": "success",
+        "result": "Relatorio executivo gerado.",
+        "generatedFile": "executive-report-sample.json"
+      }
+    ],
+    "files": [
+      {
+        "id": "validacao-cadastros-raw",
+        "name": "raw-administrative-base.csv",
+        "type": "CSV",
+        "size": "32 KB",
+        "generatedAt": "2026-06-01",
+        "automationSlug": "validacao-cadastros",
+        "href": "/samples/raw-administrative-base.csv"
+      },
+      {
+        "id": "validacao-cadastros-processed",
+        "name": "processed-administrative-base.csv",
+        "type": "CSV",
+        "size": "28 KB",
+        "generatedAt": "2026-06-01",
+        "automationSlug": "validacao-cadastros",
+        "href": "/samples/processed-administrative-base.csv"
+      },
+      {
+        "id": "validacao-cadastros-execution",
+        "name": "automation-execution-log.json",
+        "type": "LOG",
+        "size": "14 KB",
+        "generatedAt": "2026-06-01",
+        "automationSlug": "validacao-cadastros",
+        "href": "/samples/automation-execution-log.json"
+      },
+      {
+        "id": "validacao-cadastros-report-json",
+        "name": "executive-report-sample.json",
+        "type": "JSON",
+        "size": "18 KB",
+        "generatedAt": "2026-06-01",
+        "automationSlug": "validacao-cadastros",
+        "href": "/samples/executive-report-sample.json"
+      },
+      {
+        "id": "validacao-cadastros-report-html",
+        "name": "executive-report-sample.html",
+        "type": "HTML",
+        "size": "22 KB",
+        "generatedAt": "2026-06-01",
+        "automationSlug": "validacao-cadastros",
+        "href": "/samples/executive-report-sample.html"
+      },
+      {
+        "id": "validacao-cadastros-quality",
+        "name": "quality-checklist.json",
+        "type": "CHECKLIST",
+        "size": "9 KB",
+        "generatedAt": "2026-06-01",
+        "automationSlug": "validacao-cadastros",
+        "href": "/samples/quality-checklist.json"
+      }
+    ],
+    "kpis": [
+      {
+        "label": "Registros processados",
+        "value": "1.880",
+        "delta": "+100%",
+        "tone": "green"
+      },
+      {
+        "label": "Inconsistencias corrigidas",
+        "value": "267",
+        "delta": "+74%",
+        "tone": "blue"
+      },
+      {
+        "label": "Horas economizadas",
+        "value": "8.1h",
+        "delta": "-retrabalho",
+        "tone": "amber"
+      },
+      {
+        "label": "Score final",
+        "value": "93%",
+        "delta": "+30 pts",
+        "tone": "rose"
+      }
+    ]
+  },
+  {
+    "id": "auto-007",
+    "slug": "monitoramento-sla",
+    "name": "Monitoramento de SLA",
+    "category": "Operacoes",
+    "complexity": "medium",
+    "description": "Automacao simulada para monitoramento de sla, com regras de validacao, logs, score de qualidade e relatorio exportavel.",
+    "problem": "Rotina atual sofre com chamados criticos, prazos violados e prioridades divergentes, exigindo conferência manual e aumentando risco operacional.",
+    "objective": "Reduzir retrabalho, padronizar dados, preservar rastreabilidade e entregar indicadores prontos para decisao.",
+    "status": "ready",
+    "impact": "critical",
+    "riskReduced": "Risco operacional e retrabalho reduzidos com validacao preventiva.",
+    "manualTimeHours": 11,
+    "automatedTimeHours": 1.2,
+    "estimatedSavingsHours": 9.8,
+    "estimatedSavingsBRL": 1176,
+    "monthlySavingsBRL": 4704,
+    "annualSavingsBRL": 56448,
+    "successRate": 98,
+    "averageResponseTimeMs": 488,
+    "processedRecords": 1320,
+    "fixedIssues": 198,
+    "duplicatesRemoved": 21,
+    "standardizedFields": 384,
+    "qualityBefore": 69,
+    "qualityAfter": 95,
+    "reworkReduction": 72,
+    "errorTypes": [
+      {
+        "name": "Duplicidades",
+        "value": 128
+      },
+      {
+        "name": "Campo obrigatorio vazio",
+        "value": 112
+      },
+      {
+        "name": "Formato invalido",
+        "value": 141
+      },
+      {
+        "name": "Outliers",
+        "value": 76
+      }
+    ],
+    "timeline": [
+      "Na fila",
+      "Recebendo base",
+      "Validando estrutura",
+      "Detectando inconsistencias",
+      "Aplicando regras",
+      "Consolidando dados",
+      "Gerando relatorio",
+      "Finalizando",
+      "Concluido"
+    ],
+    "rules": [
+      {
+        "field": "Valor",
+        "original": "R$ 1.200,50",
+        "correction": "1200.50",
+        "rule": "normalizacao monetaria",
+        "impact": "campo liberado para calculo agregado"
+      },
+      {
+        "field": "Data de admissao",
+        "original": "32/13/2025",
+        "correction": "Registro marcado como invalido",
+        "rule": "validacao de data no padrao dd/mm/yyyy",
+        "impact": "removido do calculo mensal ate correcao da origem"
+      },
+      {
+        "field": "Status",
+        "original": "sem status",
+        "correction": "Em revisao",
+        "rule": "validar status permitido",
+        "impact": "evita consolidacao com classificacao operacional invalida"
+      }
+    ],
+    "rulesEngine": [
+      {
+        "id": "remover-duplicados",
+        "name": "Remover duplicados",
+        "description": "Remove registros repetidos pela chave de negocio.",
+        "estimatedImpact": "Base consolidada sem sobrecontagem",
+        "affectedRecords": 99,
+        "reducedRisk": "risco de duplicidade",
+        "active": true
+      },
+      {
+        "id": "validar-cpf-ficticio",
+        "name": "Validar CPF ficticio",
+        "description": "Marca documentos ficticios invalidos para revisao.",
+        "estimatedImpact": "Cadastros invalidos deixam de entrar no relatorio",
+        "affectedRecords": 66,
+        "reducedRisk": "risco cadastral",
+        "active": true
+      },
+      {
+        "id": "normalizar-datas",
+        "name": "Normalizar datas",
+        "description": "Converte datas validas para dd/mm/yyyy e sinaliza impossiveis.",
+        "estimatedImpact": "Periodos ficam comparaveis",
+        "affectedRecords": 49,
+        "reducedRisk": "risco temporal",
+        "active": true
+      },
+      {
+        "id": "padronizar-nomes",
+        "name": "Padronizar nomes",
+        "description": "Aplica capitalizacao e remove espacos duplicados.",
+        "estimatedImpact": "Relatorios ficam legiveis e agrupaveis",
+        "affectedRecords": 39,
+        "reducedRisk": "risco de agrupamento",
+        "active": true
+      },
+      {
+        "id": "corrigir-categorias",
+        "name": "Corrigir categorias",
+        "description": "Mapeia categorias divergentes para uma taxonomia padrao.",
+        "estimatedImpact": "Indicadores por categoria ficam consistentes",
+        "affectedRecords": 33,
+        "reducedRisk": "risco de classificacao",
+        "active": true
+      },
+      {
+        "id": "detectar-negativos",
+        "name": "Detectar valores negativos",
+        "description": "Sinaliza valores negativos fora de contexto.",
+        "estimatedImpact": "Anomalias financeiras ficam visiveis",
+        "affectedRecords": 28,
+        "reducedRisk": "risco financeiro",
+        "active": true
+      },
+      {
+        "id": "campos-obrigatorios",
+        "name": "Marcar obrigatorios vazios",
+        "description": "Identifica campos essenciais sem preenchimento.",
+        "estimatedImpact": "Registros incompletos deixam de contaminar KPIs",
+        "affectedRecords": 24,
+        "reducedRisk": "risco de completude",
+        "active": true
+      },
+      {
+        "id": "identificar-outliers",
+        "name": "Identificar outliers",
+        "description": "Marca valores fora da distribuicao esperada.",
+        "estimatedImpact": "Excecoes operacionais ficam auditaveis",
+        "affectedRecords": 22,
+        "reducedRisk": "risco de decisao",
+        "active": false
+      },
+      {
+        "id": "normalizar-monetarios",
+        "name": "Normalizar valores monetarios",
+        "description": "Converte moeda em decimal padronizado.",
+        "estimatedImpact": "Calculos financeiros ficam seguros",
+        "affectedRecords": 19,
+        "reducedRisk": "risco contabil",
+        "active": false
+      },
+      {
+        "id": "validar-status",
+        "name": "Validar status permitido",
+        "description": "Garante status dentro da lista oficial.",
+        "estimatedImpact": "Fluxos operacionais ficam comparaveis",
+        "affectedRecords": 18,
+        "reducedRisk": "risco operacional",
+        "active": false
+      }
+    ],
+    "qualityDimensions": [
+      {
+        "dimension": "completude",
+        "before": 69,
+        "after": 95,
+        "issues": 99,
+        "severity": "critico",
+        "recommendation": "Manter regra automatizada de completude antes do fechamento mensal."
+      },
+      {
+        "dimension": "unicidade",
+        "before": 68,
+        "after": 95,
+        "issues": 66,
+        "severity": "critico",
+        "recommendation": "Manter regra automatizada de unicidade antes do fechamento mensal."
+      },
+      {
+        "dimension": "validade",
+        "before": 67,
+        "after": 94,
+        "issues": 49,
+        "severity": "critico",
+        "recommendation": "Manter regra automatizada de validade antes do fechamento mensal."
+      },
+      {
+        "dimension": "consistencia",
+        "before": 66,
+        "after": 94,
+        "issues": 39,
+        "severity": "alto",
+        "recommendation": "Manter regra automatizada de consistencia antes do fechamento mensal."
+      },
+      {
+        "dimension": "padronizacao",
+        "before": 65,
+        "after": 93,
+        "issues": 33,
+        "severity": "alto",
+        "recommendation": "Manter regra automatizada de padronizacao antes do fechamento mensal."
+      },
+      {
+        "dimension": "integridade",
+        "before": 64,
+        "after": 93,
+        "issues": 28,
+        "severity": "medio",
+        "recommendation": "Manter regra automatizada de integridade antes do fechamento mensal."
+      }
+    ],
+    "riskProfile": [
+      {
+        "name": "Risco de duplicidade",
+        "before": "alto",
+        "after": "baixo",
+        "description": "Evita contagem dupla em relatórios e indicadores."
+      },
+      {
+        "name": "Campo obrigatorio vazio",
+        "before": "critico",
+        "after": "medio",
+        "description": "Reduz registros incompletos em bases analiticas."
+      },
+      {
+        "name": "Relatorio inconsistente",
+        "before": "alto",
+        "after": "baixo",
+        "description": "Padroniza periodos, categorias e formatos."
+      },
+      {
+        "name": "Atraso operacional",
+        "before": "medio",
+        "after": "baixo",
+        "description": "Diminui dependencia de revisao manual."
+      },
+      {
+        "name": "Decisao com dado invalido",
+        "before": "critico",
+        "after": "baixo",
+        "description": "Sinaliza excecoes antes do consumo gerencial."
+      },
+      {
+        "name": "Retrabalho",
+        "before": "alto",
+        "after": "baixo",
+        "description": "Automatiza validacoes repetitivas."
+      }
+    ],
+    "auditTrail": [
+      {
+        "id": "monitoramento-sla-audit-0",
+        "timestamp": "2026-06-01 14:32",
+        "event": "Regra aplicada",
+        "rule": "normalizar_datas",
+        "affectedRecords": 66,
+        "severity": "success",
+        "result": "Datas normalizadas e invalidas sinalizadas.",
+        "generatedFile": ""
+      },
+      {
+        "id": "monitoramento-sla-audit-1",
+        "timestamp": "2026-06-01 14:33",
+        "event": "Registros marcados",
+        "rule": "campos_obrigatorios",
+        "affectedRecords": 39,
+        "severity": "warning",
+        "result": "Registros incompletos enviados para revisao.",
+        "generatedFile": ""
+      },
+      {
+        "id": "monitoramento-sla-audit-2",
+        "timestamp": "2026-06-01 14:34",
+        "event": "Duplicidades removidas",
+        "rule": "remover_duplicados",
+        "affectedRecords": 33,
+        "severity": "success",
+        "result": "Base consolidada sem duplicidades.",
+        "generatedFile": ""
+      },
+      {
+        "id": "monitoramento-sla-audit-3",
+        "timestamp": "2026-06-01 14:35",
+        "event": "Relatorio gerado",
+        "rule": "gerar_relatorio",
+        "affectedRecords": 198,
+        "severity": "success",
+        "result": "Relatorio executivo gerado.",
+        "generatedFile": "executive-report-sample.json"
+      }
+    ],
+    "files": [
+      {
+        "id": "monitoramento-sla-raw",
+        "name": "raw-administrative-base.csv",
+        "type": "CSV",
+        "size": "32 KB",
+        "generatedAt": "2026-06-01",
+        "automationSlug": "monitoramento-sla",
+        "href": "/samples/raw-administrative-base.csv"
+      },
+      {
+        "id": "monitoramento-sla-processed",
+        "name": "processed-administrative-base.csv",
+        "type": "CSV",
+        "size": "28 KB",
+        "generatedAt": "2026-06-01",
+        "automationSlug": "monitoramento-sla",
+        "href": "/samples/processed-administrative-base.csv"
+      },
+      {
+        "id": "monitoramento-sla-execution",
+        "name": "automation-execution-log.json",
+        "type": "LOG",
+        "size": "14 KB",
+        "generatedAt": "2026-06-01",
+        "automationSlug": "monitoramento-sla",
+        "href": "/samples/automation-execution-log.json"
+      },
+      {
+        "id": "monitoramento-sla-report-json",
+        "name": "executive-report-sample.json",
+        "type": "JSON",
+        "size": "18 KB",
+        "generatedAt": "2026-06-01",
+        "automationSlug": "monitoramento-sla",
+        "href": "/samples/executive-report-sample.json"
+      },
+      {
+        "id": "monitoramento-sla-report-html",
+        "name": "executive-report-sample.html",
+        "type": "HTML",
+        "size": "22 KB",
+        "generatedAt": "2026-06-01",
+        "automationSlug": "monitoramento-sla",
+        "href": "/samples/executive-report-sample.html"
+      },
+      {
+        "id": "monitoramento-sla-quality",
+        "name": "quality-checklist.json",
+        "type": "CHECKLIST",
+        "size": "9 KB",
+        "generatedAt": "2026-06-01",
+        "automationSlug": "monitoramento-sla",
+        "href": "/samples/quality-checklist.json"
+      }
+    ],
+    "kpis": [
+      {
+        "label": "Registros processados",
+        "value": "1.320",
+        "delta": "+100%",
+        "tone": "green"
+      },
+      {
+        "label": "Inconsistencias corrigidas",
+        "value": "198",
+        "delta": "+72%",
+        "tone": "blue"
+      },
+      {
+        "label": "Horas economizadas",
+        "value": "9.8h",
+        "delta": "-retrabalho",
+        "tone": "amber"
+      },
+      {
+        "label": "Score final",
+        "value": "95%",
+        "delta": "+26 pts",
+        "tone": "rose"
+      }
+    ]
+  },
+  {
+    "id": "auto-008",
+    "slug": "padronizacao-relatorios-mensais",
+    "name": "Padronizacao de relatorios mensais",
+    "category": "BI",
+    "complexity": "low",
+    "description": "Automacao simulada para padronizacao de relatorios mensais, com regras de validacao, logs, score de qualidade e relatorio exportavel.",
+    "problem": "Rotina atual sofre com periodos faltantes, colunas inconsistentes e formatacao divergente, exigindo conferência manual e aumentando risco operacional.",
+    "objective": "Reduzir retrabalho, padronizar dados, preservar rastreabilidade e entregar indicadores prontos para decisao.",
+    "status": "success",
+    "impact": "high",
+    "riskReduced": "Risco operacional e retrabalho reduzidos com validacao preventiva.",
+    "manualTimeHours": 13,
+    "automatedTimeHours": 1.5,
+    "estimatedSavingsHours": 11.5,
+    "estimatedSavingsBRL": 1380,
+    "monthlySavingsBRL": 5520,
+    "annualSavingsBRL": 66240,
+    "successRate": 95,
+    "averageResponseTimeMs": 512,
+    "processedRecords": 1540,
+    "fixedIssues": 234,
+    "duplicatesRemoved": 37,
+    "standardizedFields": 524,
+    "qualityBefore": 66,
+    "qualityAfter": 94,
+    "reworkReduction": 73,
+    "errorTypes": [
+      {
+        "name": "Duplicidades",
+        "value": 128
+      },
+      {
+        "name": "Campo obrigatorio vazio",
+        "value": 112
+      },
+      {
+        "name": "Formato invalido",
+        "value": 141
+      },
+      {
+        "name": "Outliers",
+        "value": 76
+      }
+    ],
+    "timeline": [
+      "Na fila",
+      "Recebendo base",
+      "Validando estrutura",
+      "Detectando inconsistencias",
+      "Aplicando regras",
+      "Consolidando dados",
+      "Gerando relatorio",
+      "Finalizando",
+      "Concluido"
+    ],
+    "rules": [
+      {
+        "field": "Valor",
+        "original": "R$ 1.200,50",
+        "correction": "1200.50",
+        "rule": "normalizacao monetaria",
+        "impact": "campo liberado para calculo agregado"
+      },
+      {
+        "field": "Data de admissao",
+        "original": "32/13/2025",
+        "correction": "Registro marcado como invalido",
+        "rule": "validacao de data no padrao dd/mm/yyyy",
+        "impact": "removido do calculo mensal ate correcao da origem"
+      },
+      {
+        "field": "Status",
+        "original": "sem status",
+        "correction": "Em revisao",
+        "rule": "validar status permitido",
+        "impact": "evita consolidacao com classificacao operacional invalida"
+      }
+    ],
+    "rulesEngine": [
+      {
+        "id": "remover-duplicados",
+        "name": "Remover duplicados",
+        "description": "Remove registros repetidos pela chave de negocio.",
+        "estimatedImpact": "Base consolidada sem sobrecontagem",
+        "affectedRecords": 117,
+        "reducedRisk": "risco de duplicidade",
+        "active": true
+      },
+      {
+        "id": "validar-cpf-ficticio",
+        "name": "Validar CPF ficticio",
+        "description": "Marca documentos ficticios invalidos para revisao.",
+        "estimatedImpact": "Cadastros invalidos deixam de entrar no relatorio",
+        "affectedRecords": 78,
+        "reducedRisk": "risco cadastral",
+        "active": true
+      },
+      {
+        "id": "normalizar-datas",
+        "name": "Normalizar datas",
+        "description": "Converte datas validas para dd/mm/yyyy e sinaliza impossiveis.",
+        "estimatedImpact": "Periodos ficam comparaveis",
+        "affectedRecords": 58,
+        "reducedRisk": "risco temporal",
+        "active": true
+      },
+      {
+        "id": "padronizar-nomes",
+        "name": "Padronizar nomes",
+        "description": "Aplica capitalizacao e remove espacos duplicados.",
+        "estimatedImpact": "Relatorios ficam legiveis e agrupaveis",
+        "affectedRecords": 46,
+        "reducedRisk": "risco de agrupamento",
+        "active": true
+      },
+      {
+        "id": "corrigir-categorias",
+        "name": "Corrigir categorias",
+        "description": "Mapeia categorias divergentes para uma taxonomia padrao.",
+        "estimatedImpact": "Indicadores por categoria ficam consistentes",
+        "affectedRecords": 39,
+        "reducedRisk": "risco de classificacao",
+        "active": true
+      },
+      {
+        "id": "detectar-negativos",
+        "name": "Detectar valores negativos",
+        "description": "Sinaliza valores negativos fora de contexto.",
+        "estimatedImpact": "Anomalias financeiras ficam visiveis",
+        "affectedRecords": 33,
+        "reducedRisk": "risco financeiro",
+        "active": true
+      },
+      {
+        "id": "campos-obrigatorios",
+        "name": "Marcar obrigatorios vazios",
+        "description": "Identifica campos essenciais sem preenchimento.",
+        "estimatedImpact": "Registros incompletos deixam de contaminar KPIs",
+        "affectedRecords": 29,
+        "reducedRisk": "risco de completude",
+        "active": true
+      },
+      {
+        "id": "identificar-outliers",
+        "name": "Identificar outliers",
+        "description": "Marca valores fora da distribuicao esperada.",
+        "estimatedImpact": "Excecoes operacionais ficam auditaveis",
+        "affectedRecords": 26,
+        "reducedRisk": "risco de decisao",
+        "active": true
+      },
+      {
+        "id": "normalizar-monetarios",
+        "name": "Normalizar valores monetarios",
+        "description": "Converte moeda em decimal padronizado.",
+        "estimatedImpact": "Calculos financeiros ficam seguros",
+        "affectedRecords": 23,
+        "reducedRisk": "risco contabil",
+        "active": true
+      },
+      {
+        "id": "validar-status",
+        "name": "Validar status permitido",
+        "description": "Garante status dentro da lista oficial.",
+        "estimatedImpact": "Fluxos operacionais ficam comparaveis",
+        "affectedRecords": 21,
+        "reducedRisk": "risco operacional",
+        "active": true
+      }
+    ],
+    "qualityDimensions": [
+      {
+        "dimension": "completude",
+        "before": 66,
+        "after": 94,
+        "issues": 117,
+        "severity": "critico",
+        "recommendation": "Manter regra automatizada de completude antes do fechamento mensal."
+      },
+      {
+        "dimension": "unicidade",
+        "before": 65,
+        "after": 94,
+        "issues": 78,
+        "severity": "critico",
+        "recommendation": "Manter regra automatizada de unicidade antes do fechamento mensal."
+      },
+      {
+        "dimension": "validade",
+        "before": 64,
+        "after": 93,
+        "issues": 58,
+        "severity": "critico",
+        "recommendation": "Manter regra automatizada de validade antes do fechamento mensal."
+      },
+      {
+        "dimension": "consistencia",
+        "before": 63,
+        "after": 93,
+        "issues": 46,
+        "severity": "alto",
+        "recommendation": "Manter regra automatizada de consistencia antes do fechamento mensal."
+      },
+      {
+        "dimension": "padronizacao",
+        "before": 62,
+        "after": 92,
+        "issues": 39,
+        "severity": "alto",
+        "recommendation": "Manter regra automatizada de padronizacao antes do fechamento mensal."
+      },
+      {
+        "dimension": "integridade",
+        "before": 61,
+        "after": 92,
+        "issues": 33,
+        "severity": "medio",
+        "recommendation": "Manter regra automatizada de integridade antes do fechamento mensal."
+      }
+    ],
+    "riskProfile": [
+      {
+        "name": "Risco de duplicidade",
+        "before": "alto",
+        "after": "baixo",
+        "description": "Evita contagem dupla em relatórios e indicadores."
+      },
+      {
+        "name": "Campo obrigatorio vazio",
+        "before": "critico",
+        "after": "medio",
+        "description": "Reduz registros incompletos em bases analiticas."
+      },
+      {
+        "name": "Relatorio inconsistente",
+        "before": "alto",
+        "after": "baixo",
+        "description": "Padroniza periodos, categorias e formatos."
+      },
+      {
+        "name": "Atraso operacional",
+        "before": "medio",
+        "after": "baixo",
+        "description": "Diminui dependencia de revisao manual."
+      },
+      {
+        "name": "Decisao com dado invalido",
+        "before": "critico",
+        "after": "baixo",
+        "description": "Sinaliza excecoes antes do consumo gerencial."
+      },
+      {
+        "name": "Retrabalho",
+        "before": "alto",
+        "after": "baixo",
+        "description": "Automatiza validacoes repetitivas."
+      }
+    ],
+    "auditTrail": [
+      {
+        "id": "padronizacao-relatorios-mensais-audit-0",
+        "timestamp": "2026-06-01 14:32",
+        "event": "Regra aplicada",
+        "rule": "normalizar_datas",
+        "affectedRecords": 78,
+        "severity": "success",
+        "result": "Datas normalizadas e invalidas sinalizadas.",
+        "generatedFile": ""
+      },
+      {
+        "id": "padronizacao-relatorios-mensais-audit-1",
+        "timestamp": "2026-06-01 14:33",
+        "event": "Registros marcados",
+        "rule": "campos_obrigatorios",
+        "affectedRecords": 46,
+        "severity": "warning",
+        "result": "Registros incompletos enviados para revisao.",
+        "generatedFile": ""
+      },
+      {
+        "id": "padronizacao-relatorios-mensais-audit-2",
+        "timestamp": "2026-06-01 14:34",
+        "event": "Duplicidades removidas",
+        "rule": "remover_duplicados",
+        "affectedRecords": 39,
+        "severity": "success",
+        "result": "Base consolidada sem duplicidades.",
+        "generatedFile": ""
+      },
+      {
+        "id": "padronizacao-relatorios-mensais-audit-3",
+        "timestamp": "2026-06-01 14:35",
+        "event": "Relatorio gerado",
+        "rule": "gerar_relatorio",
+        "affectedRecords": 234,
+        "severity": "success",
+        "result": "Relatorio executivo gerado.",
+        "generatedFile": "executive-report-sample.json"
+      }
+    ],
+    "files": [
+      {
+        "id": "padronizacao-relatorios-mensais-raw",
+        "name": "raw-administrative-base.csv",
+        "type": "CSV",
+        "size": "32 KB",
+        "generatedAt": "2026-06-01",
+        "automationSlug": "padronizacao-relatorios-mensais",
+        "href": "/samples/raw-administrative-base.csv"
+      },
+      {
+        "id": "padronizacao-relatorios-mensais-processed",
+        "name": "processed-administrative-base.csv",
+        "type": "CSV",
+        "size": "28 KB",
+        "generatedAt": "2026-06-01",
+        "automationSlug": "padronizacao-relatorios-mensais",
+        "href": "/samples/processed-administrative-base.csv"
+      },
+      {
+        "id": "padronizacao-relatorios-mensais-execution",
+        "name": "automation-execution-log.json",
+        "type": "LOG",
+        "size": "14 KB",
+        "generatedAt": "2026-06-01",
+        "automationSlug": "padronizacao-relatorios-mensais",
+        "href": "/samples/automation-execution-log.json"
+      },
+      {
+        "id": "padronizacao-relatorios-mensais-report-json",
+        "name": "executive-report-sample.json",
+        "type": "JSON",
+        "size": "18 KB",
+        "generatedAt": "2026-06-01",
+        "automationSlug": "padronizacao-relatorios-mensais",
+        "href": "/samples/executive-report-sample.json"
+      },
+      {
+        "id": "padronizacao-relatorios-mensais-report-html",
+        "name": "executive-report-sample.html",
+        "type": "HTML",
+        "size": "22 KB",
+        "generatedAt": "2026-06-01",
+        "automationSlug": "padronizacao-relatorios-mensais",
+        "href": "/samples/executive-report-sample.html"
+      },
+      {
+        "id": "padronizacao-relatorios-mensais-quality",
+        "name": "quality-checklist.json",
+        "type": "CHECKLIST",
+        "size": "9 KB",
+        "generatedAt": "2026-06-01",
+        "automationSlug": "padronizacao-relatorios-mensais",
+        "href": "/samples/quality-checklist.json"
+      }
+    ],
+    "kpis": [
+      {
+        "label": "Registros processados",
+        "value": "1.540",
+        "delta": "+100%",
+        "tone": "green"
+      },
+      {
+        "label": "Inconsistencias corrigidas",
+        "value": "234",
+        "delta": "+73%",
+        "tone": "blue"
+      },
+      {
+        "label": "Horas economizadas",
+        "value": "11.5h",
+        "delta": "-retrabalho",
+        "tone": "amber"
+      },
+      {
+        "label": "Score final",
+        "value": "94%",
+        "delta": "+28 pts",
         "tone": "rose"
       }
     ]

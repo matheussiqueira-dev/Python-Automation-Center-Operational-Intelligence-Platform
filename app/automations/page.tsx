@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { AutomationGrid } from "@/components/automations/automation-grid";
+import { AutomationMarketplace } from "@/components/automations/automation-marketplace";
 import { SectionHeader } from "@/components/shared/section-header";
 import { getAutomations } from "@/lib/mock-data";
 
@@ -16,10 +16,10 @@ export default function AutomationsPage() {
       <div className="mx-auto max-w-7xl space-y-8">
         <SectionHeader
           eyebrow="Central de automacoes"
-          title="Escolha uma rotina para executar"
+          title="Automation Marketplace"
           description="Cada card apresenta problema, categoria, tempo manual, tempo automatizado, economia simulada, status e nivel de impacto."
         />
-        <AutomationGrid automations={automations} />
+        <AutomationMarketplace automations={automations} />
       </div>
     </div>
   );

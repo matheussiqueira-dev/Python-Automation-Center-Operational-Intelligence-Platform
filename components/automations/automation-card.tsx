@@ -37,12 +37,14 @@ export function AutomationCard({ automation }: { automation: Automation }) {
       <div className="mt-4 flex flex-wrap gap-2">
         <Badge tone="green">{formatHours(automation.estimatedSavingsHours)} economizadas</Badge>
         <Badge tone={impactTone}>Impacto {impactLabel(automation.impact)}</Badge>
-        <Badge tone="blue">{formatCurrency(automation.estimatedSavingsBRL)}</Badge>
+        <Badge tone="blue">{formatCurrency(automation.monthlySavingsBRL)} mes</Badge>
+        <Badge tone="amber">Complexidade {automation.complexity}</Badge>
       </div>
+      <p className="mt-3 text-xs leading-5 text-zinc-500">{automation.riskReduced}</p>
 
       <div className="mt-5 grid gap-2 sm:grid-cols-2">
         <Button href={`/automations/${automation.slug}`} icon={<PlayCircle className="h-4 w-4" aria-hidden="true" />}>
-          Executar
+          Executar demo
         </Button>
         <Button href={`/automations/${automation.slug}`} variant="secondary" icon={<Eye className="h-4 w-4" aria-hidden="true" />}>
           Detalhes

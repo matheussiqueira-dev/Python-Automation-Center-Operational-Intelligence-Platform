@@ -1,4 +1,4 @@
-id,nome,cpf,setor,data,valor,status
-ADM-001,Ana Silva,CPF invalido - revisar,Financeiro,Data invalida,1240.80,Ativo
-ADM-002,Bruno Costa,CPF invalido - revisar,Financeiro,12/04/2025,845.00,Pendente
-ADM-004,Carla Lima,987.654.321-99,Operacoes,Pendente de origem,0.00,Em revisao
+id,nome,cpf_ficticio,setor,cargo,data,valor,categoria,centro_custo,status,severidade
+ADM-001,Ana Silva,CPF invalido - revisar,Financeiro,Analista,Data invalida,1240.80,Servico,CC-01,Ativo,critico
+ADM-002,Bruno Costa,CPF invalido - revisar,Financeiro,Coordenador,12/04/2025,845.00,Opex,CC-02,Pendente,alto
+ADM-004,Carla Lima,987.654.321-99,Operacoes,Gestora,Pendente de origem,0.00,Contrato,CC-09,Em revisao,medio

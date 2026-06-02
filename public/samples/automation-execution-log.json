@@ -1,0 +1,42 @@
+[
+  {
+    "id": "limpeza-planilhas-administrativas-audit-0",
+    "timestamp": "2026-06-01 14:32",
+    "event": "Regra aplicada",
+    "rule": "normalizar_datas",
+    "affectedRecords": 104,
+    "severity": "success",
+    "result": "Datas normalizadas e invalidas sinalizadas.",
+    "generatedFile": ""
+  },
+  {
+    "id": "limpeza-planilhas-administrativas-audit-1",
+    "timestamp": "2026-06-01 14:33",
+    "event": "Registros marcados",
+    "rule": "campos_obrigatorios",
+    "affectedRecords": 62,
+    "severity": "warning",
+    "result": "Registros incompletos enviados para revisao.",
+    "generatedFile": ""
+  },
+  {
+    "id": "limpeza-planilhas-administrativas-audit-2",
+    "timestamp": "2026-06-01 14:34",
+    "event": "Duplicidades removidas",
+    "rule": "remover_duplicados",
+    "affectedRecords": 52,
+    "severity": "success",
+    "result": "Base consolidada sem duplicidades.",
+    "generatedFile": ""
+  },
+  {
+    "id": "limpeza-planilhas-administrativas-audit-3",
+    "timestamp": "2026-06-01 14:35",
+    "event": "Relatorio gerado",
+    "rule": "gerar_relatorio",
+    "affectedRecords": 312,
+    "severity": "success",
+    "result": "Relatorio executivo gerado.",
+    "generatedFile": "executive-report-sample.json"
+  }
+]

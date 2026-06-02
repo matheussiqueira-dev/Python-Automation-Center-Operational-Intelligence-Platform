@@ -3,15 +3,19 @@ import { AlertTriangle, CheckCircle2, Clock3, Database, DollarSign, Gauge, Rotat
 import { AutomationUsageChart } from "@/components/dashboard/automation-usage-chart";
 import { DataQualityChart } from "@/components/dashboard/data-quality-chart";
 import { InsightsPanel } from "@/components/dashboard/insights-panel";
+import { IssueTypeChart } from "@/components/dashboard/issue-type-chart";
 import { KpiCard } from "@/components/dashboard/kpi-card";
 import { OperationalImpactChart } from "@/components/dashboard/operational-impact-chart";
+import { RiskPanel } from "@/components/dashboard/risk-panel";
 import { RoiSummary } from "@/components/dashboard/roi-summary";
+import { SavingsTrendChart } from "@/components/dashboard/savings-trend-chart";
+import { SystemHealthPanel } from "@/components/dashboard/system-health-panel";
 import { Badge } from "@/components/shared/badge";
 import { Card } from "@/components/shared/card";
 import { SectionHeader } from "@/components/shared/section-header";
 import { rankAutomationsByEfficiency } from "@/lib/calculations";
 import { formatCompactNumber, formatCurrency, formatHours, formatPercent } from "@/lib/formatters";
-import { getAutomations, getDashboardInsights, getDashboardMetrics, getExecutionHistory } from "@/lib/mock-data";
+import { getAutomations, getDashboardInsights, getDashboardMetrics, getExecutionHistory, getSystemHealth } from "@/lib/mock-data";
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -24,6 +28,7 @@ export default function DashboardPage() {
   const history = getExecutionHistory();
   const insights = getDashboardInsights();
   const ranking = rankAutomationsByEfficiency(automations);
+  const health = getSystemHealth();
 
   return (
     <div className="px-4 py-10 sm:px-6 lg:px-8">
@@ -39,6 +44,10 @@ export default function DashboardPage() {
           <KpiCard label="Registros processados" value={formatCompactNumber(metrics.processedRecords)} helper="Bases administrativas" delta="+38%" icon={<Database className="h-5 w-5" aria-hidden="true" />} />
           <KpiCard label="Inconsistencias corrigidas" value={formatCompactNumber(metrics.fixedIssues)} helper="Erros tratados" delta="+31%" icon={<CheckCircle2 className="h-5 w-5" aria-hidden="true" />} />
           <KpiCard label="Economia simulada" value={formatCurrency(metrics.operationalSavingsBRL)} helper="Valor operacional" delta="+19%" icon={<DollarSign className="h-5 w-5" aria-hidden="true" />} />
+          <KpiCard label="Taxa de sucesso" value={`${metrics.successRate}%`} helper="Execucoes simuladas" delta="+7%" icon={<Gauge className="h-5 w-5" aria-hidden="true" />} />
+          <KpiCard label="Tempo medio" value={`${metrics.averageResponseTimeMs}ms`} helper="Resposta simulada" delta="-12%" icon={<Clock3 className="h-5 w-5" aria-hidden="true" />} />
+          <KpiCard label="Duplicidades removidas" value={formatCompactNumber(metrics.duplicatesRemoved)} helper="Governanca" delta="+18%" icon={<RotateCcw className="h-5 w-5" aria-hidden="true" />} />
+          <KpiCard label="Campos padronizados" value={formatCompactNumber(metrics.standardizedFields)} helper="Qualidade" delta="+26%" icon={<Database className="h-5 w-5" aria-hidden="true" />} />
         </div>
 
         <div className="grid gap-4 lg:grid-cols-[1.3fr_0.7fr]">
@@ -52,6 +61,11 @@ export default function DashboardPage() {
           <RoiSummary automations={automations} />
         </div>
 
+        <div className="grid gap-4 lg:grid-cols-[0.9fr_1.1fr]">
+          <SystemHealthPanel health={health} />
+          <RiskPanel risks={automations[0].riskProfile} />
+        </div>
+
         <div className="grid gap-4 xl:grid-cols-2">
           <Card className="p-5">
             <h2 className="text-lg font-semibold text-white">Uso por automacao</h2>
@@ -62,6 +76,19 @@ export default function DashboardPage() {
             <h2 className="text-lg font-semibold text-white">Qualidade de dados antes/depois</h2>
             <p className="mt-1 text-sm text-zinc-500">Comparacao de score por automacao.</p>
             <DataQualityChart automations={automations} />
+          </Card>
+        </div>
+
+        <div className="grid gap-4 xl:grid-cols-2">
+          <Card className="p-5">
+            <h2 className="text-lg font-semibold text-white">Tipos de erro</h2>
+            <p className="mt-1 text-sm text-zinc-500">Distribuicao simulada de problemas recorrentes.</p>
+            <IssueTypeChart data={automations[0].errorTypes} />
+          </Card>
+          <Card className="p-5">
+            <h2 className="text-lg font-semibold text-white">Economia mensal</h2>
+            <p className="mt-1 text-sm text-zinc-500">Tendencia financeira simulada por ciclo.</p>
+            <SavingsTrendChart data={history} />
           </Card>
         </div>
 

@@ -16,6 +16,6 @@ describe("critical UI rendering", () => {
     render(<AutomationGrid automations={getAutomations()} />);
 
     expect(screen.getByText("Limpeza de planilhas administrativas")).toBeInTheDocument();
-    expect(screen.getAllByText("Executar").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("Executar demo").length).toBeGreaterThan(0);
   });
 });

@@ -2,14 +2,17 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { BarChart3, FileText, Home, Info, Workflow } from "lucide-react";
+import { BarChart3, Boxes, FileText, Home, Info, Network, ScrollText, Workflow } from "lucide-react";
 import { cn } from "@/lib/formatters";
 
 const navItems = [
   { href: "/", label: "Home", icon: Home },
   { href: "/automations", label: "Automacoes", icon: Workflow },
   { href: "/dashboard", label: "Dashboard", icon: BarChart3 },
+  { href: "/executions", label: "Execucoes", icon: ScrollText },
   { href: "/reports", label: "Relatorios", icon: FileText },
+  { href: "/architecture", label: "Arquitetura", icon: Network },
+  { href: "/case-study", label: "Case Study", icon: Boxes },
   { href: "/about", label: "Sobre", icon: Info },
 ];
 

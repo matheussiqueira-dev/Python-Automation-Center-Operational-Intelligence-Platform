@@ -1,7 +1,15 @@
 import { formatCurrency } from "@/lib/formatters";
-import { getAutomations } from "@/lib/mock-data";
+import { getAutomations, getReportsData } from "@/lib/mock-data";
 
 export function getReports() {
+  const generated = getReportsData();
+  if (generated.length) {
+    return generated as ReturnType<typeof buildFallbackReports>;
+  }
+  return buildFallbackReports();
+}
+
+function buildFallbackReports() {
   return getAutomations().map((automation, index) => ({
     id: `report-${automation.slug}`,
     title: `Relatorio executivo - ${automation.name}`,

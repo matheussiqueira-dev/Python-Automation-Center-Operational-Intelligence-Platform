@@ -3,14 +3,18 @@
     {
       "id": "ADM-001",
       "nome": "ana  silva",
-      "cpf": "123.456.789-00",
+      "cpf_ficticio": "123.456.789-00",
       "setor": "fin",
+      "cargo": "analista",
       "data": "32/13/2025",
       "valor": "R$ 1.240,8",
+      "categoria": "servico",
+      "centro_custo": "CC-01",
       "status": "ativo",
+      "severidade": "critico",
       "inconsistencies": [
         "nome",
-        "cpf",
+        "cpf_ficticio",
         "data",
         "valor"
       ]
@@ -18,38 +22,51 @@
     {
       "id": "ADM-002",
       "nome": "BRUNO COSTA",
-      "cpf": "00000000000",
+      "cpf_ficticio": "00000000000",
       "setor": "",
+      "cargo": "coord",
       "data": "2025-04-12",
       "valor": "845,00",
+      "categoria": "opex",
+      "centro_custo": "",
       "status": "pendente",
+      "severidade": "alto",
       "inconsistencies": [
-        "cpf",
+        "cpf_ficticio",
         "setor",
-        "data"
+        "data",
+        "centro_custo"
       ]
     },
     {
       "id": "ADM-002",
       "nome": "Bruno Costa",
-      "cpf": "00000000000",
+      "cpf_ficticio": "00000000000",
       "setor": "Financeiro",
+      "cargo": "coord",
       "data": "12/04/2025",
       "valor": "845.00",
+      "categoria": "OPEX",
+      "centro_custo": "CC-02",
       "status": "pendente",
+      "severidade": "alto",
       "inconsistencies": [
         "duplicidade",
-        "cpf"
+        "cpf_ficticio"
       ]
     },
     {
       "id": "ADM-004",
       "nome": "carla lima",
-      "cpf": "987.654.321-99",
+      "cpf_ficticio": "987.654.321-99",
       "setor": "Operacoes",
+      "cargo": "gestora",
       "data": "",
       "valor": "R$ -",
+      "categoria": "contrato",
+      "centro_custo": "CC-09",
       "status": "sem status",
+      "severidade": "medio",
       "inconsistencies": [
         "data",
         "valor",
@@ -61,14 +78,18 @@
     {
       "id": "ADM-001",
       "nome": "ana  silva",
-      "cpf": "123.456.789-00",
+      "cpf_ficticio": "123.456.789-00",
       "setor": "fin",
+      "cargo": "analista",
       "data": "32/13/2025",
       "valor": "R$ 1.240,8",
+      "categoria": "servico",
+      "centro_custo": "CC-01",
       "status": "ativo",
+      "severidade": "critico",
       "inconsistencies": [
         "nome",
-        "cpf",
+        "cpf_ficticio",
         "data",
         "valor"
       ]
@@ -76,38 +97,51 @@
     {
       "id": "ADM-002",
       "nome": "BRUNO COSTA",
-      "cpf": "00000000000",
+      "cpf_ficticio": "00000000000",
       "setor": "",
+      "cargo": "coord",
       "data": "2025-04-12",
       "valor": "845,00",
+      "categoria": "opex",
+      "centro_custo": "",
       "status": "pendente",
+      "severidade": "alto",
       "inconsistencies": [
-        "cpf",
+        "cpf_ficticio",
         "setor",
-        "data"
+        "data",
+        "centro_custo"
       ]
     },
     {
       "id": "ADM-002",
       "nome": "Bruno Costa",
-      "cpf": "00000000000",
+      "cpf_ficticio": "00000000000",
       "setor": "Financeiro",
+      "cargo": "coord",
       "data": "12/04/2025",
       "valor": "845.00",
+      "categoria": "OPEX",
+      "centro_custo": "CC-02",
       "status": "pendente",
+      "severidade": "alto",
       "inconsistencies": [
         "duplicidade",
-        "cpf"
+        "cpf_ficticio"
       ]
     },
     {
       "id": "ADM-004",
       "nome": "carla lima",
-      "cpf": "987.654.321-99",
+      "cpf_ficticio": "987.654.321-99",
       "setor": "Operacoes",
+      "cargo": "gestora",
       "data": "",
       "valor": "R$ -",
+      "categoria": "contrato",
+      "centro_custo": "CC-09",
       "status": "sem status",
+      "severidade": "medio",
       "inconsistencies": [
         "data",
         "valor",
@@ -119,14 +153,18 @@
     {
       "id": "ADM-001",
       "nome": "ana  silva",
-      "cpf": "123.456.789-00",
+      "cpf_ficticio": "123.456.789-00",
       "setor": "fin",
+      "cargo": "analista",
       "data": "32/13/2025",
       "valor": "R$ 1.240,8",
+      "categoria": "servico",
+      "centro_custo": "CC-01",
       "status": "ativo",
+      "severidade": "critico",
       "inconsistencies": [
         "nome",
-        "cpf",
+        "cpf_ficticio",
         "data",
         "valor"
       ]
@@ -134,38 +172,51 @@
     {
       "id": "ADM-002",
       "nome": "BRUNO COSTA",
-      "cpf": "00000000000",
+      "cpf_ficticio": "00000000000",
       "setor": "",
+      "cargo": "coord",
       "data": "2025-04-12",
       "valor": "845,00",
+      "categoria": "opex",
+      "centro_custo": "",
       "status": "pendente",
+      "severidade": "alto",
       "inconsistencies": [
-        "cpf",
+        "cpf_ficticio",
         "setor",
-        "data"
+        "data",
+        "centro_custo"
       ]
     },
     {
       "id": "ADM-002",
       "nome": "Bruno Costa",
-      "cpf": "00000000000",
+      "cpf_ficticio": "00000000000",
       "setor": "Financeiro",
+      "cargo": "coord",
       "data": "12/04/2025",
       "valor": "845.00",
+      "categoria": "OPEX",
+      "centro_custo": "CC-02",
       "status": "pendente",
+      "severidade": "alto",
       "inconsistencies": [
         "duplicidade",
-        "cpf"
+        "cpf_ficticio"
       ]
     },
     {
       "id": "ADM-004",
       "nome": "carla lima",
-      "cpf": "987.654.321-99",
+      "cpf_ficticio": "987.654.321-99",
       "setor": "Operacoes",
+      "cargo": "gestora",
       "data": "",
       "valor": "R$ -",
+      "categoria": "contrato",
+      "centro_custo": "CC-09",
       "status": "sem status",
+      "severidade": "medio",
       "inconsistencies": [
         "data",
         "valor",
@@ -177,14 +228,18 @@
     {
       "id": "ADM-001",
       "nome": "ana  silva",
-      "cpf": "123.456.789-00",
+      "cpf_ficticio": "123.456.789-00",
       "setor": "fin",
+      "cargo": "analista",
       "data": "32/13/2025",
       "valor": "R$ 1.240,8",
+      "categoria": "servico",
+      "centro_custo": "CC-01",
       "status": "ativo",
+      "severidade": "critico",
       "inconsistencies": [
         "nome",
-        "cpf",
+        "cpf_ficticio",
         "data",
         "valor"
       ]
@@ -192,38 +247,51 @@
     {
       "id": "ADM-002",
       "nome": "BRUNO COSTA",
-      "cpf": "00000000000",
+      "cpf_ficticio": "00000000000",
       "setor": "",
+      "cargo": "coord",
       "data": "2025-04-12",
       "valor": "845,00",
+      "categoria": "opex",
+      "centro_custo": "",
       "status": "pendente",
+      "severidade": "alto",
       "inconsistencies": [
-        "cpf",
+        "cpf_ficticio",
         "setor",
-        "data"
+        "data",
+        "centro_custo"
       ]
     },
     {
       "id": "ADM-002",
       "nome": "Bruno Costa",
-      "cpf": "00000000000",
+      "cpf_ficticio": "00000000000",
       "setor": "Financeiro",
+      "cargo": "coord",
       "data": "12/04/2025",
       "valor": "845.00",
+      "categoria": "OPEX",
+      "centro_custo": "CC-02",
       "status": "pendente",
+      "severidade": "alto",
       "inconsistencies": [
         "duplicidade",
-        "cpf"
+        "cpf_ficticio"
       ]
     },
     {
       "id": "ADM-004",
       "nome": "carla lima",
-      "cpf": "987.654.321-99",
+      "cpf_ficticio": "987.654.321-99",
       "setor": "Operacoes",
+      "cargo": "gestora",
       "data": "",
       "valor": "R$ -",
+      "categoria": "contrato",
+      "centro_custo": "CC-09",
       "status": "sem status",
+      "severidade": "medio",
       "inconsistencies": [
         "data",
         "valor",
@@ -235,14 +303,18 @@
     {
       "id": "ADM-001",
       "nome": "ana  silva",
-      "cpf": "123.456.789-00",
+      "cpf_ficticio": "123.456.789-00",
       "setor": "fin",
+      "cargo": "analista",
       "data": "32/13/2025",
       "valor": "R$ 1.240,8",
+      "categoria": "servico",
+      "centro_custo": "CC-01",
       "status": "ativo",
+      "severidade": "critico",
       "inconsistencies": [
         "nome",
-        "cpf",
+        "cpf_ficticio",
         "data",
         "valor"
       ]
@@ -250,38 +322,276 @@
     {
       "id": "ADM-002",
       "nome": "BRUNO COSTA",
-      "cpf": "00000000000",
+      "cpf_ficticio": "00000000000",
       "setor": "",
+      "cargo": "coord",
       "data": "2025-04-12",
       "valor": "845,00",
+      "categoria": "opex",
+      "centro_custo": "",
       "status": "pendente",
+      "severidade": "alto",
       "inconsistencies": [
-        "cpf",
+        "cpf_ficticio",
         "setor",
-        "data"
+        "data",
+        "centro_custo"
       ]
     },
     {
       "id": "ADM-002",
       "nome": "Bruno Costa",
-      "cpf": "00000000000",
+      "cpf_ficticio": "00000000000",
       "setor": "Financeiro",
+      "cargo": "coord",
       "data": "12/04/2025",
       "valor": "845.00",
+      "categoria": "OPEX",
+      "centro_custo": "CC-02",
       "status": "pendente",
+      "severidade": "alto",
       "inconsistencies": [
         "duplicidade",
-        "cpf"
+        "cpf_ficticio"
       ]
     },
     {
       "id": "ADM-004",
       "nome": "carla lima",
-      "cpf": "987.654.321-99",
+      "cpf_ficticio": "987.654.321-99",
       "setor": "Operacoes",
+      "cargo": "gestora",
       "data": "",
       "valor": "R$ -",
+      "categoria": "contrato",
+      "centro_custo": "CC-09",
       "status": "sem status",
+      "severidade": "medio",
+      "inconsistencies": [
+        "data",
+        "valor",
+        "status"
+      ]
+    }
+  ],
+  "validacao-cadastros": [
+    {
+      "id": "ADM-001",
+      "nome": "ana  silva",
+      "cpf_ficticio": "123.456.789-00",
+      "setor": "fin",
+      "cargo": "analista",
+      "data": "32/13/2025",
+      "valor": "R$ 1.240,8",
+      "categoria": "servico",
+      "centro_custo": "CC-01",
+      "status": "ativo",
+      "severidade": "critico",
+      "inconsistencies": [
+        "nome",
+        "cpf_ficticio",
+        "data",
+        "valor"
+      ]
+    },
+    {
+      "id": "ADM-002",
+      "nome": "BRUNO COSTA",
+      "cpf_ficticio": "00000000000",
+      "setor": "",
+      "cargo": "coord",
+      "data": "2025-04-12",
+      "valor": "845,00",
+      "categoria": "opex",
+      "centro_custo": "",
+      "status": "pendente",
+      "severidade": "alto",
+      "inconsistencies": [
+        "cpf_ficticio",
+        "setor",
+        "data",
+        "centro_custo"
+      ]
+    },
+    {
+      "id": "ADM-002",
+      "nome": "Bruno Costa",
+      "cpf_ficticio": "00000000000",
+      "setor": "Financeiro",
+      "cargo": "coord",
+      "data": "12/04/2025",
+      "valor": "845.00",
+      "categoria": "OPEX",
+      "centro_custo": "CC-02",
+      "status": "pendente",
+      "severidade": "alto",
+      "inconsistencies": [
+        "duplicidade",
+        "cpf_ficticio"
+      ]
+    },
+    {
+      "id": "ADM-004",
+      "nome": "carla lima",
+      "cpf_ficticio": "987.654.321-99",
+      "setor": "Operacoes",
+      "cargo": "gestora",
+      "data": "",
+      "valor": "R$ -",
+      "categoria": "contrato",
+      "centro_custo": "CC-09",
+      "status": "sem status",
+      "severidade": "medio",
+      "inconsistencies": [
+        "data",
+        "valor",
+        "status"
+      ]
+    }
+  ],
+  "monitoramento-sla": [
+    {
+      "id": "ADM-001",
+      "nome": "ana  silva",
+      "cpf_ficticio": "123.456.789-00",
+      "setor": "fin",
+      "cargo": "analista",
+      "data": "32/13/2025",
+      "valor": "R$ 1.240,8",
+      "categoria": "servico",
+      "centro_custo": "CC-01",
+      "status": "ativo",
+      "severidade": "critico",
+      "inconsistencies": [
+        "nome",
+        "cpf_ficticio",
+        "data",
+        "valor"
+      ]
+    },
+    {
+      "id": "ADM-002",
+      "nome": "BRUNO COSTA",
+      "cpf_ficticio": "00000000000",
+      "setor": "",
+      "cargo": "coord",
+      "data": "2025-04-12",
+      "valor": "845,00",
+      "categoria": "opex",
+      "centro_custo": "",
+      "status": "pendente",
+      "severidade": "alto",
+      "inconsistencies": [
+        "cpf_ficticio",
+        "setor",
+        "data",
+        "centro_custo"
+      ]
+    },
+    {
+      "id": "ADM-002",
+      "nome": "Bruno Costa",
+      "cpf_ficticio": "00000000000",
+      "setor": "Financeiro",
+      "cargo": "coord",
+      "data": "12/04/2025",
+      "valor": "845.00",
+      "categoria": "OPEX",
+      "centro_custo": "CC-02",
+      "status": "pendente",
+      "severidade": "alto",
+      "inconsistencies": [
+        "duplicidade",
+        "cpf_ficticio"
+      ]
+    },
+    {
+      "id": "ADM-004",
+      "nome": "carla lima",
+      "cpf_ficticio": "987.654.321-99",
+      "setor": "Operacoes",
+      "cargo": "gestora",
+      "data": "",
+      "valor": "R$ -",
+      "categoria": "contrato",
+      "centro_custo": "CC-09",
+      "status": "sem status",
+      "severidade": "medio",
+      "inconsistencies": [
+        "data",
+        "valor",
+        "status"
+      ]
+    }
+  ],
+  "padronizacao-relatorios-mensais": [
+    {
+      "id": "ADM-001",
+      "nome": "ana  silva",
+      "cpf_ficticio": "123.456.789-00",
+      "setor": "fin",
+      "cargo": "analista",
+      "data": "32/13/2025",
+      "valor": "R$ 1.240,8",
+      "categoria": "servico",
+      "centro_custo": "CC-01",
+      "status": "ativo",
+      "severidade": "critico",
+      "inconsistencies": [
+        "nome",
+        "cpf_ficticio",
+        "data",
+        "valor"
+      ]
+    },
+    {
+      "id": "ADM-002",
+      "nome": "BRUNO COSTA",
+      "cpf_ficticio": "00000000000",
+      "setor": "",
+      "cargo": "coord",
+      "data": "2025-04-12",
+      "valor": "845,00",
+      "categoria": "opex",
+      "centro_custo": "",
+      "status": "pendente",
+      "severidade": "alto",
+      "inconsistencies": [
+        "cpf_ficticio",
+        "setor",
+        "data",
+        "centro_custo"
+      ]
+    },
+    {
+      "id": "ADM-002",
+      "nome": "Bruno Costa",
+      "cpf_ficticio": "00000000000",
+      "setor": "Financeiro",
+      "cargo": "coord",
+      "data": "12/04/2025",
+      "valor": "845.00",
+      "categoria": "OPEX",
+      "centro_custo": "CC-02",
+      "status": "pendente",
+      "severidade": "alto",
+      "inconsistencies": [
+        "duplicidade",
+        "cpf_ficticio"
+      ]
+    },
+    {
+      "id": "ADM-004",
+      "nome": "carla lima",
+      "cpf_ficticio": "987.654.321-99",
+      "setor": "Operacoes",
+      "cargo": "gestora",
+      "data": "",
+      "valor": "R$ -",
+      "categoria": "contrato",
+      "centro_custo": "CC-09",
+      "status": "sem status",
+      "severidade": "medio",
       "inconsistencies": [
         "data",
         "valor",

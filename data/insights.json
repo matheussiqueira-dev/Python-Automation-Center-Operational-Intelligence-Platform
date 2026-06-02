@@ -2,9 +2,19 @@
   {
     "id": "recurring-duplicates",
     "title": "Duplicidades recorrentes",
-    "description": "Duplicidades aparecem em todos os fluxos simulados e devem ser tratadas antes da consolidacao mensal.",
+    "description": "Duplicidades aparecem em todos os fluxos simulados.",
     "severity": "medium",
     "category": "governanca",
-    "recommendation": "Criar uma chave de negocio por origem e setor antes da carga final."
+    "recommendation": "Criar chave de negocio por origem e setor.",
+    "estimatedImpact": "Reduzir retrabalho em 18%."
+  },
+  {
+    "id": "sla-risk",
+    "title": "SLA como risco operacional",
+    "description": "Chamados criticos precisam de monitoramento preventivo.",
+    "severity": "high",
+    "category": "risco operacional",
+    "recommendation": "Priorizar alertas antes do vencimento.",
+    "estimatedImpact": "Aumentar taxa de SLA em 12%."
   }
 ]

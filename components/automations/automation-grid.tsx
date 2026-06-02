@@ -10,9 +10,13 @@ export function AutomationGrid({ automations }: { automations: Automation[] }) {
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState("all");
   const [impact, setImpact] = useState("all");
+  const [status, setStatus] = useState("all");
+  const [complexity, setComplexity] = useState("all");
 
   const categories = useMemo(() => ["all", ...Array.from(new Set(automations.map((item) => item.category)))], [automations]);
   const impacts = ["all", "critical", "high", "medium"];
+  const statuses = ["all", "ready", "success", "attention", "running"];
+  const complexities = ["all", "low", "medium", "high"];
 
   const filtered = automations.filter((automation) => {
     const matchesQuery = [automation.name, automation.category, automation.description]
@@ -21,13 +25,15 @@ export function AutomationGrid({ automations }: { automations: Automation[] }) {
       .includes(query.toLowerCase());
     const matchesCategory = category === "all" || automation.category === category;
     const matchesImpact = impact === "all" || automation.impact === impact;
+    const matchesStatus = status === "all" || automation.status === status;
+    const matchesComplexity = complexity === "all" || automation.complexity === complexity;
 
-    return matchesQuery && matchesCategory && matchesImpact;
+    return matchesQuery && matchesCategory && matchesImpact && matchesStatus && matchesComplexity;
   });
 
   return (
     <div className="space-y-6">
-      <div className="grid gap-3 rounded-lg border border-white/10 bg-white/[0.045] p-3 md:grid-cols-[1fr_220px_180px]">
+      <div className="grid gap-3 rounded-lg border border-white/10 bg-white/[0.045] p-3 md:grid-cols-[1fr_190px_160px_150px_170px]">
         <label className="relative block">
           <span className="sr-only">Buscar automacao</span>
           <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-zinc-500" aria-hidden="true" />
@@ -65,6 +71,34 @@ export function AutomationGrid({ automations }: { automations: Automation[] }) {
             {impacts.map((item) => (
               <option key={item} value={item}>
                 {item === "all" ? "Todos os impactos" : `Impacto ${item}`}
+              </option>
+            ))}
+          </select>
+        </label>
+        <label className="block">
+          <span className="sr-only">Filtrar por status</span>
+          <select
+            value={status}
+            onChange={(event) => setStatus(event.target.value)}
+            className="h-11 w-full rounded-md border border-white/10 bg-black/20 px-3 text-sm text-white focus:border-emerald-300 focus:outline-none"
+          >
+            {statuses.map((item) => (
+              <option key={item} value={item}>
+                {item === "all" ? "Todos status" : item}
+              </option>
+            ))}
+          </select>
+        </label>
+        <label className="block">
+          <span className="sr-only">Filtrar por complexidade</span>
+          <select
+            value={complexity}
+            onChange={(event) => setComplexity(event.target.value)}
+            className="h-11 w-full rounded-md border border-white/10 bg-black/20 px-3 text-sm text-white focus:border-emerald-300 focus:outline-none"
+          >
+            {complexities.map((item) => (
+              <option key={item} value={item}>
+                {item === "all" ? "Toda complexidade" : item}
               </option>
             ))}
           </select>
