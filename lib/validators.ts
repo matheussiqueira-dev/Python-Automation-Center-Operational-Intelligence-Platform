@@ -14,6 +14,10 @@ export const reportPayloadSchema = z.object({
   format: z.enum(["json", "html"]).default("json"),
 });
 
+export const dataQualityPayloadSchema = z.object({
+  datasetId: z.string().min(3).max(80).regex(/^[a-z0-9-]+$/),
+});
+
 export const executionQuerySchema = z.object({
   status: z.enum(["queued", "running", "completed", "failed"]).optional(),
   category: z.string().optional(),

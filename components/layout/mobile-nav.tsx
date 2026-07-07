@@ -2,13 +2,15 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { BarChart3, FileText, Home, Info, Workflow } from "lucide-react";
+import { BarChart3, FileText, Home, Info, ScrollText, ShieldCheck, Workflow } from "lucide-react";
 import { cn } from "@/lib/formatters";
 
 const navItems = [
   { href: "/", label: "Home", icon: Home },
   { href: "/automations", label: "Autos", icon: Workflow },
   { href: "/dashboard", label: "BI", icon: BarChart3 },
+  { href: "/data-quality", label: "DQ", icon: ShieldCheck },
+  { href: "/logs", label: "Logs", icon: ScrollText },
   { href: "/reports", label: "Docs", icon: FileText },
   { href: "/about", label: "Sobre", icon: Info },
 ];
@@ -18,7 +20,7 @@ export function MobileNav() {
 
   return (
     <nav className="fixed inset-x-3 bottom-3 z-50 rounded-lg border border-white/12 bg-zinc-950/92 p-1.5 shadow-2xl backdrop-blur lg:hidden" aria-label="Navegacao mobile">
-      <div className="grid grid-cols-5 gap-1">
+      <div className="grid grid-cols-7 gap-1">
         {navItems.map((item) => {
           const active = pathname === item.href || (item.href !== "/" && pathname.startsWith(`${item.href}/`));
           const Icon = item.icon;

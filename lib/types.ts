@@ -11,6 +11,16 @@ export type ViewMode = "executive" | "technical";
 export type LogSeverity = "info" | "success" | "warning" | "error";
 
 export type InsightSeverity = "low" | "medium" | "high";
+export type DataQualitySeverity = "baixo" | "medio" | "alto" | "critico";
+export type DataQualityIssueType =
+  | "nulo"
+  | "duplicidade"
+  | "tipo_invalido"
+  | "data_invalida"
+  | "valor_negativo"
+  | "obrigatorio_ausente"
+  | "outlier"
+  | "texto_inconsistente";
 
 export type InsightCategory =
   | "eficiencia"
@@ -211,4 +221,44 @@ export interface SystemHealth {
   uptime: string;
   errorsByCategory: ErrorTypeMetric[];
   interactionEvents: number;
+}
+
+export interface DatasetProfile {
+  id: string;
+  name: string;
+  description: string;
+  owner: string;
+  records: DatasetRecord[];
+  requiredColumns: string[];
+  expectedDateColumns: string[];
+  numericColumns: string[];
+  categoryColumns: string[];
+}
+
+export interface DataQualityIssue {
+  id: string;
+  datasetId: string;
+  rowId: string;
+  column: string;
+  type: DataQualityIssueType;
+  severity: DataQualitySeverity;
+  message: string;
+  recommendation: string;
+  impact: string;
+}
+
+export interface DataQualityReport {
+  id: string;
+  datasetId: string;
+  datasetName: string;
+  generatedAt: string;
+  score: number;
+  scoreLabel: "Excelente" | "Bom" | "Atencao" | "Critico";
+  totalRecords: number;
+  totalIssues: number;
+  issues: DataQualityIssue[];
+  completenessByColumn: Array<{ column: string; completeness: number }>;
+  issueTypeSeries: Array<{ type: DataQualityIssueType; count: number }>;
+  executiveSummary: string;
+  recommendations: string[];
 }

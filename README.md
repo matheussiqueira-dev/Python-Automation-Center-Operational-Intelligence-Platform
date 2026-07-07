@@ -17,10 +17,12 @@ Demonstrar uma central web interativa que transforma bases administrativas desor
 - Comparacao antes/depois com Data Diff, celulas destacadas, resumo e regras aplicadas.
 - Data Quality Score por dimensao, audit trail, risco/compliance e downloads.
 - Dashboard executivo com KPIs, graficos Recharts, ranking, alertas, System Health e insights.
+- Data Quality Monitor dedicado com score geral, completude por coluna, severidade e recomendacoes acionaveis.
+- Centro de logs operacionais com busca, filtro por nivel e filtro por automacao.
 - Historico de execucoes com status, score, arquivos e responsaveis ficticios.
 - Paginas Architecture e Case Study para explicar valor tecnico e produto.
 - Relatorios simulados com preview e downloads.
-- Route Handlers para automacoes, execucao, executions, relatorios, downloads e health.
+- Route Handlers para automacoes, execucao, data quality, logs, runs, insights, relatorios, downloads e health.
 - Scripts Python locais para gerar datasets e arquivos de exemplo.
 - Testes para UI, calculos, insights, validadores, rule engine, data quality, endpoint de execucao e health.
 
